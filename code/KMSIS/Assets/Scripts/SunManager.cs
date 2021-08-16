@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SunManager : MonoBehaviour
 {
-    private GameObject sunlight;
-
-    private float maxDistance = 30f;
     private double degToRad = 0.01745329251;
     private double radToDeg = 57.2957795131;
     private double latitude = 37.507424845050046;
@@ -18,11 +15,6 @@ public class SunManager : MonoBehaviour
     private double b, g, eot, tc, lst, hra;
     private double azimuth, altitude, sunrise, sunset;
 
-    void Start()
-    {
-        sunlight = GameObject.Find("Directional Light");
-    }
-
     public List<double> Calculate(int month, int day, float clock)
     {
         dayOfYear = 0;
@@ -33,6 +25,7 @@ public class SunManager : MonoBehaviour
         if (day > dayForMonth[month - 1] || day < 1)
         {
             Debug.Log("Unexpected value, day = " + day);
+            return null;
         }
         else
         {
@@ -51,7 +44,6 @@ public class SunManager : MonoBehaviour
         azimuth = radToDeg * azimuth;
         sunrise = 12f - radToDeg * Mathf.Acos(-Mathf.Tan((float)(latitude * degToRad)) * Mathf.Tan((float)(g * degToRad))) / 15f - tc / 60f;
         sunset = 12f + radToDeg * Mathf.Acos(-Mathf.Tan((float)(latitude * degToRad)) * Mathf.Tan((float)(g * degToRad))) / 15f - tc / 60f;
-        //sunlight.transform.eulerAngles = CalculateSunVector(azimuth, altitude);
         List<double> sunDataList = new List<double>();
         sunDataList.Add(azimuth);
         sunDataList.Add(altitude);
@@ -62,6 +54,6 @@ public class SunManager : MonoBehaviour
 
     public Vector3 CalculateSunVector(double azimuth, double altitude)
     {
-        return new Vector3(Mathf.Sin((float)(azimuth * degToRad)) * Mathf.Cos((float)(altitude * degToRad)), Mathf.Sin(-(float)(altitude * degToRad)), 0f);
+        return new Vector3(Mathf.Sin((float)(azimuth * degToRad)) * Mathf.Cos((float)(altitude * degToRad)), Mathf.Sin(-(float)(altitude * degToRad)), Mathf.Cos((float)(altitude * degToRad)) * Mathf.Cos((float)(azimuth * degToRad)));
     }
 }

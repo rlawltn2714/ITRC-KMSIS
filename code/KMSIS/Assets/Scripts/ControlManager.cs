@@ -8,12 +8,13 @@ public class ControlManager : MonoBehaviour
     public Material selectMaterial;
     public Material normalMaterial;
 
-    private List<GameObject> gameObjectList;
+    private List<GameObject> selectedObjectList;
     private RaycastHit hit;
     private Vector2 clickPosition;
     private GameObject buildings;
     private GameObject mainCamera;
     private RayManager rayManager;
+    private SunManager sunManager;
 
     private float clickTime;
     private float rotateLR;
@@ -27,22 +28,18 @@ public class ControlManager : MonoBehaviour
         buildings = GameObject.Find("Buildings");
         mainCamera = GameObject.Find("Main Camera");
         rayManager = GameObject.Find("RayManager").GetComponent<RayManager>();
-        gameObjectList = new List<GameObject>();
+        sunManager = GameObject.Find("SunManager").GetComponent<SunManager>();
+        selectedObjectList = new List<GameObject>();
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Debug.Log(GameObject.Find("Directional Light").transform.forward);
-            GameObject.Find("Directional Light").transform.eulerAngles = new Vector3(10f, 20f, 0);
-        }
-
         if (Input.GetKey(KeyCode.Return))
         {
-            for (int i = 0; i < gameObjectList.Count; i++)
+            for (int i = 0; i < selectedObjectList.Count; i++)
             {
-                List<RaycastHit> hitPointList = rayManager.GetPointOnObject(gameObjectList[i]);
+                List<RaycastHit> hitPointList = rayManager.GetPointOnObject(selectedObjectList[i]);
+                Debug.Log(rayManager.Ratio(hitPointList, sunManager.CalculateSunVector(GameObject.Find("Directional Light").transform.eulerAngles.y, GameObject.Find("Directional Light").transform.eulerAngles.x)) + "%");
             }
         }
 
@@ -61,7 +58,7 @@ public class ControlManager : MonoBehaviour
         {
             if (Time.time - clickTime > 0.2)
             {
-
+                // Long click
             }
             else
             {
@@ -72,28 +69,32 @@ public class ControlManager : MonoBehaviour
                     if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
                     {
                         bool isSelected = false;
-                        for (int i = 0; i < gameObjectList.Count; i++)
+                        for (int i = 0; i < selectedObjectList.Count; i++)
                         {
-                            if (hit.collider.gameObject.name == gameObjectList[i].name)
+                            if (hit.collider.gameObject.name == selectedObjectList[i].name)
                             {
                                 isSelected = true;
-                                gameObjectList.RemoveAt(i);
+                                selectedObjectList.RemoveAt(i);
                                 hit.collider.gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
                                 break;
                             }
                         }
                         if (!isSelected)
                         {
-                            gameObjectList.Add(hit.collider.gameObject);
+                            selectedObjectList.Add(hit.collider.gameObject);
                             hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
                         }
                     }
                     else
                     {
                         ClearSelection();
-                        gameObjectList.Add(hit.collider.gameObject);
+                        selectedObjectList.Add(hit.collider.gameObject);
                         hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
                     }
+                }
+                else
+                {
+                    ClearSelection();
                 }
             }
 
@@ -206,7 +207,7 @@ public class ControlManager : MonoBehaviour
             {
                 if (hit.collider.gameObject.name == buildings.transform.GetChild(objectNumList[i]).gameObject.name)
                 {
-                    gameObjectList.Add(hit.collider.gameObject);
+                    selectedObjectList.Add(hit.collider.gameObject);
                     hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
                 }
             }
@@ -215,7 +216,7 @@ public class ControlManager : MonoBehaviour
 
     void ClearSelection()
     {
-        gameObjectList.Clear();
+        selectedObjectList.Clear();
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
             buildings.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;

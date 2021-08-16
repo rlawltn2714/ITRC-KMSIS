@@ -19,23 +19,16 @@ public class RayManager : MonoBehaviour
         sunlight = GameObject.Find("Directional Light");
     }
 
-    void Update()
-    {
-
-    }
-
     public List<RaycastHit> GetPointOnObject(GameObject building)
     {
         List<RaycastHit> result = new List<RaycastHit>();
 
-        building.layer = 0;
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
-            if (buildings.transform.GetChild(i).gameObject != building)
-            {
-                buildings.transform.GetChild(i).gameObject.layer = 2;
-            }
+            buildings.transform.GetChild(i).gameObject.layer = 2;
         }
+        building.layer = 0;
+        GameObject.Find("Dem").layer = 2;
 
         float x = building.transform.position.x;
         float y = building.transform.position.y;
@@ -117,6 +110,20 @@ public class RayManager : MonoBehaviour
         {
             buildings.transform.GetChild(i).gameObject.layer = 0;
         }
+        GameObject.Find("Dem").layer = 0;
         return result;
+    }
+
+    public float Ratio(List<RaycastHit> raycastPointList, Vector3 sunVector)
+    {
+        int sum = 0;
+        for (int i = 0; i < raycastPointList.Count; i++)
+        {
+            if (!Physics.Raycast(raycastPointList[i].transform.position, -sunVector, out hit, maxDistance))
+            {
+                sum++;
+            }
+        }
+        return (float)(sum) * 100f / (float)(raycastPointList.Count);
     }
 }
