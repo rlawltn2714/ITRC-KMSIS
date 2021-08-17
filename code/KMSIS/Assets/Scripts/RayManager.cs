@@ -119,7 +119,8 @@ public class RayManager : MonoBehaviour
         int sum = 0;
         for (int i = 0; i < raycastPointList.Count; i++)
         {
-            if (!Physics.Raycast(raycastPointList[i].transform.position, -sunVector, out hit, maxDistance))
+            Vector3 temp = raycastPointList[i].point;
+            if (!Physics.Raycast(temp, -sunVector, out hit, maxDistance))
             {
                 sum++;
             }

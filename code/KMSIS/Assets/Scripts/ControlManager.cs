@@ -88,8 +88,11 @@ public class ControlManager : MonoBehaviour
                     else
                     {
                         ClearSelection();
-                        selectedObjectList.Add(hit.collider.gameObject);
-                        hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                        if (hit.collider.gameObject.name != "Dem")
+                        {
+                            selectedObjectList.Add(hit.collider.gameObject);
+                            hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                        }
                     }
                 }
                 else
