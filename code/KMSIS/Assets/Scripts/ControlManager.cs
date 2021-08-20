@@ -68,21 +68,24 @@ public class ControlManager : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
                     {
-                        bool isSelected = false;
-                        for (int i = 0; i < selectedObjectList.Count; i++)
+                        if (hit.collider.gameObject.name != "Dem")
                         {
-                            if (hit.collider.gameObject.name == selectedObjectList[i].name)
+                            bool isSelected = false;
+                            for (int i = 0; i < selectedObjectList.Count; i++)
                             {
-                                isSelected = true;
-                                selectedObjectList.RemoveAt(i);
-                                hit.collider.gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
-                                break;
+                                if (hit.collider.gameObject.name == selectedObjectList[i].name)
+                                {
+                                    isSelected = true;
+                                    selectedObjectList.RemoveAt(i);
+                                    hit.collider.gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
+                                    break;
+                                }
                             }
-                        }
-                        if (!isSelected)
-                        {
-                            selectedObjectList.Add(hit.collider.gameObject);
-                            hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                            if (!isSelected)
+                            {
+                                selectedObjectList.Add(hit.collider.gameObject);
+                                hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                            }
                         }
                     }
                     else
