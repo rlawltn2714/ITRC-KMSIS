@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class DeleteLevitation : MonoBehaviour
 {
-    private bool checkCollision;
+    private GameObject buildings;
+    private GameObject colliders;
 
     void Start()
     {
-        checkCollision = false;
+        buildings = GameObject.Find("Buildings");
+        colliders = GameObject.Find("DemRigidbody").transform.GetChild(0).gameObject;
+        foreach(var collider in colliders.GetComponents<BoxCollider>())
+        {
+            collider.isTrigger = true;
+        }
     }
 
     void Update()
     {
-        if (!checkCollision)
+        for (int i = 0; i < buildings.transform.childCount; i++)
         {
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.01f, this.transform.position.z);
+            GameObject temp = buildings.transform.GetChild(i).gameObject;
+            if (temp.tag == "Untagged")
+            {
+                temp.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y - 0.01f, temp.transform.position.z);
+            }
         }
     }
     
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collider)
     {
-        checkCollision = true;
+        collider.gameObject.tag = "Building";
     }
 }

@@ -1,0 +1,15 @@
+﻿2.1.1
+Changelog:
+-Added the PivotPosition Asset Loader Option.
+-Added option to disable in editor file-formats importing.
+-Fixed iOS StandaloneFileBrowser bug.
+-Fixed bug where OBJ geometry groups were not created correctly.
+-Fixed PLY big-endian loading issue.
+-Fixed glTF Draco loader.
+-Fixed glTF Quantitized loading.
+-Fixed OBJ reader NaN parsing.
+-Fixed FBX bug where a single layer was referenced by more than one animation stack.
+-Fixed textures compression issue.
+-Fixed alpha materials creation issue. TriLib was creating an alpha material even for meshes that don't use transparent textures or alpha values.
+-Fixed mip-maps generation bug.
+-Fixed misc. bugs.

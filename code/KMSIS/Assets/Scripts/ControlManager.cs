@@ -68,7 +68,7 @@ public class ControlManager : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
                     {
-                        if (hit.collider.gameObject.name != "Dem")
+                        if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "DemRigidbody")
                         {
                             bool isSelected = false;
                             for (int i = 0; i < selectedObjectList.Count; i++)
@@ -91,7 +91,7 @@ public class ControlManager : MonoBehaviour
                     else
                     {
                         ClearSelection();
-                        if (hit.collider.gameObject.name != "Dem")
+                        if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "DemRigidbody")
                         {
                             selectedObjectList.Add(hit.collider.gameObject);
                             hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;

@@ -29,6 +29,7 @@ public class RayManager : MonoBehaviour
         }
         building.layer = 0;
         GameObject.Find("Dem").layer = 2;
+        GameObject.Find("DemRigidbody").layer = 2;
 
         float x = building.transform.position.x;
         float y = building.transform.position.y;
@@ -111,6 +112,7 @@ public class RayManager : MonoBehaviour
             buildings.transform.GetChild(i).gameObject.layer = 0;
         }
         GameObject.Find("Dem").layer = 0;
+        GameObject.Find("DemRigidbody").layer = 0;
         return result;
     }
 
