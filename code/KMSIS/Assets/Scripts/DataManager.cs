@@ -9,7 +9,6 @@ public class DataManager : MonoBehaviour
     private string[,] buildingData; // 0 : management_number, 1 : latitude, 2 : longitude, 3 : name, 4 : sido, 5 : gu, 6 : dong, 7 : road_name, 8 : subname, 9 : number,  10 : height, 11 : name_eng
     private int dongjakSize;
 
-    private GameObject buildings;
     private double standardX, standardZ;
     private double latitudeStandard = 2250.44549070300276;
     private double longitudeStandard = 7617.6241408941156;
@@ -37,12 +36,11 @@ public class DataManager : MonoBehaviour
         string[] ydata_line = currentText.Split('\n');
         rowSize = ydata_line.Length;
 
-        buildings = GameObject.Find("Buildings");
         standardX = GameObject.Find("Building.4983").transform.position.x;
         standardZ = GameObject.Find("Building.4983").transform.position.z;
         for (int i = 0; i < rowSize; i++)
         {
-            GameObject temp = buildings.transform.GetChild(i).gameObject;
+            GameObject temp = GameObject.Find("Buildings").transform.GetChild(i).gameObject;
             if (temp.tag == "Untagged")
             {
                 temp.transform.position = new Vector3(temp.transform.position.x, float.Parse(ydata_line[i]), temp.transform.position.z);
@@ -51,11 +49,11 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void FindBuilding(int index)
+    public void FindBuilding(GameObject building)
     {
         double latitude, longitude, x, z, dx, dz;
-        double mx = (double)(buildings.transform.GetChild(index).position.x);
-        double mz = (double)(buildings.transform.GetChild(index).position.z);
+        double mx = (double)(building.transform.position.x);
+        double mz = (double)(building.transform.position.z);
         float[] d = new float[dongjakSize];
         int min = -1;
         for (int i = 0; i < dongjakSize; i++)

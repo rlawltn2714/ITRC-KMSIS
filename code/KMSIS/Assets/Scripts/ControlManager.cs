@@ -42,20 +42,14 @@ public class ControlManager : MonoBehaviour
             {
                 List<RaycastHit> hitPointList = rayManager.GetPointOnObject(selectedObjectList[i]);
                 Debug.Log(rayManager.Ratio(hitPointList, sunManager.CalculateSunVector(GameObject.Find("Directional Light").transform.eulerAngles.y, GameObject.Find("Directional Light").transform.eulerAngles.x)) + "%");
+                rayManager.InstantiateObject(hitPointList);
             }
         }
         if (Input.GetKey(KeyCode.Return))
         {
             for (int i = 0; i < selectedObjectList.Count; i++)
             {
-                for (int j = 0; j < buildings.transform.childCount; j++)
-                {
-                    if (selectedObjectList[i].name == buildings.transform.GetChild(j).gameObject.name)
-                    {
-                        dataManager.FindBuilding(j);
-                        break;
-                    }
-                }
+                dataManager.FindBuilding(selectedObjectList[i]);
             }
         }
 
