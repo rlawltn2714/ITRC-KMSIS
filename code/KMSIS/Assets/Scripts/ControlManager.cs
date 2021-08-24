@@ -69,6 +69,7 @@ public class ControlManager : MonoBehaviour
             if (Time.time - clickTime > 0.2)
             {
                 // Long click
+                dataManager.Save();
             }
             else
             {

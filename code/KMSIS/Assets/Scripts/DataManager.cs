@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System;
+using System.IO;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -8,6 +11,9 @@ public class DataManager : MonoBehaviour
     public TextAsset ydata;
     private string[,] buildingData; // 0 : management_number, 1 : latitude, 2 : longitude, 3 : name, 4 : sido, 5 : gu, 6 : dong, 7 : road_name, 8 : subname, 9 : number,  10 : height, 11 : name_eng
     private int dongjakSize;
+
+    private string directory = "/SaveFile";
+    private string filename = "/data.save";
 
     private double standardX, standardZ;
     private double latitudeStandard = 2250.44549070300276;
@@ -47,6 +53,8 @@ public class DataManager : MonoBehaviour
                 temp.tag = "Building";
             }
         }
+
+        Load();
     }
 
     public void FindBuilding(GameObject building)
@@ -88,5 +96,81 @@ public class DataManager : MonoBehaviour
     private void PrintAll(int index)
     {
         Debug.Log(buildingData[index, 0] + " " + buildingData[index, 1] + " " + buildingData[index, 2] + " " + buildingData[index, 3] + " " + buildingData[index, 6] + " " + buildingData[index, 7] + " " + buildingData[index, 9]);
+    }
+
+    public void Save()
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        FileStream fileStream = new FileStream(Application.persistentDataPath + directory + filename, FileMode.Create);
+        UserData userData = SaveData();
+        binaryFormatter.Serialize(fileStream, userData);
+        fileStream.Close();
+    }
+
+    private void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + directory + filename))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(Application.persistentDataPath + directory + filename, FileMode.Open);
+            UserData userData = binaryFormatter.Deserialize(fileStream) as UserData;
+            LoadData(userData);
+            fileStream.Close();
+        }
+        else
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + directory);
+            if (!directoryInfo.Exists)
+            {
+                directoryInfo.Create();
+            }
+        }
+    }
+
+    [Serializable]
+    public class UserData
+    {
+        [SerializeField]
+        private float cameraPositionX, cameraPositionY, cameraPositionZ, cameraRotationX, cameraRotationY, cameraRotationZ;
+
+        public UserData() {}
+
+        public void SetCameraPosition(Vector3 position)
+        {
+            cameraPositionX = position.x;
+            cameraPositionY = position.y;
+            cameraPositionZ = position.z;
+        }
+
+        public Vector3 GetCameraPosition()
+        {
+            return new Vector3(cameraPositionX, cameraPositionY, cameraPositionZ);
+        }
+
+        public void SetCameraRotation(Vector3 rotation)
+        {
+            cameraRotationX = rotation.x;
+            cameraRotationY = rotation.y;
+            cameraRotationZ = rotation.z;
+        }
+
+        public Vector3 GetCameraRotation()
+        {
+            return new Vector3(cameraRotationX, cameraRotationY, cameraRotationZ);
+        }
+    }
+
+    public UserData SaveData()
+    {
+        UserData userData = new UserData();
+        userData.SetCameraPosition(new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z));
+        userData.SetCameraRotation(new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z));
+        return userData;
+    }
+
+    private void LoadData(UserData userData)
+    {
+        Camera.main.transform.position = userData.GetCameraPosition();
+        Camera.main.transform.eulerAngles = userData.GetCameraRotation();
     }
 }
