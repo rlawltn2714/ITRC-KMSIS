@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class SunManager : MonoBehaviour
 {
+    // This class manages sun.
+
+    // Convert value
     private double degToRad = 0.01745329251;
     private double radToDeg = 57.2957795131;
+
+    // Latitude and longitude (Standard : Chung-Ang University Hospital)
     private double latitude = 37.507424845050046;
     private double longitude = 126.96040234823526;
 
+    // Value needed to calculate data of sun
     private int[] dayForMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private int dayOfYear;
     private int lstm = 135;
     private double b, g, eot, tc, lst, hra;
     private double azimuth, altitude, sunrise, sunset;
 
+    // Calculate azimuth, altitude, sunrise, sunset four values
     public List<double> Calculate(int month, int day, float clock)
     {
+        // Calculate dayOfYear
         dayOfYear = 0;
         for (int i = 1; i < month; i++)
         {
@@ -31,6 +39,8 @@ public class SunManager : MonoBehaviour
         {
             dayOfYear += day;
         }
+
+        // Calculate data of sun
         b = (double)((dayOfYear - 81) * 360) / 365;
         g = radToDeg * Mathf.Asin(Mathf.Sin((float)(23.45 * degToRad)) * Mathf.Sin((float)(b * degToRad)));
         eot = 9.87 * Mathf.Sin((float)(2 * b * degToRad)) - 7.53 * Mathf.Cos((float)(b * degToRad)) - 1.5 * Mathf.Sin((float)(b * degToRad));
@@ -44,6 +54,8 @@ public class SunManager : MonoBehaviour
         azimuth = radToDeg * azimuth;
         sunrise = 12f - radToDeg * Mathf.Acos(-Mathf.Tan((float)(latitude * degToRad)) * Mathf.Tan((float)(g * degToRad))) / 15f - tc / 60f;
         sunset = 12f + radToDeg * Mathf.Acos(-Mathf.Tan((float)(latitude * degToRad)) * Mathf.Tan((float)(g * degToRad))) / 15f - tc / 60f;
+        
+        // Make list and return them
         List<double> sunDataList = new List<double>();
         sunDataList.Add(azimuth);
         sunDataList.Add(altitude);
@@ -52,6 +64,7 @@ public class SunManager : MonoBehaviour
         return sunDataList;
     }
 
+    // Calculate DirectionalLight.forward using azimuth, altitude
     public Vector3 CalculateSunVector(double azimuth, double altitude)
     {
         return new Vector3(Mathf.Sin((float)(azimuth * degToRad)) * Mathf.Cos((float)(altitude * degToRad)), Mathf.Sin(-(float)(altitude * degToRad)), Mathf.Cos((float)(altitude * degToRad)) * Mathf.Cos((float)(azimuth * degToRad)));

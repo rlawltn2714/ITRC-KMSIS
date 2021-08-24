@@ -4,24 +4,34 @@ using UnityEngine;
 
 public class RayManager : MonoBehaviour
 {
+    // This class manages raycast.
+
+    // GameObject component
     private GameObject plane;
     private GameObject buildings;
     private GameObject sunlight;
+
+    // RaycastHit variable
     private RaycastHit hit;
+
+    // GetPointOnObject setting
     private float length = 0.25f;
     private int divisor = 120;
 
     void Start()
     {
+        // Get GameObject component
         plane = GameObject.Find("Plane");
         buildings = GameObject.Find("Buildings");
         sunlight = GameObject.Find("Directional Light");
     }
 
+    // Get points on the surface of object
     public List<RaycastHit> GetPointOnObject(GameObject building)
     {
         List<RaycastHit> result = new List<RaycastHit>();
 
+        // Layer setting
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
             buildings.transform.GetChild(i).gameObject.layer = 2;
@@ -31,10 +41,12 @@ public class RayManager : MonoBehaviour
         GameObject.Find("DemRigidbody").layer = 2;
         GameObject.Find("Colliders").layer = 2;
 
+        // Local variable
         float x = building.transform.position.x;
         float y = building.transform.position.y;
         float z = building.transform.position.z;
 
+        // Get points using raycast
         for (int i = 1; i < divisor; i++)
         {
             for (int j = 1; j < divisor; j++)
@@ -46,7 +58,6 @@ public class RayManager : MonoBehaviour
                 }
             }
         }
-
         for (int i = 1; i < divisor; i++)
         {
             for (int j = 1; j < divisor; j++)
@@ -58,7 +69,6 @@ public class RayManager : MonoBehaviour
                 }
             }
         }
-
         for (int i = 1; i < divisor; i++)
         {
             for (int j = 1; j < divisor; j++)
@@ -70,7 +80,6 @@ public class RayManager : MonoBehaviour
                 }
             }
         }
-
         for (int i = 1; i < divisor; i++)
         {
             for (int j = 1; j < divisor; j++)
@@ -82,7 +91,6 @@ public class RayManager : MonoBehaviour
                 }
             }
         }
-
         for (int i = 1; i < divisor; i++)
         {
             for (int j = 1; j < divisor; j++)
@@ -94,7 +102,6 @@ public class RayManager : MonoBehaviour
                 }
             }
         }
-
         for (int i = 1; i < divisor; i++)
         {
             for (int j = 1; j < divisor; j++)
@@ -107,6 +114,7 @@ public class RayManager : MonoBehaviour
             }
         }
 
+        // Layer restore
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
             buildings.transform.GetChild(i).gameObject.layer = 0;
@@ -114,9 +122,11 @@ public class RayManager : MonoBehaviour
         GameObject.Find("Dem").layer = 0;
         GameObject.Find("DemRigidbody").layer = 0;
         GameObject.Find("Colliders").layer = 0;
+
         return result;
     }
 
+    // Calculate the percentage of points in sunlight
     public float Ratio(List<RaycastHit> hitPointList, Vector3 sunVector)
     {
         int sum = 0;
@@ -131,6 +141,7 @@ public class RayManager : MonoBehaviour
         return (float)(sum) * 100f / (float)(hitPointList.Count);
     }
 
+    // Intantiate plane object on the points
     public void InstantiateObject(List<RaycastHit> hitPointList)
     {
         for (int i = 0; i < hitPointList.Count; i++)

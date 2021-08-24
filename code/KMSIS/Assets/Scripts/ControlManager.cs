@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class ControlManager : MonoBehaviour
 {
-    public RectTransform dragSelectBox;
-    public Material selectMaterial;
-    public Material normalMaterial;
+    // This class manages what the user controls.
 
-    private List<GameObject> selectedObjectList;
-    private RaycastHit hit;
-    private Vector2 clickPosition;
-    private GameObject buildings;
-    private GameObject mainCamera;
+    // Manager component
     private RayManager rayManager;
     private SunManager sunManager;
     private DataManager dataManager;
 
+    // SelectBox component and list of selected objects
+    public RectTransform dragSelectBox;
+    private List<GameObject> selectedObjectList;
+
+    // Material component
+    public Material selectMaterial;
+    public Material normalMaterial;
+    
+    // RaycastHit variable
+    private RaycastHit hit;
+
+    // GameObject component
+    private GameObject buildings;
+    private GameObject mainCamera;
+
+    // Local variable and setting
+    private Vector2 clickPosition;
     private float clickTime;
     private float rotateLR;
     private float rotateUD;
@@ -26,18 +37,22 @@ public class ControlManager : MonoBehaviour
 
     void Start()
     {
+        // Get GameObject component
         buildings = GameObject.Find("Buildings");
         mainCamera = GameObject.Find("Main Camera");
         rayManager = GameObject.Find("RayManager").GetComponent<RayManager>();
         sunManager = GameObject.Find("SunManager").GetComponent<SunManager>();
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
+        
+        // Initialize variable
         selectedObjectList = new List<GameObject>();
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space)) // When get spacebar
         {
+            // Instantiate plane object using rayManager, and calculate R(x) using sunManager
             for (int i = 0; i < selectedObjectList.Count; i++)
             {
                 List<RaycastHit> hitPointList = rayManager.GetPointOnObject(selectedObjectList[i]);
@@ -45,26 +60,29 @@ public class ControlManager : MonoBehaviour
                 rayManager.InstantiateObject(hitPointList);
             }
         }
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(KeyCode.Return)) // When get enter
         {
+            // Find data of selected buildings
             for (int i = 0; i < selectedObjectList.Count; i++)
             {
                 dataManager.FindBuilding(selectedObjectList[i]);
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // When left click is start
         {
+            // Record position and time
             clickPosition = Input.mousePosition;
             clickTime = Time.time;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)) // When left click is continue
         {
+            // Update SelectBox
             UpdateDragSelectBox(Input.mousePosition);
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)) // When left click is end
         {
             if (Time.time - clickTime > 0.2)
             {
@@ -73,18 +91,19 @@ public class ControlManager : MonoBehaviour
             }
             else
             {
+                // Check if building is exist on click position
                 Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
-                
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+                    if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) // When get ctrl
                     {
-                        if (hit.transform.gameObject.name != "Dem" && hit.transform.gameObject.name != "DemRigidbody")
+                        if (hit.transform.gameObject.name != "Dem" && hit.transform.gameObject.name != "DemRigidbody") // When didn't click outside
                         {
+                            // Check if object is already selected
                             bool isSelected = false;
                             for (int i = 0; i < selectedObjectList.Count; i++)
                             {
-                                if (hit.collider.gameObject.name == selectedObjectList[i].name)
+                                if (hit.collider.gameObject.name == selectedObjectList[i].name)// When object is already selected
                                 {
                                     isSelected = true;
                                     selectedObjectList.RemoveAt(i);
@@ -92,18 +111,21 @@ public class ControlManager : MonoBehaviour
                                     break;
                                 }
                             }
-                            if (!isSelected)
+                            if (!isSelected) // When object isn't selected
                             {
+                                // select object
                                 selectedObjectList.Add(hit.collider.gameObject);
                                 hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
                             }
                         }
                     }
-                    else
+                    else // When click without ctrl
                     {
+                        // Clear selection list
                         ClearSelection();
-                        if (hit.transform.gameObject.name != "Dem" && hit.transform.gameObject.name != "DemRigidbody")
+                        if (hit.transform.gameObject.name != "Dem" && hit.transform.gameObject.name != "DemRigidbody") // When didn't click outside
                         {
+                            // select object
                             selectedObjectList.Add(hit.collider.gameObject);
                             hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
                         }
@@ -115,7 +137,7 @@ public class ControlManager : MonoBehaviour
                 }
             }
 
-            if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
+            if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f) // When click, not drag
             {
                 dragSelectBox.gameObject.SetActive(false);
             }
@@ -125,29 +147,34 @@ public class ControlManager : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1)) // When right click is continue
         {
-            mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+            // Update direction of camera
+            mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0); 
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed != 0)
+        if (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed != 0) // When scroll
         {
+            // Update zoom of camera
             mainCamera.GetComponent<Camera>().fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         }
 
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal") != 0) // When get A D กๆ ก็
         {
+            // Update position of camera
             mainCamera.transform.position += mainCamera.transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
             CameraPositionRangeCheck();
         }
 
-        if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Vertical") != 0) // When get W S ก่ ก้
         {
+            // Update position of camera
             mainCamera.transform.position += mainCamera.transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
             CameraPositionRangeCheck();
         }
     }
 
+    // Limit the range of camera
     void CameraPositionRangeCheck()
     {
         if (mainCamera.transform.position.y < 0)
@@ -176,6 +203,7 @@ public class ControlManager : MonoBehaviour
         }
     }
 
+    // Update selectBox with mouse position
     void UpdateDragSelectBox(Vector2 currentMousePosition)
     {
         if (!dragSelectBox.gameObject.activeInHierarchy)
@@ -190,10 +218,12 @@ public class ControlManager : MonoBehaviour
         dragSelectBox.anchoredPosition = clickPosition + new Vector2(width / 2, height / 2);
     }
 
+    // Release selectBox
     void ReleaseDragSelectBox()
     {
         dragSelectBox.gameObject.SetActive(false);
 
+        // calculate the range of position
         Vector2 min = dragSelectBox.anchoredPosition - (dragSelectBox.sizeDelta / 2);
         Vector2 max = dragSelectBox.anchoredPosition + (dragSelectBox.sizeDelta / 2);
 
@@ -202,8 +232,8 @@ public class ControlManager : MonoBehaviour
 
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
-            Vector2 screenPosition = Camera.main.WorldToScreenPoint(buildings.transform.GetChild(i).position);
-
+            // Check if position of building is in the selectBox
+            Vector2 screenPosition = mainCamera.GetComponent<Camera>().WorldToScreenPoint(buildings.transform.GetChild(i).position);
             if (screenPosition.x > min.x && screenPosition.x < max.x && screenPosition.y > min.y && screenPosition.y < max.y)
             {
                 pointList.Add(screenPosition);
@@ -211,15 +241,15 @@ public class ControlManager : MonoBehaviour
             }
         }
 
-        if (!Input.GetKey(KeyCode.LeftControl) & !Input.GetKey(KeyCode.RightControl))
+        if (!Input.GetKey(KeyCode.LeftControl) & !Input.GetKey(KeyCode.RightControl)) // When get ctrl
         {
             ClearSelection();
         }
 
         for (int i = 0; i < pointList.Count; i++)
         {
-            Ray ray = Camera.main.ScreenPointToRay(pointList[i]);
-
+            // Check if camera can detect the building
+            Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(pointList[i]);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.gameObject.name == buildings.transform.GetChild(objectNumList[i]).gameObject.name)
@@ -231,6 +261,7 @@ public class ControlManager : MonoBehaviour
         }
     }
 
+    // Clear selectBox
     void ClearSelection()
     {
         selectedObjectList.Clear();
