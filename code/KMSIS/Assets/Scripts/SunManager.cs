@@ -21,6 +21,40 @@ public class SunManager : MonoBehaviour
     private double b, g, eot, tc, lst, hra;
     private double azimuth, altitude, sunrise, sunset;
 
+    // Variable for simulation
+    private bool simulationMode = false;
+    private bool check = false;
+    private int simulationMonth, simulationDay;
+    private float simulationTime, simulationSunrise, simulationSunset, simulationInterval;
+
+    void Update()
+    {
+        if (simulationMode && check) // When simulation mode and need to update the position of sun
+        {
+            check = false;
+
+            // Calculate position of sun
+            List<double> tempList = Calculate(simulationMonth, simulationDay, simulationTime);
+            if (tempList != null)
+            {
+                // Set the position of sun
+                GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(tempList[1]), (float)(tempList[0]), 0);
+            }
+
+            // Add interval
+            simulationTime += simulationInterval;
+
+            if (simulationTime > simulationSunset) // When simulation is end
+            {
+                simulationMode = false;
+            }
+            else
+            {
+                StartCoroutine(Wait());
+            }
+        }
+    }
+
     // Calculate azimuth, altitude, sunrise, sunset four values
     public List<double> Calculate(int month, int day, float clock)
     {
@@ -68,5 +102,31 @@ public class SunManager : MonoBehaviour
     public Vector3 CalculateSunVector(double azimuth, double altitude)
     {
         return new Vector3(Mathf.Sin((float)(azimuth * degToRad)) * Mathf.Cos((float)(altitude * degToRad)), Mathf.Sin(-(float)(altitude * degToRad)), Mathf.Cos((float)(altitude * degToRad)) * Mathf.Cos((float)(azimuth * degToRad)));
+    }
+
+    // Simulate sunlight for a specific day
+    public void SimulateSunlight(int month, int day)
+    {
+        // Calculate sunrise and sunset
+        List<double> sunDataList = Calculate(month, day, 0);
+
+        // Set values
+        simulationMonth = month;
+        simulationDay = day;
+        simulationTime = (float)(sunDataList[2]);
+        simulationSunrise = (float)(sunDataList[2]);
+        simulationSunset = (float)(sunDataList[3]);
+        simulationInterval = (simulationSunset - simulationSunrise) / 1000f;
+
+        // Turn on the simulation mode
+        simulationMode = true;
+        check = true;
+    }
+
+    // Make time delay using coroutine
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.002f);
+        check = true;
     }
 }

@@ -48,4 +48,13 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    // Simulate sunlight for a specific day
+    public void Simulation()
+    {
+        if (int.TryParse(monthInput.text, out int month) && int.TryParse(dayInput.text, out int day))
+        {
+            sunManager.SimulateSunlight(month, day);
+        }
+    }
 }

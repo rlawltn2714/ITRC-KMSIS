@@ -20,7 +20,7 @@ public class DataManager : MonoBehaviour
     // Local variable (Standard : Chung-Ang University Hospital)
     private string[,] buildingData; // 0 : management_number, 1 : latitude, 2 : longitude, 3 : name, 4 : sido, 5 : gu, 6 : dong, 7 : road_name, 8 : subname, 9 : number,  10 : height, 11 : name_eng
     private int dongjakSize;
-    private double standardX, standardZ;
+    private double standardX = 0.003031239, standardZ = 0.0003396049;
     private double latitudeStandard = 2250.44549070300276;
     private double longitudeStandard = 7617.6241408941156;
     private double ratio = 0.254985734830929;
@@ -47,8 +47,6 @@ public class DataManager : MonoBehaviour
         currentText = ydata.text.Substring(0, ydata.text.Length - 1);
         string[] ydata_line = currentText.Split('\n');
         rowSize = ydata_line.Length;
-        standardX = GameObject.Find("Building.4983").transform.position.x;
-        standardZ = GameObject.Find("Building.4983").transform.position.z;
         for (int i = 0; i < rowSize; i++)
         {
             GameObject temp = GameObject.Find("Buildings").transform.GetChild(i).gameObject;
