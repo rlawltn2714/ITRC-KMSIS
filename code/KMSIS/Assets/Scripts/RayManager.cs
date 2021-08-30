@@ -146,7 +146,7 @@ public class RayManager : MonoBehaviour
     {
         for (int i = 0; i < hitPointList.Count; i++)
         {
-            GameObject t = Instantiate(plane, hitPointList[i].point + 0.00001f * hitPointList[i].normal, Quaternion.identity);
+            GameObject t = Instantiate(plane, hitPointList[i].point + 0.000005f * hitPointList[i].normal, Quaternion.identity);
             t.transform.up = hitPointList[i].normal;
             Destroy(t, 3.0f);
         }

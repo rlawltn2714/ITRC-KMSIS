@@ -24,6 +24,7 @@ public class ControlManager : MonoBehaviour
 
     // GameObject component
     private GameObject buildings;
+    private GameObject importedBuildings;
     private GameObject mainCamera;
 
     // Local variable and setting
@@ -39,6 +40,7 @@ public class ControlManager : MonoBehaviour
     {
         // Get GameObject component
         buildings = GameObject.Find("Buildings");
+        importedBuildings = GameObject.Find("ImportedBuildings");
         mainCamera = GameObject.Find("Main Camera");
         rayManager = GameObject.Find("RayManager").GetComponent<RayManager>();
         sunManager = GameObject.Find("SunManager").GetComponent<SunManager>();
@@ -183,9 +185,9 @@ public class ControlManager : MonoBehaviour
         }
         if (mainCamera.transform.position.y > 7)
         {
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, 0, mainCamera.transform.position.z);
+            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, 7, mainCamera.transform.position.z);
         }
-        if (mainCamera.transform.position.z < -8)
+        if (mainCamera.transform.position.z < -10)
         {
             mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, -10);
         }
@@ -268,6 +270,10 @@ public class ControlManager : MonoBehaviour
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
             buildings.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
+        }
+        for (int i=0;i< importedBuildings.transform.childCount; i++)
+        {
+            importedBuildings.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
         }
     }
 

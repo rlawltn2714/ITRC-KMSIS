@@ -44,7 +44,14 @@ public class UIManager : MonoBehaviour
             if (sunDataList != null)
             {
                 // Set the position of sun
-                GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(sunDataList[1]), (float)(sunDataList[0]), 0);
+                if (clock > (sunDataList[2] + sunDataList[3]) / 2)
+                {
+                    GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(sunDataList[1]), (float)(-sunDataList[0]), 0);
+                }
+                else
+                {
+                    GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(sunDataList[1]), (float)(sunDataList[0]), 0);
+                }
             }
         }
     }

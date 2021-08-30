@@ -27,7 +27,7 @@ public class SunManager : MonoBehaviour
     private int simulationMonth, simulationDay;
     private float simulationTime, simulationSunrise, simulationSunset, simulationInterval;
 
-    void Update()
+    void FixedUpdate()
     {
         if (simulationMode && check) // When simulation mode and need to update the position of sun
         {
@@ -38,7 +38,14 @@ public class SunManager : MonoBehaviour
             if (tempList != null)
             {
                 // Set the position of sun
-                GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(tempList[1]), (float)(tempList[0]), 0);
+                if (simulationTime > (tempList[2] + tempList[3]) / 2)
+                {
+                    GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(tempList[1]), (float)(-tempList[0]), 0);
+                }
+                else
+                {
+                    GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(tempList[1]), (float)(tempList[0]), 0);
+                }
             }
 
             // Add interval
@@ -89,7 +96,7 @@ public class SunManager : MonoBehaviour
         sunrise = 12f - radToDeg * Mathf.Acos(-Mathf.Tan((float)(latitude * degToRad)) * Mathf.Tan((float)(g * degToRad))) / 15f - tc / 60f;
         sunset = 12f + radToDeg * Mathf.Acos(-Mathf.Tan((float)(latitude * degToRad)) * Mathf.Tan((float)(g * degToRad))) / 15f - tc / 60f;
         
-        // Make list and return them
+        // Make list and return it
         List<double> sunDataList = new List<double>();
         sunDataList.Add(azimuth);
         sunDataList.Add(altitude);
@@ -116,7 +123,7 @@ public class SunManager : MonoBehaviour
         simulationTime = (float)(sunDataList[2]);
         simulationSunrise = (float)(sunDataList[2]);
         simulationSunset = (float)(sunDataList[3]);
-        simulationInterval = (simulationSunset - simulationSunrise) / 1000f;
+        simulationInterval = (simulationSunset - simulationSunrise) / 300f;
 
         // Turn on the simulation mode
         simulationMode = true;
@@ -126,7 +133,7 @@ public class SunManager : MonoBehaviour
     // Make time delay using coroutine
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(0.002f);
+        yield return new WaitForSeconds(0.01f);
         check = true;
     }
 }
