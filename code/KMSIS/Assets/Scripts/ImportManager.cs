@@ -15,16 +15,46 @@ namespace TriLibCore.Samples
 		// GameObject component
 		private GameObject importedBuildings;
 		private GameObject standardBoundBuilding;
+		private GameObject colliders;
 
 		// Bound variable
 		private float minBound;
+
+		// Delete levitation
+		private bool deleteLevitation;
 
 		void Start()
         {
 			importedBuildings = GameObject.Find("ImportedBuildings");
 			standardBoundBuilding = GameObject.Find("Building.4028");
 			minBound = standardBoundBuilding.GetComponent<MeshRenderer>().bounds.size.y;
-        }
+			colliders = GameObject.Find("DemRigidbody").transform.GetChild(0).gameObject;
+			foreach (var collider in colliders.GetComponents<BoxCollider>())
+			{
+				collider.isTrigger = true;
+			}
+			deleteLevitation = false;
+		}
+
+		void Update()
+        {
+			if (deleteLevitation)
+            {
+				GameObject temp = importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject;
+				if (temp.tag == "Untagged")
+				{
+					temp.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y - 0.01f, temp.transform.position.z);
+				}
+				else deleteLevitation = false;
+			}
+		}
+
+		// Delete levitation
+		public void DeleteLevitation(GameObject building)
+        {
+			building.transform.position = new Vector3(building.transform.position.x, 0.05f, building.transform.position.z);
+			deleteLevitation = true;
+		}
 
 		// Set the size of model appropriately
 		public void SetSizeOfModel(GameObject building)
@@ -89,6 +119,7 @@ namespace TriLibCore.Samples
 		private void OnLoad(AssetLoaderContext assetLoaderContext)
 		{
 			SetSizeOfModel(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
+			DeleteLevitation(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
 		}
 
 		IEnumerator ShowLoadDialogCoroutine()

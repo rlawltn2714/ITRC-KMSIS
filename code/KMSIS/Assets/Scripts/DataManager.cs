@@ -61,8 +61,8 @@ public class DataManager : MonoBehaviour
         Load();
     }
 
-    // Find data of building and print it
-    public void FindBuilding(GameObject building)
+    // Find data of building and return it
+    public List<string> FindBuilding(GameObject building)
     {
         // Local variable
         double latitude, longitude, x, z, dx, dz;
@@ -92,7 +92,13 @@ public class DataManager : MonoBehaviour
                 min = i;
             }
         }
-        PrintAll(min);
+
+        List<string> result = new List<string>();
+        for(int i = 0; i < 12; i++)
+        {
+            result.Add(buildingData[min, i]);
+        }
+        return result;
     }
 
     // Convert degree to minute
@@ -100,12 +106,6 @@ public class DataManager : MonoBehaviour
     {
         double t = value / 1;
         return t * 60 + (value - t) * 60;
-    }
-
-    // Print building data
-    private void PrintAll(int index)
-    {
-        Debug.Log(buildingData[index, 0] + " " + buildingData[index, 1] + " " + buildingData[index, 2] + " " + buildingData[index, 3] + " " + buildingData[index, 6] + " " + buildingData[index, 7] + " " + buildingData[index, 9]);
     }
 
     // Save data
