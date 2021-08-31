@@ -17,13 +17,13 @@ namespace TriLibCore.Samples
 		private GameObject standardBoundBuilding;
 
 		// Bound variable
-		private float maxBound;
+		private float minBound;
 
 		void Start()
         {
 			importedBuildings = GameObject.Find("ImportedBuildings");
 			standardBoundBuilding = GameObject.Find("Building.4028");
-			maxBound = standardBoundBuilding.GetComponent<MeshFilter>().mesh.bounds.size.y;
+			minBound = standardBoundBuilding.GetComponent<MeshRenderer>().bounds.size.y;
         }
 
 		// Set the size of model appropriately
@@ -31,14 +31,12 @@ namespace TriLibCore.Samples
         {
 			if (!CheckSizeOfModel(building))
             {
-				Debug.Log(maxBound);
-				Bounds bounds = building.GetComponent<MeshFilter>().mesh.bounds;
-				float ratio = maxBound / bounds.size.x;
-				if (maxBound / bounds.size.y > ratio) ratio = maxBound / bounds.size.y;
-				if (maxBound / bounds.size.z > ratio) ratio = maxBound / bounds.size.z;
-
-				Debug.Log(ratio);
-				building.transform.localScale = new Vector3(ratio, ratio, ratio);
+				// Calculate ratio and set scale of object
+				Bounds bounds = building.GetComponent<MeshRenderer>().bounds;
+				float ratio = minBound / bounds.size.x;
+				if (minBound / bounds.size.y < ratio) ratio = minBound / bounds.size.y;
+				if (minBound / bounds.size.z < ratio) ratio = minBound / bounds.size.z;
+				building.transform.localScale = new Vector3(building.transform.localScale.x * ratio, building.transform.localScale.y * ratio, building.transform.localScale.z * ratio);
 			}
 		}
 
@@ -46,7 +44,7 @@ namespace TriLibCore.Samples
 		public bool CheckSizeOfModel(GameObject building)
         {
 			Bounds bounds = building.GetComponent<MeshFilter>().mesh.bounds;
-			if (bounds.size.x <= maxBound && bounds.size.y <= maxBound && bounds.size.z <= maxBound) return true;
+			if (bounds.size.x <= minBound && bounds.size.y <= minBound && bounds.size.z <= minBound) return true;
 			else return false;
 		}
 
