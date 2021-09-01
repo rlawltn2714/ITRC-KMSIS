@@ -9,9 +9,12 @@ public class DataManager : MonoBehaviour
 {
     // This class manages data.
 
-    // Text Component
+    // Text component
     public TextAsset dongjak;
     public TextAsset ydata;
+
+    // GameObject component
+    private GameObject buildings;
 
     // SaveFile seteting
     private string directory = "/SaveFile";
@@ -57,12 +60,72 @@ public class DataManager : MonoBehaviour
             }
         }
 
+        // Get GameObject component
+        buildings = GameObject.Find("Buildings");
+
         // Load savefile
         Load();
     }
 
+    // Search data and return list of buildings
+    public List<GameObject> SearchWithText(string text)
+    {
+        List<GameObject> result = new List<GameObject>();
+        string[] str = text.Split(' ');
+        if (str.Length == 0)
+        {
+            return null;
+        }
+        else if (str.Length == 1)
+        {
+            for (int i = 0; i < buildings.transform.childCount; i++)
+            {
+                List<string> tempList = FindData(buildings.transform.GetChild(i).gameObject);
+                if (tempList[3] != "null" && tempList[3].Contains(str[0]))
+                {
+                    result.Add(buildings.transform.GetChild(i).gameObject);
+                    continue;
+                }
+                if (tempList[8] != "null" && tempList[8].Contains(str[0]))
+                {
+                    result.Add(buildings.transform.GetChild(i).gameObject);
+                    continue;
+                }
+                if (tempList[11] != "null" && tempList[11].Contains(str[0]))
+                {
+                    result.Add(buildings.transform.GetChild(i).gameObject);
+                    continue;
+                }
+            }
+            if (result.Count == 0) return null;
+            else return result;
+        }
+        else
+        {
+            for (int i = 0; i < buildings.transform.childCount; i++)
+            {
+                List<string> tempList = FindData(buildings.transform.GetChild(i).gameObject);
+                if (tempList[4].Contains(str[0]) && str.Length < 5)
+                {
+                    bool check = true;
+                    for (int j = 1; j < str.Length; j++)
+                    {
+                        if (tempList[4 + j].Contains(str[j])) continue;
+                        else
+                        {
+                            check = false;
+                            break;
+                        }
+                    }
+                    if (check) result.Add(buildings.transform.GetChild(i).gameObject);
+                }
+            }
+        }
+        return result;
+    }
+
     // Find data of building and return it
-    public List<string> FindBuilding(GameObject building)
+    public List<string> FindData(GameObject building)
     {
         // Local variable
         double latitude, longitude, x, z, dx, dz;

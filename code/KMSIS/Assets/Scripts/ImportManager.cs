@@ -25,9 +25,12 @@ namespace TriLibCore.Samples
 
 		void Start()
         {
+			// Get GameObject component
 			importedBuildings = GameObject.Find("ImportedBuildings");
 			standardBoundBuilding = GameObject.Find("Building.4028");
 			minBound = standardBoundBuilding.GetComponent<MeshRenderer>().bounds.size.y;
+
+			// Set collider
 			colliders = GameObject.Find("DemRigidbody").transform.GetChild(0).gameObject;
 			foreach (var collider in colliders.GetComponents<BoxCollider>())
 			{

@@ -12,14 +12,17 @@ public class UIManager : MonoBehaviour
     public InputField dayInput;
     public InputField hourInput;
     public InputField minuteInput;
+    public InputField searchInput;
 
     // Manager component
     private SunManager sunManager;
+    private DataManager dataManager;
 
     void Start()
     {
         // Get manager component
         sunManager = GameObject.Find("SunManager").GetComponent<SunManager>();
+        dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
 
         //  Initialize text of UI
         monthInput.text = System.DateTime.Now.ToString("MM");
@@ -63,5 +66,20 @@ public class UIManager : MonoBehaviour
         {
             sunManager.SimulateSunlight(month, day);
         }
+    }
+
+    // Search data with text using DataManager
+    public void Search()
+    {
+        List<GameObject> tempList = dataManager.SearchWithText(searchInput.text);
+        if (tempList == null || tempList.Count == 0) Debug.Log("검색 결과가 없습니다.");
+        else if (tempList.Count < 10)
+        {
+            for(int i = 0; i < tempList.Count; i++)
+            {
+                Debug.Log(tempList[i].name);
+            }
+        }
+        else Debug.Log("검색 결과가 너무 많습니다.");
     }
 }

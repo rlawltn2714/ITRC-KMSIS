@@ -10,15 +10,11 @@ public class ControlManager : MonoBehaviour
     private RayManager rayManager;
     private SunManager sunManager;
     private DataManager dataManager;
+    private BuildingManager buildingManager;
 
     // SelectBox component and list of selected objects
     public RectTransform dragSelectBox;
-    private List<GameObject> selectedObjectList;
 
-    // Material component
-    public Material selectMaterial;
-    public Material normalMaterial;
-    
     // RaycastHit variable
     private RaycastHit hit;
 
@@ -45,9 +41,7 @@ public class ControlManager : MonoBehaviour
         rayManager = GameObject.Find("RayManager").GetComponent<RayManager>();
         sunManager = GameObject.Find("SunManager").GetComponent<SunManager>();
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
-        
-        // Initialize variable
-        selectedObjectList = new List<GameObject>();
+        buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
     }
 
     void Update()
@@ -55,9 +49,9 @@ public class ControlManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)) // When get spacebar
         {
             // Instantiate plane object using rayManager, and calculate R(x) using sunManager
-            for (int i = 0; i < selectedObjectList.Count; i++)
+            for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
             {
-                List<RaycastHit> hitPointList = rayManager.GetPointOnObject(selectedObjectList[i]);
+                List<RaycastHit> hitPointList = rayManager.GetPointOnObject(buildingManager.GetSelectedObjectList()[i]);
                 Debug.Log(rayManager.Ratio(hitPointList, sunManager.CalculateSunVector(GameObject.Find("Directional Light").transform.eulerAngles.y, GameObject.Find("Directional Light").transform.eulerAngles.x)) + "%");
                 rayManager.InstantiateObject(hitPointList);
             }
@@ -65,10 +59,31 @@ public class ControlManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Return)) // When get enter
         {
             // Find data of selected buildings
-            for (int i = 0; i < selectedObjectList.Count; i++)
+            for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
             {
-                dataManager.FindBuilding(selectedObjectList[i]);
+                dataManager.FindData(buildingManager.GetSelectedObjectList()[i]);
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
+            {
+                buildingManager.GetDeletedObjectList().Add(buildingManager.GetSelectedObjectList()[i]);
+                buildingManager.GetSelectedObjectList()[i].SetActive(false);
+            }
+            buildingManager.ClearSelectedObjectList();
+        }
+
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            buildingManager.GetDeletedObjectList().Clear();
+            buildingManager.ShowAll();
+        }
+
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            buildingManager.ChangeView();
         }
 
         if (Input.GetMouseButtonDown(0)) // When left click is start
@@ -88,7 +103,6 @@ public class ControlManager : MonoBehaviour
         {
             if (Time.time - clickTime > 0.2)
             {
-                // Long click
                 dataManager.Save();
             }
             else
@@ -103,39 +117,36 @@ public class ControlManager : MonoBehaviour
                         {
                             // Check if object is already selected
                             bool isSelected = false;
-                            for (int i = 0; i < selectedObjectList.Count; i++)
+                            for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
                             {
-                                if (hit.collider.gameObject.name == selectedObjectList[i].name)// When object is already selected
+                                if (hit.collider.gameObject.name == buildingManager.GetSelectedObjectList()[i].name)// When object is already selected
                                 {
                                     isSelected = true;
-                                    selectedObjectList.RemoveAt(i);
-                                    hit.collider.gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
+                                    buildingManager.DeleteFromSelectedObjectList(i);
                                     break;
                                 }
                             }
                             if (!isSelected) // When object isn't selected
                             {
                                 // select object
-                                selectedObjectList.Add(hit.collider.gameObject);
-                                hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                                buildingManager.SelectObject(hit.collider.gameObject);
                             }
                         }
                     }
                     else // When click without ctrl
                     {
                         // Clear selection list
-                        ClearSelection();
+                        buildingManager.ClearSelectedObjectList();
                         if (hit.transform.gameObject.name != "Dem" && hit.transform.gameObject.name != "DemRigidbody") // When didn't click outside
                         {
                             // select object
-                            selectedObjectList.Add(hit.collider.gameObject);
-                            hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                            buildingManager.SelectObject(hit.collider.gameObject);
                         }
                     }
                 }
                 else
                 {
-                    ClearSelection();
+                    buildingManager.ClearSelectedObjectList();
                 }
             }
 
@@ -245,7 +256,7 @@ public class ControlManager : MonoBehaviour
 
         if (!Input.GetKey(KeyCode.LeftControl) & !Input.GetKey(KeyCode.RightControl)) // When get ctrl
         {
-            ClearSelection();
+            buildingManager.ClearSelectedObjectList();
         }
 
         for (int i = 0; i < pointList.Count; i++)
@@ -256,25 +267,9 @@ public class ControlManager : MonoBehaviour
             {
                 if (hit.collider.gameObject.name == buildings.transform.GetChild(objectNumList[i]).gameObject.name)
                 {
-                    selectedObjectList.Add(hit.collider.gameObject);
-                    hit.collider.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                    buildingManager.SelectObject(hit.collider.gameObject);
                 }
             }
         }
     }
-
-    // Clear selectBox
-    void ClearSelection()
-    {
-        selectedObjectList.Clear();
-        for (int i = 0; i < buildings.transform.childCount; i++)
-        {
-            buildings.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
-        }
-        for (int i=0;i< importedBuildings.transform.childCount; i++)
-        {
-            importedBuildings.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
-        }
-    }
-
 }
