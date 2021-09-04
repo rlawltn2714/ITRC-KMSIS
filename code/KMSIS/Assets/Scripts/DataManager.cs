@@ -10,7 +10,7 @@ public class DataManager : MonoBehaviour
     // This class manages data.
 
     // Text component
-    public TextAsset dongjak;
+    public TextAsset data;
     public TextAsset ydata;
 
     // GameObject component
@@ -23,15 +23,11 @@ public class DataManager : MonoBehaviour
     // Local variable (Standard : Chung-Ang University Hospital)
     private string[,] buildingData; // 0 : management_number, 1 : latitude, 2 : longitude, 3 : name, 4 : sido, 5 : gu, 6 : dong, 7 : road_name, 8 : subname, 9 : number,  10 : height, 11 : name_eng
     private int dongjakSize;
-    private double standardX = 0.003031239, standardZ = 0.0003396049;
-    private double latitudeStandard = 2250.44549070300276;
-    private double longitudeStandard = 7617.6241408941156;
-    private double ratio = 0.254985734830929;
 
     void Start()
     {
         // Text parsing for building data
-        string currentText = dongjak.text.Substring(0, dongjak.text.Length - 1);
+        string currentText = data.text.Substring(0, data.text.Length - 1);
         string[] dongjak_line = currentText.Split('\n');
         dongjakSize = dongjak_line.Length;
         int rowSize = dongjakSize;
@@ -80,7 +76,7 @@ public class DataManager : MonoBehaviour
         {
             for (int i = 0; i < buildings.transform.childCount; i++)
             {
-                List<string> tempList = FindData(buildings.transform.GetChild(i).gameObject);
+                List<string> tempList = FindData(i);
                 if (tempList[3] != "null" && tempList[3].Contains(str[0]))
                 {
                     result.Add(buildings.transform.GetChild(i).gameObject);
@@ -104,7 +100,7 @@ public class DataManager : MonoBehaviour
         {
             for (int i = 0; i < buildings.transform.childCount; i++)
             {
-                List<string> tempList = FindData(buildings.transform.GetChild(i).gameObject);
+                List<string> tempList = FindData(i);
                 if (tempList[4].Contains(str[0]) && str.Length < 5)
                 {
                     bool check = true;
@@ -125,41 +121,12 @@ public class DataManager : MonoBehaviour
     }
 
     // Find data of building and return it
-    public List<string> FindData(GameObject building)
+    public List<string> FindData(int index)
     {
-        // Local variable
-        double latitude, longitude, x, z, dx, dz;
-        double mx = (double)(building.transform.position.x);
-        double mz = (double)(building.transform.position.z);
-        float[] d = new float[dongjakSize];
-        int min = -1;
-
-        // Get data that is most similar to the predicted coordinate
-        for (int i = 0; i < dongjakSize; i++)
-        {
-            latitude = double.Parse(buildingData[i, 1]);
-            longitude = double.Parse(buildingData[i, 2]);
-            latitude = ConvertToMinute(latitude);
-            longitude = ConvertToMinute(longitude);
-            x = longitudeStandard - longitude;
-            z = latitudeStandard - latitude;
-            dx = x - (mx - standardX) * ratio;
-            dz = z - (mz - standardZ) * ratio;
-            d[i] = Mathf.Sqrt((float)(dx * dx + dz * dz));
-            if (min == -1)
-            {
-                min = i;
-            }
-            else if (d[min] > d[i])
-            {
-                min = i;
-            }
-        }
-
         List<string> result = new List<string>();
         for(int i = 0; i < 12; i++)
         {
-            result.Add(buildingData[min, i]);
+            result.Add(buildingData[index, i]);
         }
         return result;
     }

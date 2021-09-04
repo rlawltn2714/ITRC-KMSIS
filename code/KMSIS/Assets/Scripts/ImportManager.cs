@@ -12,6 +12,9 @@ namespace TriLibCore.Samples
 	{
 		// This class manages importing.
 
+		// Manager component
+		private ControlManager controlManager;
+
 		// GameObject component
 		private GameObject importedBuildings;
 		private GameObject standardBoundBuilding;
@@ -30,6 +33,9 @@ namespace TriLibCore.Samples
 			standardBoundBuilding = GameObject.Find("Building.4028");
 			minBound = standardBoundBuilding.GetComponent<MeshRenderer>().bounds.size.y;
 
+			// Get manager component
+			controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
+
 			// Set collider
 			colliders = GameObject.Find("DemRigidbody").transform.GetChild(0).gameObject;
 			foreach (var collider in colliders.GetComponents<BoxCollider>())
@@ -46,7 +52,7 @@ namespace TriLibCore.Samples
 				GameObject temp = importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject;
 				if (temp.tag == "Untagged")
 				{
-					temp.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y - 0.01f, temp.transform.position.z);
+					temp.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y - 0.005f, temp.transform.position.z);
 				}
 				else deleteLevitation = false;
 			}
@@ -55,7 +61,8 @@ namespace TriLibCore.Samples
 		// Delete levitation
 		public void DeleteLevitation(GameObject building)
         {
-			building.transform.position = new Vector3(building.transform.position.x, 0.05f, building.transform.position.z);
+			building.tag = "Untagged";
+			building.transform.position = new Vector3(building.transform.position.x, 0.5f, building.transform.position.z);
 			deleteLevitation = true;
 		}
 
@@ -93,6 +100,7 @@ namespace TriLibCore.Samples
 		// Import model using file browser
 		public void ImportFromBrowser()
 		{
+			controlManager.SetMode(-1);
 			// Set filters (optional)
 			// It is sufficient to set the filters just once (instead of each time before showing the file browser dialog), 
 			// if all the dialogs will be using the same filters
@@ -122,7 +130,8 @@ namespace TriLibCore.Samples
 		private void OnLoad(AssetLoaderContext assetLoaderContext)
 		{
 			SetSizeOfModel(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
-			DeleteLevitation(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
+			importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).position = new Vector3(Camera.main.transform.position.x, 0.5f, Camera.main.transform.position.z);
+			Camera.main.transform.eulerAngles = new Vector3(90f, Camera.main.transform.eulerAngles.y, 0f);
 		}
 
 		IEnumerator ShowLoadDialogCoroutine()
@@ -138,6 +147,11 @@ namespace TriLibCore.Samples
 				{
 					ImportFromPath(FileBrowser.Result[i]);
 				}
+				controlManager.SetMode(1);
+			}
+            else
+            {
+				controlManager.SetMode(0);
 			}
 		}
 	}

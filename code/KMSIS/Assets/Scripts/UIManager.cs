@@ -17,12 +17,14 @@ public class UIManager : MonoBehaviour
     // Manager component
     private SunManager sunManager;
     private DataManager dataManager;
+    private BuildingManager buildingManager;
 
     void Start()
     {
         // Get manager component
         sunManager = GameObject.Find("SunManager").GetComponent<SunManager>();
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
+        buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
 
         //  Initialize text of UI
         monthInput.text = System.DateTime.Now.ToString("MM");
@@ -73,13 +75,19 @@ public class UIManager : MonoBehaviour
     {
         List<GameObject> tempList = dataManager.SearchWithText(searchInput.text);
         if (tempList == null || tempList.Count == 0) Debug.Log("검색 결과가 없습니다.");
-        else if (tempList.Count < 10)
+        else
         {
-            for(int i = 0; i < tempList.Count; i++)
+            buildingManager.ClearSelectedObjectList();
+            float x = 0f, z = 0f;
+            for (int i = 0; i < tempList.Count; i++)
             {
-                Debug.Log(tempList[i].name);
+                buildingManager.SelectObject(tempList[i]);
+                x += tempList[i].transform.position.x;
+                z += tempList[i].transform.position.z;
             }
+            x = x / tempList.Count;
+            z = z / tempList.Count;
+            Camera.main.transform.position = new Vector3(x, 0.005f, z) - Camera.main.transform.forward * 2f;
         }
-        else Debug.Log("검색 결과가 너무 많습니다.");
     }
 }

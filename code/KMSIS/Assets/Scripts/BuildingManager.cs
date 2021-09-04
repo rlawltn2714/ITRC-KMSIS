@@ -8,6 +8,7 @@ public class BuildingManager : MonoBehaviour
 
     // GameObject component
     private GameObject buildings;
+    private GameObject importedBuildings;
     private List<GameObject> selectedObjectList;
     private List<GameObject> deletedObjectList;
 
@@ -22,6 +23,7 @@ public class BuildingManager : MonoBehaviour
     {
         // Get GameObject component
         buildings = GameObject.Find("Buildings");
+        importedBuildings = GameObject.Find("ImportedBuildings");
 
         // Initialize variable
         selectedObjectList = new List<GameObject>();
@@ -35,6 +37,10 @@ public class BuildingManager : MonoBehaviour
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
             buildings.transform.GetChild(i).gameObject.SetActive(true);
+        }
+        for (int i = 0; i < importedBuildings.transform.childCount; i++)
+        {
+            importedBuildings.transform.GetChild(i).gameObject.SetActive(true);
         }
         for (int i = 0; i < deletedObjectList.Count; i++)
         {
@@ -52,6 +58,10 @@ public class BuildingManager : MonoBehaviour
             {
                 buildings.transform.GetChild(i).gameObject.SetActive(false);
             }
+            for (int i = 0; i < importedBuildings.transform.childCount; i++)
+            {
+                importedBuildings.transform.GetChild(i).gameObject.SetActive(false);
+            }
             for (int i = 0; i < deletedObjectList.Count; i++)
             {
                 deletedObjectList[i].SetActive(true);
@@ -63,6 +73,10 @@ public class BuildingManager : MonoBehaviour
             for (int i = 0; i < buildings.transform.childCount; i++)
             {
                 buildings.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            for (int i = 0; i < importedBuildings.transform.childCount; i++)
+            {
+                importedBuildings.transform.GetChild(i).gameObject.SetActive(true);
             }
             for (int i = 0; i < deletedObjectList.Count; i++)
             {

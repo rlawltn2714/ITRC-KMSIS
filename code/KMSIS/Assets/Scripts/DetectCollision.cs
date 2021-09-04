@@ -6,7 +6,7 @@ public class DetectCollision : MonoBehaviour
 {
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag != "Building")
+        if (collider.gameObject.tag == "Untagged")
         {
             collider.gameObject.tag = "Building";
         }
