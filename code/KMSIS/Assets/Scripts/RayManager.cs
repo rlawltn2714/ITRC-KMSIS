@@ -9,6 +9,7 @@ public class RayManager : MonoBehaviour
     // GameObject component
     private GameObject plane;
     private GameObject buildings;
+    private GameObject importedBuildings;
     private GameObject sunlight;
 
     // RaycastHit variable
@@ -23,6 +24,7 @@ public class RayManager : MonoBehaviour
         // Get GameObject component
         plane = GameObject.Find("Plane");
         buildings = GameObject.Find("Buildings");
+        importedBuildings = GameObject.Find("ImportedBuildings");
         sunlight = GameObject.Find("Directional Light");
     }
 
@@ -35,6 +37,10 @@ public class RayManager : MonoBehaviour
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
             buildings.transform.GetChild(i).gameObject.layer = 2;
+        }
+        for (int i = 0; i < importedBuildings.transform.childCount; i++)
+        {
+            importedBuildings.transform.GetChild(i).gameObject.layer = 2;
         }
         building.layer = 0;
         GameObject.Find("Dem").layer = 2;
@@ -118,6 +124,10 @@ public class RayManager : MonoBehaviour
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
             buildings.transform.GetChild(i).gameObject.layer = 0;
+        }
+        for (int i = 0; i < importedBuildings.transform.childCount; i++)
+        {
+            importedBuildings.transform.GetChild(i).gameObject.layer = 0;
         }
         GameObject.Find("Dem").layer = 0;
         GameObject.Find("DemRigidbody").layer = 0;

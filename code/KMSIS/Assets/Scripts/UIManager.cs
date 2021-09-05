@@ -13,11 +13,18 @@ public class UIManager : MonoBehaviour
     public InputField hourInput;
     public InputField minuteInput;
     public InputField searchInput;
+    public Button importButton;
+    public Button simulateButton;
+    public Button searchButton;
+    public InputField[] scaleInput;
+    public Button[] scaleUp;
+    public Button[] scaleDown;
 
     // Manager component
     private SunManager sunManager;
     private DataManager dataManager;
     private BuildingManager buildingManager;
+    private ControlManager controlManager;
 
     void Start()
     {
@@ -25,6 +32,7 @@ public class UIManager : MonoBehaviour
         sunManager = GameObject.Find("SunManager").GetComponent<SunManager>();
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
         buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
+        controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
 
         //  Initialize text of UI
         monthInput.text = System.DateTime.Now.ToString("MM");
@@ -34,6 +42,97 @@ public class UIManager : MonoBehaviour
 
         // Set the position of sun
         SetSunPosition();
+
+        // Turn on UI
+        ChangeInterface(-1, 0);
+    }
+
+    // Change UI
+    public void ChangeInterface(int current, int next)
+    {
+        if (current == -1 && next == 0)
+        {
+            OffInterface();
+            monthInput.gameObject.SetActive(true);
+            dayInput.gameObject.SetActive(true);
+            hourInput.gameObject.SetActive(true);
+            minuteInput.gameObject.SetActive(true);
+            searchInput.gameObject.SetActive(true);
+            importButton.gameObject.SetActive(true);
+            simulateButton.gameObject.SetActive(true);
+            searchButton.gameObject.SetActive(true);
+        }
+        else if (current == -1 && next == 1)
+        {
+            OffInterface();
+            for (int i = 0; i < 3; i++)
+            {
+                scaleInput[i].gameObject.SetActive(true);
+                scaleInput[i].text = "1";
+                scaleUp[i].gameObject.SetActive(true);
+                scaleDown[i].gameObject.SetActive(true);
+            }
+        }
+        else if (current == 1 && next == 0)
+        {
+            OffInterface();
+            monthInput.gameObject.SetActive(true);
+            dayInput.gameObject.SetActive(true);
+            hourInput.gameObject.SetActive(true);
+            minuteInput.gameObject.SetActive(true);
+            searchInput.gameObject.SetActive(true);
+            importButton.gameObject.SetActive(true);
+            simulateButton.gameObject.SetActive(true);
+            searchButton.gameObject.SetActive(true);
+        }
+    }
+
+    // Turn off all UI
+    private void OffInterface()
+    {
+        monthInput.gameObject.SetActive(false);
+        dayInput.gameObject.SetActive(false);
+        hourInput.gameObject.SetActive(false);
+        minuteInput.gameObject.SetActive(false);
+        searchInput.gameObject.SetActive(false);
+        importButton.gameObject.SetActive(false);
+        simulateButton.gameObject.SetActive(false);
+        searchButton.gameObject.SetActive(false);
+        for (int i = 0; i < 3; i++)
+        {
+            scaleInput[i].gameObject.SetActive(false);
+            scaleUp[i].gameObject.SetActive(false);
+            scaleDown[i].gameObject.SetActive(false);
+        }
+    }
+
+    // Set scale of imported building
+    public void SetScale()
+    {
+        if (float.TryParse(scaleInput[0].text, out float x) && float.TryParse(scaleInput[1].text, out float y) && float.TryParse(scaleInput[2].text, out float z))
+        {
+            controlManager.SetScale(x, y, z);
+        }
+    }
+
+    // Update scale
+    public void UpdateScaleUp(int index)
+    {
+        if (float.TryParse(scaleInput[index].text, out float temp))
+        {
+            temp += 0.1f;
+            scaleInput[index].text = temp.ToString();
+        }
+    }
+
+    // Update scale
+    public void UpdateScaleDown(int index)
+    {
+        if (float.TryParse(scaleInput[index].text, out float temp))
+        {
+            temp -= 0.1f;
+            scaleInput[index].text = temp.ToString();
+        }
     }
 
     // Set the position of sun according to the text in UI

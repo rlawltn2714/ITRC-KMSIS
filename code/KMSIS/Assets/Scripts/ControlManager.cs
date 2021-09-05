@@ -13,6 +13,7 @@ public class ControlManager : MonoBehaviour
     private DataManager dataManager;
     private BuildingManager buildingManager;
     private ImportManager importManager;
+    private UIManager uiManager;
 
     // SelectBox component and list of selected objects
     public RectTransform dragSelectBox;
@@ -39,6 +40,8 @@ public class ControlManager : MonoBehaviour
     private float rotateSpeed = 5.0f;
     private float moveSpeed = 1.5f;
     private Vector3 offset;
+    private bool rightClick;
+    private float normalScale;
 
     void Start()
     {
@@ -53,8 +56,10 @@ public class ControlManager : MonoBehaviour
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
         buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
         importManager = GameObject.Find("ImportManager").GetComponent<ImportManager>();
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         mode = 0;
+        rightClick = false;
     }
 
     void Update()
@@ -216,40 +221,81 @@ public class ControlManager : MonoBehaviour
                 CameraPositionRangeCheck();
             }
 
-            if (Input.GetMouseButtonDown(0)) // When left click is start
+            if (!rightClick)
             {
-                // Record position
-                clickPosition = Input.mousePosition;
-
-                // Check if user click imported object
-                Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
-                if (Physics.Raycast(ray, out hit))
+                if (Input.GetMouseButtonDown(0)) // When left click is start
                 {
-                    if (hit.transform.gameObject == importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject)
+                    // Record position
+                    clickPosition = Input.mousePosition;
+
+                    // Check if user click imported object
+                    Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
+                    if (Physics.Raycast(ray, out hit))
                     {
-                        hit.transform.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
-                        hit.transform.gameObject.tag = "Selected";
-                        offset = mainCamera.GetComponent<Camera>().WorldToScreenPoint(hit.transform.position) - Input.mousePosition;
+                        if (hit.transform.gameObject == importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject)
+                        {
+                            hit.transform.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                            hit.transform.gameObject.tag = "Selected";
+                            offset = mainCamera.GetComponent<Camera>().WorldToScreenPoint(hit.transform.position) - Input.mousePosition;
+                        }
+                    }
+                }
+
+                if (Input.GetMouseButton(0)) // When left click is continue
+                {
+                    if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
+                    {
+                        Vector3 temp = mainCamera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition + offset);
+                        importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).transform.position = new Vector3(temp.x, 0.5f, temp.z);
+                    }
+                }
+
+                if (Input.GetMouseButtonUp(0)) // When left click is end
+                {
+                    if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
+                    {
+                        importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag = "Untagged";
+                        importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
+                        importManager.DeleteLevitation(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
+                    }
+                }
+
+                if (Input.GetMouseButtonUp(1)) // When right click is end
+                {
+                    // Record position
+                    clickPosition = Input.mousePosition;
+
+                    // Check if user click imported object
+                    Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        if (hit.transform.gameObject == importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject)
+                        {
+                            hit.transform.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
+                            hit.transform.gameObject.tag = "Selected";
+                            offset = mainCamera.GetComponent<Camera>().WorldToScreenPoint(hit.transform.position) - Input.mousePosition;
+                            rightClick = true;
+                        }
                     }
                 }
             }
-
-            if (Input.GetMouseButton(0)) // When left click is continue
+            else
             {
                 if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
                 {
                     Vector3 temp = mainCamera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition + offset);
-                    importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).transform.position = new Vector3(temp.x, 0.5f, temp.z);
+                    importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).position = new Vector3(temp.x, 0.5f, temp.z);
                 }
-            }
 
-            if (Input.GetMouseButtonUp(0)) // When left click is end
-            {
-                if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
+                if (Input.GetMouseButtonUp(1)) // When right click is end
                 {
-                    importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag = "Untagged";
-                    importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
-                    importManager.DeleteLevitation(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
+                    if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
+                    {
+                        importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag = "Untagged";
+                        importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
+                        importManager.DeleteLevitation(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
+                        rightClick = false;
+                    }
                 }
             }
 
@@ -260,38 +306,54 @@ public class ControlManager : MonoBehaviour
         }
     }
 
+    // Set normal scale
+    public void SetNormalScale(float value)
+    {
+        normalScale = value;
+    }
+
+    // Set scale of imported building
+    public void SetScale(float x, float y, float z)
+    {
+        if (mode == 1 && importedBuildings.transform.childCount != 0)
+        {
+            importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).localScale = normalScale * new Vector3(x, y, z);
+        }
+    }
+
     // Set mode
     public void SetMode(int value)
     {
+        uiManager.ChangeInterface(mode, value);
         mode = value;
     }
 
     // Limit the range of camera
     private void CameraPositionRangeCheck()
     {
-        if (mainCamera.transform.position.y < 0)
+        if (mainCamera.transform.position.y < 0.5f)
         {
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, 0, mainCamera.transform.position.z);
+            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, 0.5f, mainCamera.transform.position.z);
         }
-        if (mainCamera.transform.position.y > 7)
+        if (mainCamera.transform.position.y > 7f)
         {
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, 7, mainCamera.transform.position.z);
+            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, 7f, mainCamera.transform.position.z);
         }
-        if (mainCamera.transform.position.z < -10)
+        if (mainCamera.transform.position.z < -10f)
         {
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, -10);
+            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, -10f);
         }
-        if (mainCamera.transform.position.z > 12)
+        if (mainCamera.transform.position.z > 12f)
         {
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 12);
+            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 12f);
         }
-        if (mainCamera.transform.position.x < -13)
+        if (mainCamera.transform.position.x < -13f)
         {
-            mainCamera.transform.position = new Vector3(-13, mainCamera.transform.position.y, mainCamera.transform.position.z);
+            mainCamera.transform.position = new Vector3(-13f, mainCamera.transform.position.y, mainCamera.transform.position.z);
         }
-        if (mainCamera.transform.position.x > 20)
+        if (mainCamera.transform.position.x > 20f)
         {
-            mainCamera.transform.position = new Vector3(20, mainCamera.transform.position.y, mainCamera.transform.position.z);
+            mainCamera.transform.position = new Vector3(20f, mainCamera.transform.position.y, mainCamera.transform.position.z);
         }
     }
 
