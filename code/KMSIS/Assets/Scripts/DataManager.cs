@@ -66,6 +66,7 @@ public class DataManager : MonoBehaviour
     // Search data and return list of buildings
     public List<GameObject> SearchWithText(string text)
     {
+        if (text == "") return null;
         List<GameObject> result = new List<GameObject>();
         string[] str = text.Split(' ');
         if (str.Length == 0)

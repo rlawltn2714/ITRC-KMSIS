@@ -138,55 +138,62 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0)) // When left click is end
             {
-                // Check if building is exist on click position
-                Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
-                if (Physics.Raycast(ray, out hit))
+                if (IsMouseOnUI(Input.mousePosition))
                 {
-                    if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) // When get ctrl
+                    dragSelectBox.gameObject.SetActive(false);
+                }
+                else
+                {
+                    // Check if building is exist on click position
+                    Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
+                    if (Physics.Raycast(ray, out hit))
                     {
-                        if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
+                        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) // When get ctrl
                         {
-                            // Check if object is already selected
-                            bool isSelected = false;
-                            for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
+                            if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
                             {
-                                if (hit.collider.gameObject.name == buildingManager.GetSelectedObjectList()[i].name)// When object is already selected
+                                // Check if object is already selected
+                                bool isSelected = false;
+                                for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
                                 {
-                                    isSelected = true;
-                                    buildingManager.DeleteFromSelectedObjectList(i);
-                                    break;
+                                    if (hit.collider.gameObject.name == buildingManager.GetSelectedObjectList()[i].name)// When object is already selected
+                                    {
+                                        isSelected = true;
+                                        buildingManager.DeleteFromSelectedObjectList(i);
+                                        break;
+                                    }
+                                }
+                                if (!isSelected) // When object isn't selected
+                                {
+                                    // select object
+                                    buildingManager.SelectObject(hit.collider.gameObject);
                                 }
                             }
-                            if (!isSelected) // When object isn't selected
+                        }
+                        else // When click without ctrl
+                        {
+                            // Clear selection list
+                            buildingManager.ClearSelectedObjectList();
+                            if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
                             {
                                 // select object
                                 buildingManager.SelectObject(hit.collider.gameObject);
                             }
                         }
                     }
-                    else // When click without ctrl
+                    else
                     {
-                        // Clear selection list
                         buildingManager.ClearSelectedObjectList();
-                        if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
-                        {
-                            // select object
-                            buildingManager.SelectObject(hit.collider.gameObject);
-                        }
                     }
-                }
-                else
-                {
-                    buildingManager.ClearSelectedObjectList();
-                }
 
-                if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
-                {
-                    dragSelectBox.gameObject.SetActive(false);
-                }
-                else
-                {
-                    ReleaseDragSelectBox();
+                    if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
+                    {
+                        dragSelectBox.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        ReleaseDragSelectBox();
+                    }
                 }
             }
 
@@ -420,5 +427,11 @@ public class ControlManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Check if mouse is on UI
+    private bool IsMouseOnUI(Vector2 clickPosition)
+    {
+        return uiManager.IsMouseOnUI(clickPosition, mode);
     }
 }

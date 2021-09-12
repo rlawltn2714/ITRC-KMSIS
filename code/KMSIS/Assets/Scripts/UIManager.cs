@@ -55,6 +55,32 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // Check if mouse is on UI
+    public bool IsMouseOnUI(Vector2 clickPosition, int mode)
+    {
+        List<RectTransform> rectList = new List<RectTransform>();
+        if (mode == 0)
+        {
+            rectList.Add(monthInput.GetComponent<RectTransform>());
+            rectList.Add(dayInput.GetComponent<RectTransform>());
+            rectList.Add(hourInput.GetComponent<RectTransform>());
+            rectList.Add(minuteInput.GetComponent<RectTransform>());
+            rectList.Add(searchInput.GetComponent<RectTransform>());
+            rectList.Add(importButton.GetComponent<RectTransform>());
+            rectList.Add(simulateButton.GetComponent<RectTransform>());
+            rectList.Add(searchButton.GetComponent<RectTransform>());
+
+            for (int i = 0; i < rectList.Count; i++)
+            {
+                if (clickPosition.x > rectList[i].position.x - rectList[i].sizeDelta.x / 2 && clickPosition.y > rectList[i].position.y - rectList[i].sizeDelta.y / 2 && clickPosition.x < rectList[i].position.x + rectList[i].sizeDelta.x / 2 && clickPosition.y < rectList[i].position.y + rectList[i].sizeDelta.y / 2)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Change UI
     public void ChangeInterface(int current, int next)
     {
