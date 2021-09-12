@@ -94,8 +94,11 @@ public class BuildingManager : MonoBehaviour
     // Select object
     public void SelectObject(GameObject building)
     {
-        selectedObjectList.Add(building);
-        building.GetComponent<MeshRenderer>().material = selectMaterial;
+        if (!selectedObjectList.Contains(building))
+        {
+            selectedObjectList.Add(building);
+            building.GetComponent<MeshRenderer>().material = selectMaterial;
+        }
     }
 
     // Delete from selectedObjectList

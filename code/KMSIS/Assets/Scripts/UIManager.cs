@@ -47,12 +47,20 @@ public class UIManager : MonoBehaviour
         ChangeInterface(-1, 0);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            Search();
+        }
+    }
+
     // Change UI
     public void ChangeInterface(int current, int next)
     {
         if (current == -1 && next == 0)
         {
-            OffInterface();
+            SetInterfaceFalse();
             monthInput.gameObject.SetActive(true);
             dayInput.gameObject.SetActive(true);
             hourInput.gameObject.SetActive(true);
@@ -64,7 +72,7 @@ public class UIManager : MonoBehaviour
         }
         else if (current == -1 && next == 1)
         {
-            OffInterface();
+            SetInterfaceFalse();
             for (int i = 0; i < 3; i++)
             {
                 scaleInput[i].gameObject.SetActive(true);
@@ -75,7 +83,7 @@ public class UIManager : MonoBehaviour
         }
         else if (current == 1 && next == 0)
         {
-            OffInterface();
+            SetInterfaceFalse();
             monthInput.gameObject.SetActive(true);
             dayInput.gameObject.SetActive(true);
             hourInput.gameObject.SetActive(true);
@@ -88,7 +96,7 @@ public class UIManager : MonoBehaviour
     }
 
     // Turn off all UI
-    private void OffInterface()
+    private void SetInterfaceFalse()
     {
         monthInput.gameObject.SetActive(false);
         dayInput.gameObject.SetActive(false);

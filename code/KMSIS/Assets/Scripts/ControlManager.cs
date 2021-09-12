@@ -86,7 +86,7 @@ public class ControlManager : MonoBehaviour
                 CameraPositionRangeCheck();
             }
 
-            if (Input.GetKey(KeyCode.Space)) // When get spacebar
+            if (Input.GetKey(KeyCode.Q))
             {
                 // Instantiate plane object using rayManager, and calculate R(x) using sunManager
                 for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
@@ -118,6 +118,11 @@ public class ControlManager : MonoBehaviour
                 buildingManager.ChangeView();
             }
 
+            if (Input.GetKeyUp(KeyCode.V))
+            {
+                dataManager.Save();
+            }
+
             if (Input.GetMouseButtonDown(0)) // When left click is start
             {
                 // Record position and time
@@ -133,56 +138,49 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0)) // When left click is end
             {
-                if (Time.time - clickTime > 0.2)
+                // Check if building is exist on click position
+                Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
+                if (Physics.Raycast(ray, out hit))
                 {
-                    dataManager.Save();
-                }
-                else
-                {
-                    // Check if building is exist on click position
-                    Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
-                    if (Physics.Raycast(ray, out hit))
+                    if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) // When get ctrl
                     {
-                        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) // When get ctrl
+                        if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
                         {
-                            if (hit.transform.gameObject.name != "Dem" && hit.transform.gameObject.name != "DemRigidbody") // When didn't click outside
+                            // Check if object is already selected
+                            bool isSelected = false;
+                            for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
                             {
-                                // Check if object is already selected
-                                bool isSelected = false;
-                                for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
+                                if (hit.collider.gameObject.name == buildingManager.GetSelectedObjectList()[i].name)// When object is already selected
                                 {
-                                    if (hit.collider.gameObject.name == buildingManager.GetSelectedObjectList()[i].name)// When object is already selected
-                                    {
-                                        isSelected = true;
-                                        buildingManager.DeleteFromSelectedObjectList(i);
-                                        break;
-                                    }
-                                }
-                                if (!isSelected) // When object isn't selected
-                                {
-                                    // select object
-                                    buildingManager.SelectObject(hit.collider.gameObject);
+                                    isSelected = true;
+                                    buildingManager.DeleteFromSelectedObjectList(i);
+                                    break;
                                 }
                             }
-                        }
-                        else // When click without ctrl
-                        {
-                            // Clear selection list
-                            buildingManager.ClearSelectedObjectList();
-                            if (hit.transform.gameObject.name != "Dem" && hit.transform.gameObject.name != "DemRigidbody") // When didn't click outside
+                            if (!isSelected) // When object isn't selected
                             {
                                 // select object
                                 buildingManager.SelectObject(hit.collider.gameObject);
                             }
                         }
                     }
-                    else
+                    else // When click without ctrl
                     {
+                        // Clear selection list
                         buildingManager.ClearSelectedObjectList();
+                        if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
+                        {
+                            // select object
+                            buildingManager.SelectObject(hit.collider.gameObject);
+                        }
                     }
                 }
+                else
+                {
+                    buildingManager.ClearSelectedObjectList();
+                }
 
-                if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f) // When click, not drag
+                if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
                 {
                     dragSelectBox.gameObject.SetActive(false);
                 }
@@ -400,9 +398,19 @@ public class ControlManager : MonoBehaviour
             buildingManager.ClearSelectedObjectList();
         }
 
+        for (int i = 0; i < importedBuildings.transform.childCount; i++)
+        {
+            // Check if position of building is in the selectBox
+            Vector2 screenPosition = mainCamera.GetComponent<Camera>().WorldToScreenPoint(importedBuildings.transform.GetChild(i).position);
+            if (screenPosition.x > min.x && screenPosition.x < max.x && screenPosition.y > min.y && screenPosition.y < max.y)
+            {
+                buildingManager.SelectObject(importedBuildings.transform.GetChild(i).gameObject);
+            }
+        }
+
+        // Check if camera can detect the building
         for (int i = 0; i < pointList.Count; i++)
         {
-            // Check if camera can detect the building
             Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(pointList[i]);
             if (Physics.Raycast(ray, out hit))
             {
