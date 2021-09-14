@@ -7,7 +7,6 @@ public class RayManager : MonoBehaviour
     // This class manages raycast.
 
     // GameObject component
-    private GameObject plane;
     private GameObject buildings;
     private GameObject importedBuildings;
     private GameObject sunlight;
@@ -22,7 +21,6 @@ public class RayManager : MonoBehaviour
     void Start()
     {
         // Get GameObject component
-        plane = GameObject.Find("Plane");
         buildings = GameObject.Find("Buildings");
         importedBuildings = GameObject.Find("ImportedBuildings");
         sunlight = GameObject.Find("Directional Light");
@@ -149,16 +147,5 @@ public class RayManager : MonoBehaviour
             }
         }
         return (float)(sum) * 100f / (float)(hitPointList.Count);
-    }
-
-    // Intantiate plane object on the points
-    public void InstantiateObject(List<RaycastHit> hitPointList)
-    {
-        for (int i = 0; i < hitPointList.Count; i++)
-        {
-            GameObject t = Instantiate(plane, hitPointList[i].point + 0.000005f * hitPointList[i].normal, Quaternion.identity);
-            t.transform.up = hitPointList[i].normal;
-            Destroy(t, 3.0f);
-        }
     }
 }

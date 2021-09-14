@@ -47,14 +47,6 @@ public class UIManager : MonoBehaviour
         ChangeInterface(-1, 0);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            Search();
-        }
-    }
-
     // Check if mouse is on UI
     public bool IsMouseOnUI(Vector2 clickPosition, int mode)
     {

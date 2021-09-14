@@ -14,6 +14,7 @@ public class ControlManager : MonoBehaviour
     private BuildingManager buildingManager;
     private ImportManager importManager;
     private UIManager uiManager;
+    private AnalysisManager analysisManager;
 
     // SelectBox component and list of selected objects
     public RectTransform dragSelectBox;
@@ -57,6 +58,7 @@ public class ControlManager : MonoBehaviour
         buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
         importManager = GameObject.Find("ImportManager").GetComponent<ImportManager>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        analysisManager = GameObject.Find("AnalysisManager").GetComponent<AnalysisManager>();
 
         mode = 0;
         rightClick = false;
@@ -86,14 +88,22 @@ public class ControlManager : MonoBehaviour
                 CameraPositionRangeCheck();
             }
 
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetMouseButton(1)) // When right click is continue
             {
-                // Instantiate plane object using rayManager, and calculate R(x) using sunManager
-                for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
+                // Update direction of camera
+                mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+            }
+
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                if (buildingManager.GetSelectedObjectList().Count == 1)
                 {
-                    List<RaycastHit> hitPointList = rayManager.GetPointOnObject(buildingManager.GetSelectedObjectList()[i]);
-                    Debug.Log(rayManager.Ratio(hitPointList, sunManager.CalculateSunVector(GameObject.Find("Directional Light").transform.eulerAngles.y, GameObject.Find("Directional Light").transform.eulerAngles.x)) + "%");
-                    rayManager.InstantiateObject(hitPointList);
+                    mode = 2;
+                    analysisManager.Init(buildingManager.GetSelectedObjectList()[0]);
+                }
+                else
+                {
+                    Debug.Log("동시에 여러 건물을 분석할 수 없습니다.");
                 }
             }
 
@@ -195,12 +205,6 @@ public class ControlManager : MonoBehaviour
                         ReleaseDragSelectBox();
                     }
                 }
-            }
-
-            if (Input.GetMouseButton(1)) // When right click is continue
-            {
-                // Update direction of camera
-                mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
             }
         }
         else if (mode == 1)
@@ -308,6 +312,46 @@ public class ControlManager : MonoBehaviour
             {
                 SetMode(0);
             }
+        }
+        else if (mode == 2)
+        {
+            if (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed != 0) // When scroll
+            {
+                // Update zoom of camera
+                mainCamera.GetComponent<Camera>().fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+            }
+
+            if (Input.GetAxis("Horizontal") != 0) // When get A D → ←
+            {
+                // Update position of camera
+                mainCamera.transform.position += mainCamera.transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+                CameraPositionRangeCheck();
+            }
+
+            if (Input.GetAxis("Vertical") != 0) // When get W S ↑ ↓
+            {
+                // Update position of camera
+                mainCamera.transform.position += mainCamera.transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+                CameraPositionRangeCheck();
+            }
+
+            if (Input.GetMouseButton(1)) // When right click is continue
+            {
+                // Update direction of camera
+                mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+            }
+
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                mode = 0;
+                analysisManager.Release();
+            }
+
+        }
+        else
+        {
+            Debug.Log("Unexpected value : mode = " + mode);
+            Application.Quit();
         }
     }
 
