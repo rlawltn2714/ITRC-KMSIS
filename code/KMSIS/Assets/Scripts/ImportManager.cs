@@ -133,6 +133,7 @@ namespace TriLibCore.Samples
 			importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).position = new Vector3(Camera.main.transform.position.x, 0.5f, Camera.main.transform.position.z);
 			Camera.main.transform.eulerAngles = new Vector3(90f, Camera.main.transform.eulerAngles.y, 0f);
 			controlManager.SetNormalScale(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).localScale.x);
+			DeleteLevitation(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
 		}
 
 		IEnumerator ShowLoadDialogCoroutine()

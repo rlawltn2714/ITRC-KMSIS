@@ -10,10 +10,19 @@ public class AnalysisManager : MonoBehaviour
     private RayManager rayManager;
 
     // GameObject component
-    private GameObject plane;
+    private GameObject pointPrefab;
+    private GameObject analysisPoints;
+
+    // Material component
+    public Material selectMaterial;
+    public Material normalMaterial;
 
     // GameObject variable
     private List<GameObject> objectList;
+    private List<GameObject> selectedObjectList;
+
+    // Variable
+    private float maxDistance = 0.02f;
 
     void Start()
     {
@@ -21,10 +30,12 @@ public class AnalysisManager : MonoBehaviour
         rayManager = GameObject.Find("RayManager").GetComponent<RayManager>();
 
         // Get gameObject component
-        plane = GameObject.Find("Plane");
+        pointPrefab = GameObject.Find("PointPrefab");
+        analysisPoints = GameObject.Find("AnalysisPoints");
 
         // Initialize variable
         objectList = new List<GameObject>();
+        selectedObjectList = new List<GameObject>();
     }
 
     public void Init(GameObject building)
@@ -37,6 +48,7 @@ public class AnalysisManager : MonoBehaviour
     public void Release()
     {
         DestroyObject();
+        selectedObjectList.Clear();
     }
 
     // Intantiate plane object on the points
@@ -44,8 +56,9 @@ public class AnalysisManager : MonoBehaviour
     {
         for (int i = 0; i < hitPointList.Count; i++)
         {
-            GameObject temp = Instantiate(plane, hitPointList[i].point + 0.000005f * hitPointList[i].normal, Quaternion.identity);
+            GameObject temp = Instantiate(pointPrefab, hitPointList[i].point + 0.000005f * hitPointList[i].normal, Quaternion.identity);
             temp.transform.up = hitPointList[i].normal;
+            temp.transform.parent = analysisPoints.transform;
             objectList.Add(temp);
         }
     }
@@ -58,5 +71,37 @@ public class AnalysisManager : MonoBehaviour
             Destroy(objectList[i], 0.5f);
         }
         objectList.Clear();
+    }
+
+    // Select object
+    public void SelectPoint(GameObject gameObject)
+    {
+        for (int i = 0; i < objectList.Count; i++)
+        {
+            if (objectList[i].transform.up == gameObject.transform.up && Vector3.Distance(objectList[i].transform.position, gameObject.transform.position) < maxDistance)
+            {
+                if (!selectedObjectList.Contains(objectList[i]))
+                {
+                    selectedObjectList.Add(objectList[i]);
+                    objectList[i].GetComponent<MeshRenderer>().material = selectMaterial;
+                }
+            }
+        }
+    }
+
+    // Clear selectedObjectList
+    public void ClearSelectedObjectList()
+    {
+        for (int i = 0; i < selectedObjectList.Count; i++)
+        {
+            selectedObjectList[i].GetComponent<MeshRenderer>().material = normalMaterial;
+        }
+        selectedObjectList.Clear();
+    }
+
+    // Return selectedObjectList
+    public List<GameObject> GetSelectedObjectList()
+    {
+        return selectedObjectList;
     }
 }

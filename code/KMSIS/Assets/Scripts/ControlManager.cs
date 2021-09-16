@@ -96,15 +96,21 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Q))
             {
-                if (buildingManager.GetSelectedObjectList().Count == 1)
+                if (buildingManager.GetSelectedObjectList().Count < 1)
                 {
+                    Debug.Log("You should choose the building for analysis.");
+                }
+                else if (buildingManager.GetSelectedObjectList().Count == 1)
+                {
+                    buildingManager.GetSelectedObjectList()[0].GetComponent<MeshRenderer>().material = normalMaterial;
                     mode = 2;
                     analysisManager.Init(buildingManager.GetSelectedObjectList()[0]);
                 }
                 else
                 {
-                    Debug.Log("동시에 여러 건물을 분석할 수 없습니다.");
+                    Debug.Log("You can choose only one building.");
                 }
+
             }
 
             if (Input.GetKeyUp(KeyCode.Z))
@@ -347,11 +353,64 @@ public class ControlManager : MonoBehaviour
                 analysisManager.Release();
             }
 
-        }
-        else
-        {
-            Debug.Log("Unexpected value : mode = " + mode);
-            Application.Quit();
+            if (Input.GetMouseButtonDown(0)) // When left click is start
+            {
+                // Record position and time
+                clickPosition = Input.mousePosition;
+                clickTime = Time.time;
+            }
+
+            if (Input.GetMouseButton(0)) // When left click is continue
+            {
+                // Update SelectBox
+                UpdateDragSelectBox(Input.mousePosition);
+            }
+
+            if (Input.GetMouseButtonUp(0)) // When left click is end
+            {
+                if (IsMouseOnUI(Input.mousePosition))
+                {
+                    dragSelectBox.gameObject.SetActive(false);
+                }
+                else
+                {
+                    // Check if point is exist on click position
+                    Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) // When get ctrl
+                        {
+                            if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
+                            {
+                                analysisManager.SelectPoint(hit.collider.gameObject);
+                            }
+                        }
+                        else // When click without ctrl
+                        {
+                            // Clear selection list
+                            analysisManager.ClearSelectedObjectList();
+                            if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
+                            {
+                                // select object
+                                analysisManager.SelectPoint(hit.collider.gameObject);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        analysisManager.ClearSelectedObjectList();
+                    }
+
+                    if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
+                    {
+                        dragSelectBox.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        ReleaseDragSelectBoxForAnalysis();
+                    }
+                }
+            }
         }
     }
 
@@ -471,6 +530,12 @@ public class ControlManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Release selectBox for analysis
+    private void ReleaseDragSelectBoxForAnalysis()
+    {
+        dragSelectBox.gameObject.SetActive(false);
     }
 
     // Check if mouse is on UI
