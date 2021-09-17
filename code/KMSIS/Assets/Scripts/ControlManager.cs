@@ -29,12 +29,13 @@ public class ControlManager : MonoBehaviour
     // GameObject component
     private GameObject buildings;
     private GameObject importedBuildings;
+    private GameObject analysisPoints;
     private GameObject mainCamera;
 
     // Local variable and setting
     private int mode; // -1 : unable control mode, 0 : normal mode, 1 : import mode, 2 : analysis mode
-    private Vector2 clickPosition;
-    private float clickTime;
+    private int analysisMode; // 0 : drawing mode, 1 : drag mode
+    private Vector3 clickPosition;
     private float rotateLR;
     private float rotateUD;
     private float zoomSpeed = 20.0f;
@@ -49,6 +50,7 @@ public class ControlManager : MonoBehaviour
         // Get GameObject component
         buildings = GameObject.Find("Buildings");
         importedBuildings = GameObject.Find("ImportedBuildings");
+        analysisPoints = GameObject.Find("AnalysisPoints");
         mainCamera = GameObject.Find("Main Camera");
 
         // Get manager component
@@ -61,6 +63,7 @@ public class ControlManager : MonoBehaviour
         analysisManager = GameObject.Find("AnalysisManager").GetComponent<AnalysisManager>();
 
         mode = 0;
+        analysisMode = 0;
         rightClick = false;
     }
 
@@ -94,6 +97,11 @@ public class ControlManager : MonoBehaviour
                 mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
             }
 
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                ResetCamera();
+            }
+
             if (Input.GetKeyUp(KeyCode.Q))
             {
                 if (buildingManager.GetSelectedObjectList().Count < 1)
@@ -110,7 +118,6 @@ public class ControlManager : MonoBehaviour
                 {
                     Debug.Log("You can choose only one building.");
                 }
-
             }
 
             if (Input.GetKeyUp(KeyCode.Z))
@@ -141,9 +148,8 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0)) // When left click is start
             {
-                // Record position and time
+                // Record position
                 clickPosition = Input.mousePosition;
-                clickTime = Time.time;
             }
 
             if (Input.GetMouseButton(0)) // When left click is continue
@@ -161,7 +167,7 @@ public class ControlManager : MonoBehaviour
                 else
                 {
                     // Check if building is exist on click position
-                    Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
+                    Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out hit))
                     {
                         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) // When get ctrl
@@ -347,6 +353,17 @@ public class ControlManager : MonoBehaviour
                 mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
             }
 
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                ResetCamera();
+            }
+
+            if (Input.GetKeyUp(KeyCode.C))
+            {
+                if (analysisMode == 0) analysisMode = 1;
+                else if (analysisMode == 1) analysisMode = 0;
+            }
+
             if (Input.GetKeyUp(KeyCode.Q))
             {
                 mode = 0;
@@ -355,53 +372,62 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0)) // When left click is start
             {
-                // Record position and time
+                // Record position
                 clickPosition = Input.mousePosition;
-                clickTime = Time.time;
             }
 
             if (Input.GetMouseButton(0)) // When left click is continue
             {
-                // Update SelectBox
-                UpdateDragSelectBox(Input.mousePosition);
+                if (analysisMode == 0)
+                {
+                    if (clickPosition != Input.mousePosition && !IsMouseOnUI(Input.mousePosition))
+                    {
+                        // Check if point is exist on click position
+                        Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
+                            {
+                                analysisManager.SelectPoint(hit.collider.gameObject);
+                            }
+                        }
+                    }
+                }
+                else if (analysisMode == 1)
+                {
+                    // Update SelectBox
+                    UpdateDragSelectBox(Input.mousePosition);
+                }
             }
 
             if (Input.GetMouseButtonUp(0)) // When left click is end
             {
-                if (IsMouseOnUI(Input.mousePosition))
+                if (analysisMode == 0)
                 {
-                    dragSelectBox.gameObject.SetActive(false);
-                }
-                else
-                {
-                    // Check if point is exist on click position
-                    Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
-                    if (Physics.Raycast(ray, out hit))
+                    if (!IsMouseOnUI(Input.mousePosition))
                     {
-                        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) // When get ctrl
+                        // Check if point is exist on click position
+                        Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+                        if (Physics.Raycast(ray, out hit))
                         {
                             if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
                             {
                                 analysisManager.SelectPoint(hit.collider.gameObject);
                             }
+                            else
+                            {
+                                analysisManager.ClearSelectedObjectList();
+                            }
                         }
-                        else // When click without ctrl
+                        else
                         {
-                            // Clear selection list
                             analysisManager.ClearSelectedObjectList();
-                            if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
-                            {
-                                // select object
-                                analysisManager.SelectPoint(hit.collider.gameObject);
-                            }
                         }
                     }
-                    else
-                    {
-                        analysisManager.ClearSelectedObjectList();
-                    }
-
-                    if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
+                }
+                else if (analysisMode == 1)
+                {
+                    if (IsMouseOnUI(Input.mousePosition) || Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
                     {
                         dragSelectBox.gameObject.SetActive(false);
                     }
@@ -412,6 +438,13 @@ public class ControlManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Reset camera rotation
+    private void ResetCamera()
+    {
+        mainCamera.transform.position = new Vector3(3.479011f, 7f, 7.51886f);
+        mainCamera.transform.eulerAngles = new Vector3(56.753f, -157.571f, 0f);
     }
 
     // Set normal scale
@@ -477,7 +510,8 @@ public class ControlManager : MonoBehaviour
         float height = currentMousePosition.y - clickPosition.y;
 
         dragSelectBox.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
-        dragSelectBox.anchoredPosition = clickPosition + new Vector2(width / 2, height / 2);
+        Vector2 temp = clickPosition;
+        dragSelectBox.anchoredPosition = temp + new Vector2(width / 2, height / 2);
     }
 
     // Release selectBox
@@ -490,7 +524,7 @@ public class ControlManager : MonoBehaviour
         Vector2 max = dragSelectBox.anchoredPosition + (dragSelectBox.sizeDelta / 2);
 
         List<Vector2> pointList = new List<Vector2>();
-        List<int> objectNumList = new List<int>();
+        List<int> objectIndexList = new List<int>();
 
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
@@ -499,11 +533,11 @@ public class ControlManager : MonoBehaviour
             if (screenPosition.x > min.x && screenPosition.x < max.x && screenPosition.y > min.y && screenPosition.y < max.y)
             {
                 pointList.Add(screenPosition);
-                objectNumList.Add(i);
+                objectIndexList.Add(i);
             }
         }
 
-        if (!Input.GetKey(KeyCode.LeftControl) & !Input.GetKey(KeyCode.RightControl)) // When get ctrl
+        if (!Input.GetKey(KeyCode.LeftControl) & !Input.GetKey(KeyCode.RightControl)) // When didn't get ctrl
         {
             buildingManager.ClearSelectedObjectList();
         }
@@ -524,7 +558,7 @@ public class ControlManager : MonoBehaviour
             Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(pointList[i]);
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.name == buildings.transform.GetChild(objectNumList[i]).gameObject.name)
+                if (hit.collider.gameObject.name == buildings.transform.GetChild(objectIndexList[i]).gameObject.name)
                 {
                     buildingManager.SelectObject(hit.collider.gameObject);
                 }
@@ -536,6 +570,42 @@ public class ControlManager : MonoBehaviour
     private void ReleaseDragSelectBoxForAnalysis()
     {
         dragSelectBox.gameObject.SetActive(false);
+
+        // calculate the range of position
+        Vector2 min = dragSelectBox.anchoredPosition - (dragSelectBox.sizeDelta / 2);
+        Vector2 max = dragSelectBox.anchoredPosition + (dragSelectBox.sizeDelta / 2);
+
+        List<Vector2> pointList = new List<Vector2>();
+        List<int> objectIndexList = new List<int>();
+
+        for (int i = 0; i < analysisPoints.transform.childCount; i++)
+        {
+            // Check if position of the point is in the selectBox
+            Vector2 screenPosition = mainCamera.GetComponent<Camera>().WorldToScreenPoint(analysisPoints.transform.GetChild(i).position);
+            if (screenPosition.x > min.x && screenPosition.x < max.x && screenPosition.y > min.y && screenPosition.y < max.y)
+            {
+                pointList.Add(screenPosition);
+                objectIndexList.Add(i);
+            }
+        }
+
+        if (!Input.GetKey(KeyCode.LeftControl) & !Input.GetKey(KeyCode.RightControl)) // When didn't get ctrl
+        {
+            analysisManager.ClearSelectedObjectList();
+        }
+
+        // Check if camera can detect the point
+        for (int i = 0; i < pointList.Count; i++)
+        {
+            Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(pointList[i]);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.gameObject.name == analysisPoints.transform.GetChild(objectIndexList[i]).gameObject.name)
+                {
+                    analysisManager.SelectObject(hit.collider.gameObject);
+                }
+            }
+        }
     }
 
     // Check if mouse is on UI

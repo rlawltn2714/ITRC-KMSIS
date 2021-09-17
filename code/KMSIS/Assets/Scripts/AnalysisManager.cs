@@ -73,7 +73,7 @@ public class AnalysisManager : MonoBehaviour
         objectList.Clear();
     }
 
-    // Select object
+    // Select points with circle
     public void SelectPoint(GameObject gameObject)
     {
         for (int i = 0; i < objectList.Count; i++)
@@ -86,6 +86,16 @@ public class AnalysisManager : MonoBehaviour
                     objectList[i].GetComponent<MeshRenderer>().material = selectMaterial;
                 }
             }
+        }
+    }
+
+    // Select object
+    public void SelectObject(GameObject gameObject)
+    {
+        if (!selectedObjectList.Contains(gameObject))
+        {
+            selectedObjectList.Add(gameObject);
+            gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
         }
     }
 
