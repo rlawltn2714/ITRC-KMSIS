@@ -322,7 +322,14 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Return)) // When get enter
             {
-                SetMode(0);
+                if (importManager.CheckSizeOfModel(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject))
+                {
+                    SetMode(0);
+                }
+                else
+                {
+                    Debug.Log("3D Model is too big.");
+                }
             }
         }
         else if (mode == 2)
@@ -370,10 +377,35 @@ public class ControlManager : MonoBehaviour
                 analysisManager.Release();
             }
 
+            if (Input.GetKeyUp(KeyCode.Return))
+            {
+
+            }
+
             if (Input.GetMouseButtonDown(0)) // When left click is start
             {
                 // Record position
                 clickPosition = Input.mousePosition;
+
+                if (analysisMode == 0)
+                {
+                    if (!IsMouseOnUI(Input.mousePosition))
+                    {
+                        // Check if point is exist on click position
+                        Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
+                            {
+                                analysisManager.SelectPoint(hit.collider.gameObject);
+                            }
+                            else
+                            {
+                                analysisManager.ClearSelectedObjectList();
+                            }
+                        }
+                    }
+                }
             }
 
             if (Input.GetMouseButton(0)) // When left click is continue
@@ -402,30 +434,7 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0)) // When left click is end
             {
-                if (analysisMode == 0)
-                {
-                    if (!IsMouseOnUI(Input.mousePosition))
-                    {
-                        // Check if point is exist on click position
-                        Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-                        if (Physics.Raycast(ray, out hit))
-                        {
-                            if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
-                            {
-                                analysisManager.SelectPoint(hit.collider.gameObject);
-                            }
-                            else
-                            {
-                                analysisManager.ClearSelectedObjectList();
-                            }
-                        }
-                        else
-                        {
-                            analysisManager.ClearSelectedObjectList();
-                        }
-                    }
-                }
-                else if (analysisMode == 1)
+                if (analysisMode == 1)
                 {
                     if (IsMouseOnUI(Input.mousePosition) || Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
                     {

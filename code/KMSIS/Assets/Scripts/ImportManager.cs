@@ -31,7 +31,7 @@ namespace TriLibCore.Samples
 			// Get GameObject component
 			importedBuildings = GameObject.Find("ImportedBuildings");
 			standardBoundBuilding = GameObject.Find("Building.4028");
-			minBound = standardBoundBuilding.GetComponent<MeshRenderer>().bounds.size.y;
+			minBound = standardBoundBuilding.GetComponent<MeshRenderer>().bounds.size.y * 0.7f;
 
 			// Get manager component
 			controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
@@ -84,7 +84,7 @@ namespace TriLibCore.Samples
 		public bool CheckSizeOfModel(GameObject building)
         {
 			Bounds bounds = building.GetComponent<MeshFilter>().mesh.bounds;
-			if (bounds.size.x <= minBound && bounds.size.y <= minBound && bounds.size.z <= minBound) return true;
+			if (bounds.size.x * building.transform.localScale.x <= minBound && bounds.size.y * building.transform.localScale.y <= minBound && bounds.size.z * building.transform.localScale.z <= minBound) return true;
 			else return false;
 		}
 

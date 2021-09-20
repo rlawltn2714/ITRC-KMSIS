@@ -76,14 +76,17 @@ public class AnalysisManager : MonoBehaviour
     // Select points with circle
     public void SelectPoint(GameObject gameObject)
     {
-        for (int i = 0; i < objectList.Count; i++)
+        if (gameObject.transform.parent.name == "AnalysisPoints")
         {
-            if (objectList[i].transform.up == gameObject.transform.up && Vector3.Distance(objectList[i].transform.position, gameObject.transform.position) < maxDistance)
+            for (int i = 0; i < objectList.Count; i++)
             {
-                if (!selectedObjectList.Contains(objectList[i]))
+                if (objectList[i].transform.up == gameObject.transform.up && Vector3.Distance(objectList[i].transform.position, gameObject.transform.position) < maxDistance)
                 {
-                    selectedObjectList.Add(objectList[i]);
-                    objectList[i].GetComponent<MeshRenderer>().material = selectMaterial;
+                    if (!selectedObjectList.Contains(objectList[i]))
+                    {
+                        selectedObjectList.Add(objectList[i]);
+                        objectList[i].GetComponent<MeshRenderer>().material = selectMaterial;
+                    }
                 }
             }
         }

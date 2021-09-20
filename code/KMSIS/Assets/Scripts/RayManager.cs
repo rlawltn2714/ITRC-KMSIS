@@ -15,8 +15,8 @@ public class RayManager : MonoBehaviour
     private RaycastHit hit;
 
     // GetPointOnObject setting
-    private float length = 0.25f;
-    private int divisor = 120;
+    private float length = 0.35f;
+    private int divisor = 150;
 
     void Start()
     {
