@@ -25,6 +25,7 @@ public class ControlManager : MonoBehaviour
     // Material component
     public Material selectMaterial;
     public Material normalMaterial;
+    public Material pointMaterial;
 
     // GameObject component
     private GameObject buildings;
@@ -110,7 +111,6 @@ public class ControlManager : MonoBehaviour
                 }
                 else if (buildingManager.GetSelectedObjectList().Count == 1)
                 {
-                    buildingManager.GetSelectedObjectList()[0].GetComponent<MeshRenderer>().material = normalMaterial;
                     mode = 2;
                     analysisManager.Init(buildingManager.GetSelectedObjectList()[0]);
                 }
@@ -379,7 +379,7 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Return))
             {
-
+                analysisManager.Analyze();
             }
 
             if (Input.GetMouseButtonDown(0)) // When left click is start

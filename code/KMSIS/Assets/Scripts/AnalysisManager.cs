@@ -8,6 +8,8 @@ public class AnalysisManager : MonoBehaviour
 
     // Manager component
     private RayManager rayManager;
+    private SunManager sunManager;
+    private UIManager uiManager;
 
     // GameObject component
     private GameObject pointPrefab;
@@ -16,10 +18,12 @@ public class AnalysisManager : MonoBehaviour
     // Material component
     public Material selectMaterial;
     public Material normalMaterial;
+    public Material pointMaterial;
 
     // GameObject variable
     private List<GameObject> objectList;
     private List<GameObject> selectedObjectList;
+    private GameObject targetBuilding;
 
     // Variable
     private float maxDistance = 0.02f;
@@ -28,6 +32,8 @@ public class AnalysisManager : MonoBehaviour
     {
         // Get manager component
         rayManager = GameObject.Find("RayManager").GetComponent<RayManager>();
+        sunManager = GameObject.Find("SunManager").GetComponent<SunManager>();
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         // Get gameObject component
         pointPrefab = GameObject.Find("PointPrefab");
@@ -38,17 +44,59 @@ public class AnalysisManager : MonoBehaviour
         selectedObjectList = new List<GameObject>();
     }
 
+    // Initialize AnalysisManager
     public void Init(GameObject building)
     {
+        targetBuilding = building;
+        building.GetComponent<MeshRenderer>().material = pointMaterial;
         List<RaycastHit> hitPointList = rayManager.GetPointOnObject(building);
         InstantiateObject(hitPointList);
-        //Debug.Log(rayManager.Ratio(hitPointList, sunManager.CalculateSunVector(GameObject.Find("Directional Light").transform.eulerAngles.y, GameObject.Find("Directional Light").transform.eulerAngles.x)) + "%");
     }
 
+    // Release AnalysisManager
     public void Release()
     {
+        targetBuilding.GetComponent<MeshRenderer>().material = normalMaterial;
         DestroyObject();
         selectedObjectList.Clear();
+    }
+
+    // Analyze the sunlight
+    public void Analyze()
+    {
+        float startTime = Time.realtimeSinceStartup;
+        if (selectedObjectList.Count < 1)
+        {
+            Debug.Log("You should select the points.");
+        }
+        else
+        {
+            for (int i = 0; i < objectList.Count; i++)
+            {
+                objectList[i].layer = 2;
+            }
+
+            // Analyze
+            List<float> dayInfo = uiManager.GetInterfaceValue();
+            if (dayInfo == null) return;
+            int month = (int)(dayInfo[0]);
+            int day = (int)(dayInfo[1]);
+
+            for (float clock = 0f; clock < 24f; clock += 24f / 1440f)
+            {
+                List<double> tempList = sunManager.Calculate(month, day, clock);
+                for (int i = 0; i < selectedObjectList.Count; i++)
+                {
+                    if (rayManager.CheckSunlight(selectedObjectList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) continue;
+                }
+            }
+
+            for (int i = 0; i < objectList.Count; i++)
+            {
+                objectList[i].layer = 0;
+            }
+        }
+        Debug.Log("Execution time : " + (Time.realtimeSinceStartup - startTime));
     }
 
     // Intantiate plane object on the points

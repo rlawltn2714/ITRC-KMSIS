@@ -132,6 +132,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // Get UI value
+    public List<float> GetInterfaceValue()
+    {
+        if (int.TryParse(monthInput.text, out int month) && int.TryParse(dayInput.text, out int day) && int.TryParse(hourInput.text, out int hour) && int.TryParse(minuteInput.text, out int minute))
+        {
+            // Calculate clock
+            float clock = (float)(hour) + (float)(minute) / 60f;
+            List<float> result = new List<float>();
+            result.Add((float)(month));
+            result.Add((float)(day));
+            result.Add(clock);
+            return result;
+        }
+        else return null;
+    }
+
     // Set scale of imported building
     public void SetScale()
     {

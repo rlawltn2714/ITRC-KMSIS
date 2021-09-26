@@ -46,9 +46,9 @@ public class RayManager : MonoBehaviour
         GameObject.Find("Colliders").layer = 2;
 
         // Local variable
-        float x = building.transform.position.x;
-        float y = building.transform.position.y;
-        float z = building.transform.position.z;
+        float x = building.GetComponent<MeshRenderer>().bounds.center.x;
+        float y = building.GetComponent<MeshRenderer>().bounds.center.y;
+        float z = building.GetComponent<MeshRenderer>().bounds.center.z;
 
         // Get points using raycast
         for (int i = 1; i < divisor; i++)
@@ -135,17 +135,24 @@ public class RayManager : MonoBehaviour
     }
 
     // Calculate the percentage of points in sunlight
-    public float Ratio(List<RaycastHit> hitPointList, Vector3 sunVector)
+    public float Ratio(List<GameObject> pointList, Vector3 sunVector)
     {
         int sum = 0;
-        for (int i = 0; i < hitPointList.Count; i++)
+        for (int i = 0; i < pointList.Count; i++)
         {
-            Vector3 temp = hitPointList[i].point;
+            Vector3 temp = pointList[i].transform.position;
             if (!Physics.Raycast(temp, -sunVector, out hit, Mathf.Infinity))
             {
                 sum++;
             }
         }
-        return (float)(sum) * 100f / (float)(hitPointList.Count);
+        return (float)(sum) * 100f / (float)(pointList.Count);
+    }
+
+    public bool CheckSunlight(GameObject point, Vector3 sunVector)
+    {
+        Vector3 temp = point.transform.position;
+        if (!Physics.Raycast(temp, -sunVector, out hit, Mathf.Infinity)) return true;
+        else return false;
     }
 }

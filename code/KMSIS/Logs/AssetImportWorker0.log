@@ -15,11 +15,11 @@ C:/Users/Owner/Documents/ITRC-KMSIS/code/KMSIS
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-53021
+59285
 Successfully changed project path to: C:/Users/Owner/Documents/ITRC-KMSIS/code/KMSIS
 C:/Users/Owner/Documents/ITRC-KMSIS/code/KMSIS
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 59.45 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 64.90 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.14f1 (d0d1bb862f9d)
 [Subsystems] Discovering subsystems at path C:/Program Files/2020.3.14f1/Editor/Data/Resources/UnitySubsystems
@@ -35,89 +35,89 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/2020.3.14f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/2020.3.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/2020.3.14f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56068
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56532
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/2020.3.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.010017 seconds.
+Registered in 0.006245 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 43.38 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 38.80 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.299 seconds
+- Completed reload, in  1.455 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1299ms)
-		BeginReloadAssembly (118ms)
+	ReloadAssembly (1456ms)
+		BeginReloadAssembly (96ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (494ms)
-			LoadAssemblies (109ms)
+		EndReloadAssembly (607ms)
+			LoadAssemblies (91ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (181ms)
+			SetupTypeCache (265ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (32ms)
-			SetupLoadedEditorAssemblies (181ms)
+			RebuildScriptCaches (35ms)
+			SetupLoadedEditorAssemblies (190ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
+				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (43ms)
-				BeforeProcessingInitializeOnLoad (8ms)
-				ProcessInitializeOnLoadAttributes (92ms)
-				ProcessInitializeOnLoadMethodAttributes (32ms)
+				RefreshPlugins (39ms)
+				BeforeProcessingInitializeOnLoad (7ms)
+				ProcessInitializeOnLoadAttributes (96ms)
+				ProcessInitializeOnLoadMethodAttributes (44ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.026686 seconds.
+Registered in 0.030223 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 36.57 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 48.04 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.589 seconds
+- Completed reload, in  1.653 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1591ms)
-		BeginReloadAssembly (209ms)
+	ReloadAssembly (1655ms)
+		BeginReloadAssembly (194ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (20ms)
-		EndReloadAssembly (1284ms)
-			LoadAssemblies (173ms)
+			CreateAndSetChildDomain (23ms)
+		EndReloadAssembly (1358ms)
+			LoadAssemblies (206ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (460ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (53ms)
-			SetupLoadedEditorAssemblies (455ms)
+			SetupTypeCache (477ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (58ms)
+			SetupLoadedEditorAssemblies (432ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (37ms)
-				BeforeProcessingInitializeOnLoad (88ms)
-				ProcessInitializeOnLoadAttributes (243ms)
-				ProcessInitializeOnLoadMethodAttributes (54ms)
-				AfterProcessingInitializeOnLoad (28ms)
-				EditorAssembliesLoaded (1ms)
+				RefreshPlugins (48ms)
+				BeforeProcessingInitializeOnLoad (92ms)
+				ProcessInitializeOnLoadAttributes (223ms)
+				ProcessInitializeOnLoadMethodAttributes (42ms)
+				AfterProcessingInitializeOnLoad (21ms)
+				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (8ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 0.58 ms, found 4 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.64 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1566 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 72.9 MB.
 System memory in use after: 73.0 MB.
 
 Unloading 79 unused Assets to reduce memory usage. Loaded Objects now: 1952.
-Total: 3.332700 ms (FindLiveObjects: 0.190400 ms CreateObjectMapping: 0.114000 ms MarkObjects: 2.822800 ms  DeleteObjects: 0.204100 ms)
+Total: 3.342800 ms (FindLiveObjects: 0.191200 ms CreateObjectMapping: 0.112600 ms MarkObjects: 2.765300 ms  DeleteObjects: 0.272200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -131,1471 +131,31 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Scripts/ControlManager.cs
-  artifactKey: Guid(61d4c8ca9b247d449bfbda79670e0c24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/ControlManager.cs using Guid(61d4c8ca9b247d449bfbda79670e0c24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea7b48ed343c8f660da5985a2cffc882') in 0.038092 seconds 
-  Import took 0.044088 seconds .
+  path: Assets/Scripts/AnalysisManager.cs
+  artifactKey: Guid(08d0a92bb1e4f5746bf95f8a784f727d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/AnalysisManager.cs using Guid(08d0a92bb1e4f5746bf95f8a784f727d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '595985a4191739edf943353cb234fca8') in 0.032657 seconds 
+  Import took 0.036086 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1452.269250 seconds.
-  path: Assets/Scripts/ImportManager.cs
-  artifactKey: Guid(1be617f01d7badc4586725693c43397f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/ImportManager.cs using Guid(1be617f01d7badc4586725693c43397f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80acfe17850af260c61184985c06e4f7') in 0.004012 seconds 
-  Import took 0.007240 seconds .
+  Time since last request: 6.725267 seconds.
+  path: Assets/Scripts/RayManager.cs
+  artifactKey: Guid(e4bae59b7dd4d884b817bba2e7ad2168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/RayManager.cs using Guid(e4bae59b7dd4d884b817bba2e7ad2168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18c69775a1bbb47936a026dcb888016b') in 0.003374 seconds 
+  Import took 0.006301 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.001153 seconds.
-  path: Assets/Scripts/ImportManager.cs
-  artifactKey: Guid(1be617f01d7badc4586725693c43397f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/ImportManager.cs using Guid(1be617f01d7badc4586725693c43397f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80acfe17850af260c61184985c06e4f7') in 0.004360 seconds 
-  Import took 0.007138 seconds .
+  Time since last request: 0.001102 seconds.
+  path: Assets/Scripts/RayManager.cs
+  artifactKey: Guid(e4bae59b7dd4d884b817bba2e7ad2168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/RayManager.cs using Guid(e4bae59b7dd4d884b817bba2e7ad2168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18c69775a1bbb47936a026dcb888016b') in 0.002701 seconds 
+  Import took 0.005294 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.024408 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.213 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1214ms)
-		BeginReloadAssembly (163ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (33ms)
-		EndReloadAssembly (960ms)
-			LoadAssemblies (157ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (307ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (382ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (82ms)
-				ProcessInitializeOnLoadAttributes (215ms)
-				ProcessInitializeOnLoadMethodAttributes (53ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.58 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.4 MB.
-System memory in use after: 72.4 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1956.
-Total: 2.351600 ms (FindLiveObjects: 0.184600 ms CreateObjectMapping: 0.109800 ms MarkObjects: 1.904400 ms  DeleteObjects: 0.151900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023683 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.207 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1207ms)
-		BeginReloadAssembly (159ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (35ms)
-		EndReloadAssembly (956ms)
-			LoadAssemblies (162ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (310ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (366ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (76ms)
-				ProcessInitializeOnLoadAttributes (206ms)
-				ProcessInitializeOnLoadMethodAttributes (52ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.4 MB.
-System memory in use after: 72.5 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1960.
-Total: 2.453700 ms (FindLiveObjects: 0.178200 ms CreateObjectMapping: 0.129000 ms MarkObjects: 1.993600 ms  DeleteObjects: 0.152100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.024045 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.55 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.191 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1192ms)
-		BeginReloadAssembly (151ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (32ms)
-		EndReloadAssembly (949ms)
-			LoadAssemblies (154ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (314ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (355ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (75ms)
-				ProcessInitializeOnLoadAttributes (199ms)
-				ProcessInitializeOnLoadMethodAttributes (50ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.69 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.4 MB.
-System memory in use after: 72.5 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1964.
-Total: 2.618100 ms (FindLiveObjects: 0.173500 ms CreateObjectMapping: 0.099500 ms MarkObjects: 2.179200 ms  DeleteObjects: 0.165000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.024544 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.68 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.171 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1171ms)
-		BeginReloadAssembly (153ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (33ms)
-		EndReloadAssembly (923ms)
-			LoadAssemblies (153ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (287ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (35ms)
-			SetupLoadedEditorAssemblies (362ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (76ms)
-				ProcessInitializeOnLoadAttributes (201ms)
-				ProcessInitializeOnLoadMethodAttributes (53ms)
-				AfterProcessingInitializeOnLoad (26ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.4 MB.
-System memory in use after: 72.5 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1968.
-Total: 2.415600 ms (FindLiveObjects: 0.176900 ms CreateObjectMapping: 0.100300 ms MarkObjects: 1.905700 ms  DeleteObjects: 0.213800 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.027310 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.93 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.251 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1252ms)
-		BeginReloadAssembly (185ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (37ms)
-		EndReloadAssembly (967ms)
-			LoadAssemblies (178ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (297ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (39ms)
-			SetupLoadedEditorAssemblies (379ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (9ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (85ms)
-				ProcessInitializeOnLoadAttributes (203ms)
-				ProcessInitializeOnLoadMethodAttributes (49ms)
-				AfterProcessingInitializeOnLoad (31ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.60 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.5 MB.
-System memory in use after: 72.5 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1972.
-Total: 2.527000 ms (FindLiveObjects: 0.179600 ms CreateObjectMapping: 0.100300 ms MarkObjects: 2.085100 ms  DeleteObjects: 0.161000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.024227 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.58 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.200 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1201ms)
-		BeginReloadAssembly (157ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (36ms)
-		EndReloadAssembly (954ms)
-			LoadAssemblies (150ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (297ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (369ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (86ms)
-				ProcessInitializeOnLoadAttributes (201ms)
-				ProcessInitializeOnLoadMethodAttributes (50ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.5 MB.
-System memory in use after: 72.6 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1976.
-Total: 2.541600 ms (FindLiveObjects: 0.170900 ms CreateObjectMapping: 0.100400 ms MarkObjects: 2.098800 ms  DeleteObjects: 0.170700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.025082 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.55 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.203 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1203ms)
-		BeginReloadAssembly (160ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (34ms)
-		EndReloadAssembly (951ms)
-			LoadAssemblies (157ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (301ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (369ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (80ms)
-				ProcessInitializeOnLoadAttributes (206ms)
-				ProcessInitializeOnLoadMethodAttributes (52ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.5 MB.
-System memory in use after: 72.6 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1980.
-Total: 2.559500 ms (FindLiveObjects: 0.222400 ms CreateObjectMapping: 0.143700 ms MarkObjects: 2.012600 ms  DeleteObjects: 0.180000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023970 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.55 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.166 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1167ms)
-		BeginReloadAssembly (150ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (30ms)
-		EndReloadAssembly (925ms)
-			LoadAssemblies (148ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (287ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (39ms)
-			SetupLoadedEditorAssemblies (360ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (77ms)
-				ProcessInitializeOnLoadAttributes (200ms)
-				ProcessInitializeOnLoadMethodAttributes (52ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.58 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.5 MB.
-System memory in use after: 72.6 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1984.
-Total: 2.327500 ms (FindLiveObjects: 0.176200 ms CreateObjectMapping: 0.100400 ms MarkObjects: 1.870800 ms  DeleteObjects: 0.179300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.022736 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.54 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.148 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1149ms)
-		BeginReloadAssembly (150ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (30ms)
-		EndReloadAssembly (909ms)
-			LoadAssemblies (149ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (293ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (35ms)
-			SetupLoadedEditorAssemblies (352ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (73ms)
-				ProcessInitializeOnLoadAttributes (199ms)
-				ProcessInitializeOnLoadMethodAttributes (49ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.6 MB.
-System memory in use after: 72.7 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1988.
-Total: 2.172500 ms (FindLiveObjects: 0.156300 ms CreateObjectMapping: 0.056300 ms MarkObjects: 1.801400 ms  DeleteObjects: 0.157700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023362 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.194 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1194ms)
-		BeginReloadAssembly (151ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (30ms)
-		EndReloadAssembly (952ms)
-			LoadAssemblies (152ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (302ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (40ms)
-			SetupLoadedEditorAssemblies (369ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (78ms)
-				ProcessInitializeOnLoadAttributes (209ms)
-				ProcessInitializeOnLoadMethodAttributes (51ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.52 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.6 MB.
-System memory in use after: 72.7 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1992.
-Total: 2.454400 ms (FindLiveObjects: 0.183800 ms CreateObjectMapping: 0.104000 ms MarkObjects: 1.998000 ms  DeleteObjects: 0.167700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023926 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.55 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.182 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1182ms)
-		BeginReloadAssembly (149ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (30ms)
-		EndReloadAssembly (944ms)
-			LoadAssemblies (149ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (296ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (40ms)
-			SetupLoadedEditorAssemblies (372ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (75ms)
-				ProcessInitializeOnLoadAttributes (213ms)
-				ProcessInitializeOnLoadMethodAttributes (52ms)
-				AfterProcessingInitializeOnLoad (25ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.59 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.6 MB.
-System memory in use after: 72.7 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1996.
-Total: 2.594300 ms (FindLiveObjects: 0.172500 ms CreateObjectMapping: 0.094900 ms MarkObjects: 2.146500 ms  DeleteObjects: 0.179400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023835 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.183 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1183ms)
-		BeginReloadAssembly (153ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (32ms)
-		EndReloadAssembly (937ms)
-			LoadAssemblies (150ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (289ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (371ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (7ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (76ms)
-				ProcessInitializeOnLoadAttributes (211ms)
-				ProcessInitializeOnLoadMethodAttributes (51ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.6 MB.
-System memory in use after: 72.7 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 2000.
-Total: 2.222600 ms (FindLiveObjects: 0.169900 ms CreateObjectMapping: 0.052900 ms MarkObjects: 1.847500 ms  DeleteObjects: 0.151000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023461 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.73 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.177 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1177ms)
-		BeginReloadAssembly (153ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (30ms)
-		EndReloadAssembly (935ms)
-			LoadAssemblies (150ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (297ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (36ms)
-			SetupLoadedEditorAssemblies (367ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (76ms)
-				ProcessInitializeOnLoadAttributes (206ms)
-				ProcessInitializeOnLoadMethodAttributes (53ms)
-				AfterProcessingInitializeOnLoad (25ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.6 MB.
-System memory in use after: 72.7 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 2004.
-Total: 2.578700 ms (FindLiveObjects: 0.247600 ms CreateObjectMapping: 0.106800 ms MarkObjects: 2.063000 ms  DeleteObjects: 0.160500 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023120 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.68 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.353 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1354ms)
-		BeginReloadAssembly (165ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (35ms)
-		EndReloadAssembly (1084ms)
-			LoadAssemblies (167ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (357ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (50ms)
-			SetupLoadedEditorAssemblies (411ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (7ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (83ms)
-				ProcessInitializeOnLoadAttributes (237ms)
-				ProcessInitializeOnLoadMethodAttributes (58ms)
-				AfterProcessingInitializeOnLoad (25ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.59 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.6 MB.
-System memory in use after: 72.7 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 2008.
-Total: 2.788700 ms (FindLiveObjects: 0.215400 ms CreateObjectMapping: 0.117300 ms MarkObjects: 2.255300 ms  DeleteObjects: 0.198900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.027360 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.83 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:38)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-(Filename: Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs Line: 38)
-
-CreateSerializedAsset is not supported while importing out-of-process
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-TriLibCore.TriLibSettings:GetTriLibPreferences () (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:35)
-TriLibCore.TriLibSettings:SetBool (string,bool) (at Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs:69)
-TriLibCore.Editor.CheckMappers:Initialize () (at Assets/TriLib/TriLibCore/Editor/Scripts/CheckMappers.cs:39)
-System.Reflection.MonoMethod:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
-System.Reflection.MethodBase:Invoke (object,object[])
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-[Assets/TriLib/TriLibCore/Scripts/TriLibSettings.cs line 35]
-
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> UnityEngine.UnityException: Creating asset at path Assets/TriLib/TriLibCore/Resources/TriLibSettings.asset failed.
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.CreateAsset(UnityEngine.Object,string)
-  at TriLibCore.TriLibSettings.GetTriLibPreferences () [0x00039] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:35 
-  at TriLibCore.TriLibSettings.SetBool (System.String key, System.Boolean value) [0x00000] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Scripts\TriLibSettings.cs:69 
-  at TriLibCore.Editor.CheckMappers.Initialize () [0x00076] in C:\Users\Owner\Documents\ITRC-KMSIS\code\KMSIS\Assets\TriLib\TriLibCore\Editor\Scripts\CheckMappers.cs:39 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00047] in <25e9afc147634a5ca855ab83fab425dd>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.142 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1143ms)
-		BeginReloadAssembly (147ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (30ms)
-		EndReloadAssembly (908ms)
-			LoadAssemblies (144ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (281ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (360ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (76ms)
-				ProcessInitializeOnLoadAttributes (201ms)
-				ProcessInitializeOnLoadMethodAttributes (51ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.7 MB.
-System memory in use after: 72.7 MB.
-
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 2012.
-Total: 2.718500 ms (FindLiveObjects: 0.184400 ms CreateObjectMapping: 0.099800 ms MarkObjects: 2.232100 ms  DeleteObjects: 0.201100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.024479 seconds.
+Registered in 0.016655 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.53 ms, found 4 plugins.
@@ -1641,42 +201,42 @@ UnityEngine.Debug:LogError (object)
 UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.195 seconds
+- Completed reload, in  1.064 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1196ms)
-		BeginReloadAssembly (158ms)
+	ReloadAssembly (1065ms)
+		BeginReloadAssembly (145ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (32ms)
-		EndReloadAssembly (946ms)
-			LoadAssemblies (154ms)
+			CreateAndSetChildDomain (35ms)
+		EndReloadAssembly (844ms)
+			LoadAssemblies (124ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (299ms)
+			SetupTypeCache (280ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (39ms)
-			SetupLoadedEditorAssemblies (372ms)
+			RebuildScriptCaches (35ms)
+			SetupLoadedEditorAssemblies (322ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (77ms)
-				ProcessInitializeOnLoadAttributes (206ms)
-				ProcessInitializeOnLoadMethodAttributes (57ms)
-				AfterProcessingInitializeOnLoad (24ms)
+				BeforeProcessingInitializeOnLoad (60ms)
+				ProcessInitializeOnLoadAttributes (196ms)
+				ProcessInitializeOnLoadMethodAttributes (45ms)
+				AfterProcessingInitializeOnLoad (15ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
 Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.7 MB.
-System memory in use after: 72.7 MB.
+System memory in use before: 72.4 MB.
+System memory in use after: 72.4 MB.
 
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 2016.
-Total: 2.508100 ms (FindLiveObjects: 0.157500 ms CreateObjectMapping: 0.055300 ms MarkObjects: 1.993700 ms  DeleteObjects: 0.300300 ms)
+Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1956.
+Total: 1.998800 ms (FindLiveObjects: 0.132800 ms CreateObjectMapping: 0.055300 ms MarkObjects: 1.637600 ms  DeleteObjects: 0.172400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -1691,10 +251,10 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.023571 seconds.
+Registered in 0.028307 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.54 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.63 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
@@ -1737,42 +297,42 @@ UnityEngine.Debug:LogError (object)
 UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.185 seconds
+- Completed reload, in  1.082 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1185ms)
-		BeginReloadAssembly (150ms)
+	ReloadAssembly (1083ms)
+		BeginReloadAssembly (131ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
+			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (30ms)
-		EndReloadAssembly (941ms)
-			LoadAssemblies (153ms)
+			CreateAndSetChildDomain (34ms)
+		EndReloadAssembly (874ms)
+			LoadAssemblies (121ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
 			SetupTypeCache (295ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (36ms)
-			SetupLoadedEditorAssemblies (373ms)
+			RebuildScriptCaches (35ms)
+			SetupLoadedEditorAssemblies (333ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (76ms)
-				ProcessInitializeOnLoadAttributes (215ms)
-				ProcessInitializeOnLoadMethodAttributes (51ms)
-				AfterProcessingInitializeOnLoad (24ms)
+				BeforeProcessingInitializeOnLoad (62ms)
+				ProcessInitializeOnLoadAttributes (203ms)
+				ProcessInitializeOnLoadMethodAttributes (46ms)
+				AfterProcessingInitializeOnLoad (16ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
 Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.7 MB.
-System memory in use after: 72.8 MB.
+System memory in use before: 72.4 MB.
+System memory in use after: 72.5 MB.
 
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 2020.
-Total: 2.142200 ms (FindLiveObjects: 0.146200 ms CreateObjectMapping: 0.060500 ms MarkObjects: 1.769200 ms  DeleteObjects: 0.165400 ms)
+Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1960.
+Total: 2.572600 ms (FindLiveObjects: 0.178700 ms CreateObjectMapping: 0.102100 ms MarkObjects: 2.080600 ms  DeleteObjects: 0.210100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -1787,7 +347,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.028203 seconds.
+Registered in 0.016650 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.55 ms, found 4 plugins.
@@ -1833,30 +393,30 @@ UnityEngine.Debug:LogError (object)
 UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.184 seconds
+- Completed reload, in  1.091 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1184ms)
-		BeginReloadAssembly (160ms)
+	ReloadAssembly (1091ms)
+		BeginReloadAssembly (135ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
+			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (34ms)
-		EndReloadAssembly (929ms)
-			LoadAssemblies (150ms)
+		EndReloadAssembly (878ms)
+			LoadAssemblies (125ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (292ms)
+			SetupTypeCache (294ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (36ms)
-			SetupLoadedEditorAssemblies (365ms)
+			RebuildScriptCaches (37ms)
+			SetupLoadedEditorAssemblies (335ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (75ms)
-				ProcessInitializeOnLoadAttributes (208ms)
-				ProcessInitializeOnLoadMethodAttributes (51ms)
-				AfterProcessingInitializeOnLoad (24ms)
+				BeforeProcessingInitializeOnLoad (62ms)
+				ProcessInitializeOnLoadAttributes (203ms)
+				ProcessInitializeOnLoadMethodAttributes (48ms)
+				AfterProcessingInitializeOnLoad (15ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (7ms)
@@ -1864,11 +424,11 @@ Platform modules already initialized, skipping
 Refreshing native plugins compatible for Editor in 0.56 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.7 MB.
-System memory in use after: 72.8 MB.
+System memory in use before: 72.4 MB.
+System memory in use after: 72.5 MB.
 
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 2024.
-Total: 2.169900 ms (FindLiveObjects: 0.155600 ms CreateObjectMapping: 0.052400 ms MarkObjects: 1.802700 ms  DeleteObjects: 0.158000 ms)
+Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1964.
+Total: 2.386000 ms (FindLiveObjects: 0.241300 ms CreateObjectMapping: 0.110500 ms MarkObjects: 1.882100 ms  DeleteObjects: 0.151400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -1883,10 +443,10 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.029971 seconds.
+Registered in 0.016625 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.58 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.60 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 TriLib is configured to use the 'StandardMaterialMapper' Material Mapper. If you want to use different Material Mappers, you can change this setting on the Project Settings/TriLib area.
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
@@ -1929,42 +489,42 @@ UnityEngine.Debug:LogError (object)
 UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.314 seconds
+- Completed reload, in  1.226 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1315ms)
-		BeginReloadAssembly (175ms)
+	ReloadAssembly (1227ms)
+		BeginReloadAssembly (134ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (41ms)
-		EndReloadAssembly (1039ms)
-			LoadAssemblies (159ms)
+			CreateAndSetChildDomain (33ms)
+		EndReloadAssembly (1016ms)
+			LoadAssemblies (121ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (338ms)
+			SetupTypeCache (328ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (39ms)
-			SetupLoadedEditorAssemblies (410ms)
+			RebuildScriptCaches (44ms)
+			SetupLoadedEditorAssemblies (389ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (84ms)
-				ProcessInitializeOnLoadAttributes (241ms)
-				ProcessInitializeOnLoadMethodAttributes (53ms)
-				AfterProcessingInitializeOnLoad (25ms)
+				BeforeProcessingInitializeOnLoad (75ms)
+				ProcessInitializeOnLoadAttributes (243ms)
+				ProcessInitializeOnLoadMethodAttributes (49ms)
+				AfterProcessingInitializeOnLoad (15ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (7ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.66 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.59 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1551 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.7 MB.
-System memory in use after: 72.8 MB.
+System memory in use before: 72.5 MB.
+System memory in use after: 72.5 MB.
 
-Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 2028.
-Total: 4.448300 ms (FindLiveObjects: 0.344500 ms CreateObjectMapping: 0.176400 ms MarkObjects: 3.606200 ms  DeleteObjects: 0.319200 ms)
+Unloading 74 unused Assets to reduce memory usage. Loaded Objects now: 1968.
+Total: 2.334100 ms (FindLiveObjects: 0.150900 ms CreateObjectMapping: 0.053200 ms MarkObjects: 1.958800 ms  DeleteObjects: 0.170200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
