@@ -17,7 +17,7 @@ public class DataManager : MonoBehaviour
     private GameObject buildings;
 
     // SaveFile seteting
-    private string directory = "/SaveFile";
+    private string directory = "/SaveFile"; // window - C:/Users/Username/AppData/LocalLow/DefaultCompony/KMSIS/SaveFile/data.save
     private string filename = "/data.save";
 
     // Local variable (Standard : Chung-Ang University Hospital)
@@ -204,7 +204,7 @@ public class DataManager : MonoBehaviour
     }
 
     // Save Data using UserData
-    public UserData SaveData()
+    private UserData SaveData()
     {
         UserData userData = new UserData();
         userData.SetCameraPosition(new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z));

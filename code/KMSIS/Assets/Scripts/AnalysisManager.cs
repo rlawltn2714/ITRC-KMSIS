@@ -155,7 +155,7 @@ public class AnalysisManager : MonoBehaviour
     {
         for (int i = 0; i < selectedObjectList.Count; i++)
         {
-            selectedObjectList[i].GetComponent<MeshRenderer>().material = normalMaterial;
+            selectedObjectList[i].GetComponent<MeshRenderer>().material = pointMaterial;
         }
         selectedObjectList.Clear();
     }
