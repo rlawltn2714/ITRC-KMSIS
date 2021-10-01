@@ -14,6 +14,7 @@ namespace TriLibCore.Samples
 
 		// Manager component
 		private ControlManager controlManager;
+		private DataManager dataManager;
 
 		// GameObject component
 		private GameObject importedBuildings;
@@ -35,6 +36,7 @@ namespace TriLibCore.Samples
 
 			// Get manager component
 			controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
+			dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
 
 			// Set collider
 			colliders = GameObject.Find("DemRigidbody").transform.GetChild(0).gameObject;
@@ -49,12 +51,17 @@ namespace TriLibCore.Samples
         {
 			if (deleteLevitation)
             {
-				GameObject temp = importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject;
-				if (temp.tag == "Untagged")
-				{
-					temp.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y - 0.005f, temp.transform.position.z);
+				bool check = false;
+				for (int i = 0; i < importedBuildings.transform.childCount; i++)
+                {
+					GameObject temp = importedBuildings.transform.GetChild(i).gameObject;
+					if (temp.tag == "Untagged")
+					{
+						temp.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y - 0.005f, temp.transform.position.z);
+						check = true;
+					}
 				}
-				else deleteLevitation = false;
+				if (!check) deleteLevitation = false;
 			}
 		}
 
@@ -129,11 +136,11 @@ namespace TriLibCore.Samples
 
 		private void OnLoad(AssetLoaderContext assetLoaderContext)
 		{
-			SetSizeOfModel(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
-			importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).position = new Vector3(Camera.main.transform.position.x, 0.5f, Camera.main.transform.position.z);
-			Camera.main.transform.eulerAngles = new Vector3(90f, Camera.main.transform.eulerAngles.y, 0f);
-			controlManager.SetNormalScale(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).localScale.x);
-			DeleteLevitation(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject);
+			SetSizeOfModel(assetLoaderContext.RootGameObject);
+			assetLoaderContext.RootGameObject.transform.position = new Vector3(Camera.main.transform.position.x, 0.5f, Camera.main.transform.position.z);
+			controlManager.SetNormalScale(assetLoaderContext.RootGameObject.transform.localScale.x);
+			DeleteLevitation(assetLoaderContext.RootGameObject);
+			dataManager.LoadBuildingState(assetLoaderContext.RootGameObject.name);
 		}
 
 		IEnumerator ShowLoadDialogCoroutine()
@@ -148,8 +155,10 @@ namespace TriLibCore.Samples
 				for (int i = 0; i < FileBrowser.Result.Length; i++)
 				{
 					ImportFromPath(FileBrowser.Result[i]);
+					dataManager.CopyFile(FileBrowser.Result[i]);
 				}
 				controlManager.SetMode(1);
+				Camera.main.transform.eulerAngles = new Vector3(90f, Camera.main.transform.eulerAngles.y, 0f);
 			}
             else
             {

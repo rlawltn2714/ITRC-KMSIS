@@ -82,6 +82,7 @@ public class AnalysisManager : MonoBehaviour
             int month = (int)(dayInfo[0]);
             int day = (int)(dayInfo[1]);
 
+            float temp = Time.realtimeSinceStartup;
             for (float clock = 0f; clock < 24f; clock += 24f / 1440f)
             {
                 List<double> tempList = sunManager.Calculate(month, day, clock);
@@ -90,7 +91,7 @@ public class AnalysisManager : MonoBehaviour
                     if (rayManager.CheckSunlight(selectedObjectList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) continue;
                 }
             }
-
+            Debug.Log("Average time : " + (Time.realtimeSinceStartup - temp) / (selectedObjectList.Count));
             for (int i = 0; i < objectList.Count; i++)
             {
                 objectList[i].layer = 0;
@@ -100,7 +101,7 @@ public class AnalysisManager : MonoBehaviour
     }
 
     // Intantiate plane object on the points
-    private void InstantiateObject(List<RaycastHit> hitPointList)
+    public void InstantiateObject(List<RaycastHit> hitPointList)
     {
         for (int i = 0; i < hitPointList.Count; i++)
         {

@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System;
 using System.IO;
 using UnityEngine;
+using TriLibCore.Samples;
 
 public class DataManager : MonoBehaviour
 {
@@ -13,12 +14,18 @@ public class DataManager : MonoBehaviour
     public TextAsset data;
     public TextAsset ydata;
 
+    // Manager component
+    private ImportManager importManager;
+
     // GameObject component
     private GameObject buildings;
+    private GameObject importedBuildings;
 
-    // SaveFile seteting
-    private string directory = "/SaveFile"; // window - C:/Users/Username/AppData/LocalLow/DefaultCompony/KMSIS/SaveFile/data.save
+    // SaveFile setting
+    private string directory1 = "/SaveFile"; // window - C:/Users/Username/AppData/LocalLow/DefaultCompony/KMSIS/SaveFile/data.save
+    private string directory2 = "/SaveFile/Buildings";
     private string filename = "/data.save";
+    Dictionary<string, bool> tempDictionary;
 
     // Local variable (Standard : Chung-Ang University Hospital)
     private string[,] buildingData; // 0 : management_number, 1 : latitude, 2 : longitude, 3 : name, 4 : sido, 5 : gu, 6 : dong, 7 : road_name, 8 : subname, 9 : number,  10 : height, 11 : name_eng
@@ -56,8 +63,12 @@ public class DataManager : MonoBehaviour
             }
         }
 
+        // Get Manager component
+        importManager = GameObject.Find("ImportManager").GetComponent<ImportManager>();
+
         // Get GameObject component
         buildings = GameObject.Find("Buildings");
+        importedBuildings = GameObject.Find("ImportedBuildings");
 
         // Load savefile
         Load();
@@ -143,7 +154,7 @@ public class DataManager : MonoBehaviour
     public void Save()
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream fileStream = new FileStream(Application.persistentDataPath + directory + filename, FileMode.Create);
+        FileStream fileStream = new FileStream(Application.persistentDataPath + directory1 + filename, FileMode.Create);
         UserData userData = SaveData();
         binaryFormatter.Serialize(fileStream, userData);
         fileStream.Close();
@@ -152,17 +163,22 @@ public class DataManager : MonoBehaviour
     // Load data
     private void Load()
     {
-        if (File.Exists(Application.persistentDataPath + directory + filename)) // When data is exist
+        if (File.Exists(Application.persistentDataPath + directory1 + filename)) // When data is exist
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = new FileStream(Application.persistentDataPath + directory + filename, FileMode.Open);
+            FileStream fileStream = new FileStream(Application.persistentDataPath + directory1 + filename, FileMode.Open);
             UserData userData = binaryFormatter.Deserialize(fileStream) as UserData;
             LoadData(userData);
             fileStream.Close();
         }
         else
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + directory);
+            DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + directory1);
+            if (!directoryInfo.Exists) // When directory isn't exist
+            {
+                directoryInfo.Create();
+            }
+            directoryInfo = new DirectoryInfo(Application.persistentDataPath + directory2);
             if (!directoryInfo.Exists) // When directory isn't exist
             {
                 directoryInfo.Create();
@@ -175,6 +191,7 @@ public class DataManager : MonoBehaviour
     {
         [SerializeField]
         private float cameraPositionX, cameraPositionY, cameraPositionZ, cameraRotationX, cameraRotationY, cameraRotationZ;
+        private Dictionary<string, bool> importedBuildingList;
 
         public UserData() {}
 
@@ -201,6 +218,16 @@ public class DataManager : MonoBehaviour
         {
             return new Vector3(cameraRotationX, cameraRotationY, cameraRotationZ);
         }
+
+        public void SetImportedBuildingList(Dictionary<string, bool> dictionary)
+        {
+            importedBuildingList = dictionary;
+        }
+
+        public Dictionary<string, bool> GetImportedBuildingList()
+        {
+            return importedBuildingList;
+        }
     }
 
     // Save Data using UserData
@@ -209,6 +236,18 @@ public class DataManager : MonoBehaviour
         UserData userData = new UserData();
         userData.SetCameraPosition(new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z));
         userData.SetCameraRotation(new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z));
+        tempDictionary = new Dictionary<string, bool>();
+        for (int i = 0; i < importedBuildings.transform.childCount; i++)
+        {
+            string name = importedBuildings.transform.GetChild(i).gameObject.name;
+            string result = SearchFile(name);
+            if (result == "null") continue;
+            else
+            {
+                tempDictionary.Add(result, importedBuildings.transform.GetChild(i).gameObject.activeSelf);
+            }
+        }
+        userData.SetImportedBuildingList(tempDictionary);
         return userData;
     }
 
@@ -217,5 +256,52 @@ public class DataManager : MonoBehaviour
     {
         Camera.main.transform.position = userData.GetCameraPosition();
         Camera.main.transform.eulerAngles = userData.GetCameraRotation();
+        tempDictionary = userData.GetImportedBuildingList();
+        foreach (var pair in tempDictionary)
+        {
+            importManager.ImportFromPath(Application.persistentDataPath + directory2 + "/" + pair.Key);
+        }
+    }
+
+    // Load buildling state
+    public void LoadBuildingState(string building)
+    {
+        string result = SearchFile(building);
+        if (result != "null")
+        {
+            bool active;
+            if (tempDictionary.TryGetValue(result, out active))
+            {
+                GameObject.Find(building).SetActive(active);
+            }
+        }
+    }
+
+    // Copy model file
+    public void CopyFile(string filePath)
+    {
+        string fName = Path.GetFileName(filePath);
+        File.Copy(filePath, Application.persistentDataPath + directory2 + "/" + fName, true);
+    }
+
+    // Search model file
+    private string SearchFile(string fileName)
+    {
+        if (File.Exists(Application.persistentDataPath + directory2 + "/" + fileName + ".stl"))
+        {
+            return fileName + ".stl";
+        }
+        else if (File.Exists(Application.persistentDataPath + directory2 + "/" + fileName + ".fbx"))
+        {
+            return fileName + ".fbx";
+        }
+        else if (File.Exists(Application.persistentDataPath + directory2 + "/" + fileName + ".obj"))
+        {
+            return fileName + ".obj";
+        }
+        else
+        {
+            return "null";
+        }
     }
 }
