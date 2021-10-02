@@ -25,7 +25,8 @@ public class DataManager : MonoBehaviour
     private string directory1 = "/SaveFile"; // window - C:/Users/Username/AppData/LocalLow/DefaultCompony/KMSIS/SaveFile/data.save
     private string directory2 = "/SaveFile/Buildings";
     private string filename = "/data.save";
-    Dictionary<string, bool> tempDictionary;
+    Dictionary<string, bool> importedBuildingList;
+    Dictionary<string, float[]> importedBuildingPointList;
 
     // Local variable (Standard : Chung-Ang University Hospital)
     private string[,] buildingData; // 0 : management_number, 1 : latitude, 2 : longitude, 3 : name, 4 : sido, 5 : gu, 6 : dong, 7 : road_name, 8 : subname, 9 : number,  10 : height, 11 : name_eng
@@ -183,6 +184,8 @@ public class DataManager : MonoBehaviour
             {
                 directoryInfo.Create();
             }
+            Save();
+            Load();
         }
     }
 
@@ -192,6 +195,7 @@ public class DataManager : MonoBehaviour
         [SerializeField]
         private float cameraPositionX, cameraPositionY, cameraPositionZ, cameraRotationX, cameraRotationY, cameraRotationZ;
         private Dictionary<string, bool> importedBuildingList;
+        private Dictionary<string, float[]> importedBuildingPositionList;
 
         public UserData() {}
 
@@ -228,6 +232,16 @@ public class DataManager : MonoBehaviour
         {
             return importedBuildingList;
         }
+
+        public void SetImportedBuildingPositionList(Dictionary<string, float[]> dictionary)
+        {
+            importedBuildingPositionList = dictionary;
+        }
+
+        public Dictionary<string, float[]> GetImportedBuildingPositionList()
+        {
+            return importedBuildingPositionList;
+        }
     }
 
     // Save Data using UserData
@@ -236,18 +250,22 @@ public class DataManager : MonoBehaviour
         UserData userData = new UserData();
         userData.SetCameraPosition(new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z));
         userData.SetCameraRotation(new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z));
-        tempDictionary = new Dictionary<string, bool>();
+        Dictionary<string, bool> temp1 = new Dictionary<string, bool>();
+        Dictionary<string, float[]> temp2 = new Dictionary<string, float[]>();
         for (int i = 0; i < importedBuildings.transform.childCount; i++)
         {
-            string name = importedBuildings.transform.GetChild(i).gameObject.name;
-            string result = SearchFile(name);
+            GameObject tempObject = importedBuildings.transform.GetChild(i).gameObject;
+            string result = SearchFile(tempObject.name);
             if (result == "null") continue;
             else
             {
-                tempDictionary.Add(result, importedBuildings.transform.GetChild(i).gameObject.activeSelf);
+                temp1.Add(result, tempObject.activeSelf);
+                temp2.Add(result, new float[] { tempObject.transform.position.x, tempObject.transform.position.y, tempObject.transform.position.z });
             }
+
         }
-        userData.SetImportedBuildingList(tempDictionary);
+        userData.SetImportedBuildingList(temp1);
+        userData.SetImportedBuildingPositionList(temp2);
         return userData;
     }
 
@@ -256,8 +274,9 @@ public class DataManager : MonoBehaviour
     {
         Camera.main.transform.position = userData.GetCameraPosition();
         Camera.main.transform.eulerAngles = userData.GetCameraRotation();
-        tempDictionary = userData.GetImportedBuildingList();
-        foreach (var pair in tempDictionary)
+        importedBuildingList = userData.GetImportedBuildingList();
+        importedBuildingPointList = userData.GetImportedBuildingPositionList();
+        foreach (var pair in importedBuildingList)
         {
             importManager.ImportFromPath(Application.persistentDataPath + directory2 + "/" + pair.Key);
         }
@@ -270,9 +289,14 @@ public class DataManager : MonoBehaviour
         if (result != "null")
         {
             bool active;
-            if (tempDictionary.TryGetValue(result, out active))
+            if (importedBuildingList.TryGetValue(result, out active))
             {
                 GameObject.Find(building).SetActive(active);
+            }
+            float[] position;
+            if (importedBuildingPointList.TryGetValue(result, out position))
+            {
+                GameObject.Find(building).transform.position = new Vector3(position[0], position[1], position[2]);
             }
         }
     }

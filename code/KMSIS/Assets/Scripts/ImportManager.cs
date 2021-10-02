@@ -21,8 +21,9 @@ namespace TriLibCore.Samples
 		private GameObject standardBoundBuilding;
 		private GameObject colliders;
 
-		// Bound variable
+		// Variable
 		private float minBound;
+		private Vector3 eulerAngles;
 
 		// Delete levitation
 		private bool deleteLevitation;
@@ -143,6 +144,13 @@ namespace TriLibCore.Samples
 			dataManager.LoadBuildingState(assetLoaderContext.RootGameObject.name);
 		}
 
+		private void OnError(IContextualizedError contextualizedError)
+        {
+			controlManager.SetMode(0);
+			Camera.main.transform.eulerAngles = eulerAngles;
+			Debug.Log("2");
+		}
+
 		IEnumerator ShowLoadDialogCoroutine()
 		{
 			yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Files, false, null, null, "Load Files", "Load");
@@ -158,6 +166,7 @@ namespace TriLibCore.Samples
 					dataManager.CopyFile(FileBrowser.Result[i]);
 				}
 				controlManager.SetMode(1);
+				eulerAngles = Camera.main.transform.eulerAngles;
 				Camera.main.transform.eulerAngles = new Vector3(90f, Camera.main.transform.eulerAngles.y, 0f);
 			}
             else

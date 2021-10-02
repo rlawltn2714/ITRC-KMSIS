@@ -253,7 +253,7 @@ public class ControlManager : MonoBehaviour
                     Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
                     if (Physics.Raycast(ray, out hit))
                     {
-                        if (hit.transform.gameObject == importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject)
+                        if (importedBuildings.transform.childCount > 0 && hit.transform.gameObject == importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject)
                         {
                             hit.transform.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
                             hit.transform.gameObject.tag = "Selected";
@@ -264,7 +264,7 @@ public class ControlManager : MonoBehaviour
 
                 if (Input.GetMouseButton(0)) // When left click is continue
                 {
-                    if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
+                    if (importedBuildings.transform.childCount > 0 && importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
                     {
                         Vector3 temp = mainCamera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition + offset);
                         importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).transform.position = new Vector3(temp.x, 0.5f, temp.z);
@@ -273,7 +273,7 @@ public class ControlManager : MonoBehaviour
 
                 if (Input.GetMouseButtonUp(0)) // When left click is end
                 {
-                    if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
+                    if (importedBuildings.transform.childCount > 0 && importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
                     {
                         importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag = "Untagged";
                         importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
@@ -290,7 +290,7 @@ public class ControlManager : MonoBehaviour
                     Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(clickPosition);
                     if (Physics.Raycast(ray, out hit))
                     {
-                        if (hit.transform.gameObject == importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject)
+                        if (importedBuildings.transform.childCount > 0 && hit.transform.gameObject == importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject)
                         {
                             hit.transform.gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
                             hit.transform.gameObject.tag = "Selected";
@@ -302,7 +302,7 @@ public class ControlManager : MonoBehaviour
             }
             else
             {
-                if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
+                if (importedBuildings.transform.childCount > 0 && importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
                 {
                     Vector3 temp = mainCamera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition + offset);
                     importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).position = new Vector3(temp.x, 0.5f, temp.z);
@@ -310,7 +310,7 @@ public class ControlManager : MonoBehaviour
 
                 if (Input.GetMouseButtonUp(1)) // When right click is end
                 {
-                    if (importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
+                    if (importedBuildings.transform.childCount > 0 && importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag == "Selected")
                     {
                         importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.tag = "Untagged";
                         importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject.GetComponent<MeshRenderer>().material = normalMaterial;
@@ -322,7 +322,7 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Return)) // When get enter
             {
-                if (importManager.CheckSizeOfModel(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject))
+                if (importedBuildings.transform.childCount > 0 && importManager.CheckSizeOfModel(importedBuildings.transform.GetChild(importedBuildings.transform.childCount - 1).gameObject))
                 {
                     SetMode(0);
                 }
