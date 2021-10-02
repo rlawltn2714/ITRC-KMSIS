@@ -16,6 +16,7 @@ public class DataManager : MonoBehaviour
 
     // Manager component
     private ImportManager importManager;
+    private BuildingManager buildingManager;
 
     // GameObject component
     private GameObject buildings;
@@ -65,6 +66,7 @@ public class DataManager : MonoBehaviour
 
         // Get Manager component
         importManager = GameObject.Find("ImportManager").GetComponent<ImportManager>();
+        buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
 
         // Get GameObject component
         buildings = GameObject.Find("Buildings");
@@ -250,9 +252,11 @@ public class DataManager : MonoBehaviour
         [SerializeField]
         private float cameraPositionX, cameraPositionY, cameraPositionZ, cameraRotationX, cameraRotationY, cameraRotationZ;
         private List<Building> importedBuildingsList;
+        private List<int> deletedBuildingsList;
 
         public UserData() {
             importedBuildingsList = new List<Building>();
+            deletedBuildingsList = new List<int>();
         }
 
         public void SetCameraPosition(Vector3 position)
@@ -283,6 +287,11 @@ public class DataManager : MonoBehaviour
         {
             return importedBuildingsList;
         }
+
+        public List<int> GetDeletedBuildingsList()
+        {
+            return deletedBuildingsList;
+        }
     }
 
     // Save Data using UserData
@@ -305,7 +314,14 @@ public class DataManager : MonoBehaviour
                 temp.SetActive(tempObject.activeSelf);
                 userData.GetImportedBuildingsList().Add(temp);
             }
-
+        }
+        List<GameObject> tempList = buildingManager.GetDeletedBuildingsList();
+        for (int i = 0; i < buildings.transform.childCount; i++)
+        {
+            if (tempList.Contains(buildings.transform.GetChild(i).gameObject))
+            {
+                userData.GetDeletedBuildingsList().Add(i);
+            }
         }
         return userData;
     }
@@ -319,6 +335,14 @@ public class DataManager : MonoBehaviour
         for (int i = 0; i < importedBuildingsList.Count; i++)
         {
             importManager.ImportFromPath(Application.persistentDataPath + directory2 + "/" + importedBuildingsList[i].GetName());
+        }
+        for (int i = 0; i < buildings.transform.childCount; i++)
+        {
+            if (userData.GetDeletedBuildingsList().Contains(i))
+            {
+                buildingManager.GetDeletedBuildingsList().Add(buildings.transform.GetChild(i).gameObject);
+                buildings.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
 

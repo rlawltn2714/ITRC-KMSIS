@@ -105,14 +105,14 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Q))
             {
-                if (buildingManager.GetSelectedObjectList().Count < 1)
+                if (buildingManager.GetSelectedBuildingsList().Count < 1)
                 {
                     Debug.Log("You should choose the building for analysis.");
                 }
-                else if (buildingManager.GetSelectedObjectList().Count == 1)
+                else if (buildingManager.GetSelectedBuildingsList().Count == 1)
                 {
                     mode = 2;
-                    analysisManager.Init(buildingManager.GetSelectedObjectList()[0]);
+                    analysisManager.Init(buildingManager.GetSelectedBuildingsList()[0]);
                 }
                 else
                 {
@@ -122,17 +122,17 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Z))
             {
-                for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
+                for (int i = 0; i < buildingManager.GetSelectedBuildingsList().Count; i++)
                 {
-                    buildingManager.GetDeletedObjectList().Add(buildingManager.GetSelectedObjectList()[i]);
-                    buildingManager.GetSelectedObjectList()[i].SetActive(false);
+                    buildingManager.GetDeletedBuildingsList().Add(buildingManager.GetSelectedBuildingsList()[i]);
+                    buildingManager.GetSelectedBuildingsList()[i].SetActive(false);
                 }
-                buildingManager.ClearSelectedObjectList();
+                buildingManager.ClearSelectedBuildingsList();
             }
 
             if (Input.GetKeyUp(KeyCode.X))
             {
-                buildingManager.GetDeletedObjectList().Clear();
+                buildingManager.GetDeletedBuildingsList().Clear();
                 buildingManager.ShowAll();
             }
 
@@ -176,36 +176,36 @@ public class ControlManager : MonoBehaviour
                             {
                                 // Check if object is already selected
                                 bool isSelected = false;
-                                for (int i = 0; i < buildingManager.GetSelectedObjectList().Count; i++)
+                                for (int i = 0; i < buildingManager.GetSelectedBuildingsList().Count; i++)
                                 {
-                                    if (hit.collider.gameObject.name == buildingManager.GetSelectedObjectList()[i].name)// When object is already selected
+                                    if (hit.collider.gameObject.name == buildingManager.GetSelectedBuildingsList()[i].name)// When object is already selected
                                     {
                                         isSelected = true;
-                                        buildingManager.DeleteFromSelectedObjectList(i);
+                                        buildingManager.DeleteFromSelectedBuildingsList(i);
                                         break;
                                     }
                                 }
                                 if (!isSelected) // When object isn't selected
                                 {
                                     // select object
-                                    buildingManager.SelectObject(hit.collider.gameObject);
+                                    buildingManager.SelectBuilding(hit.collider.gameObject);
                                 }
                             }
                         }
                         else // When click without ctrl
                         {
                             // Clear selection list
-                            buildingManager.ClearSelectedObjectList();
+                            buildingManager.ClearSelectedBuildingsList();
                             if (hit.collider.gameObject.name != "Dem" && hit.collider.gameObject.name != "Colliders") // When didn't click outside
                             {
                                 // select object
-                                buildingManager.SelectObject(hit.collider.gameObject);
+                                buildingManager.SelectBuilding(hit.collider.gameObject);
                             }
                         }
                     }
                     else
                     {
-                        buildingManager.ClearSelectedObjectList();
+                        buildingManager.ClearSelectedBuildingsList();
                     }
 
                     if (Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
@@ -548,7 +548,7 @@ public class ControlManager : MonoBehaviour
 
         if (!Input.GetKey(KeyCode.LeftControl) & !Input.GetKey(KeyCode.RightControl)) // When didn't get ctrl
         {
-            buildingManager.ClearSelectedObjectList();
+            buildingManager.ClearSelectedBuildingsList();
         }
 
         for (int i = 0; i < importedBuildings.transform.childCount; i++)
@@ -557,7 +557,7 @@ public class ControlManager : MonoBehaviour
             Vector2 screenPosition = mainCamera.GetComponent<Camera>().WorldToScreenPoint(importedBuildings.transform.GetChild(i).position);
             if (screenPosition.x > min.x && screenPosition.x < max.x && screenPosition.y > min.y && screenPosition.y < max.y)
             {
-                buildingManager.SelectObject(importedBuildings.transform.GetChild(i).gameObject);
+                buildingManager.SelectBuilding(importedBuildings.transform.GetChild(i).gameObject);
             }
         }
 
@@ -569,7 +569,7 @@ public class ControlManager : MonoBehaviour
             {
                 if (hit.collider.gameObject.name == buildings.transform.GetChild(objectIndexList[i]).gameObject.name)
                 {
-                    buildingManager.SelectObject(hit.collider.gameObject);
+                    buildingManager.SelectBuilding(hit.collider.gameObject);
                 }
             }
         }

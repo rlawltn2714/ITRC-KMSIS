@@ -218,11 +218,11 @@ public class UIManager : MonoBehaviour
         if (tempList == null || tempList.Count == 0) Debug.Log("검색 결과가 없습니다.");
         else
         {
-            buildingManager.ClearSelectedObjectList();
+            buildingManager.ClearSelectedBuildingsList();
             float x = 0f, z = 0f;
             for (int i = 0; i < tempList.Count; i++)
             {
-                buildingManager.SelectObject(tempList[i]);
+                buildingManager.SelectBuilding(tempList[i]);
                 x += tempList[i].transform.position.x;
                 z += tempList[i].transform.position.z;
             }

@@ -9,8 +9,8 @@ public class BuildingManager : MonoBehaviour
     // GameObject component
     private GameObject buildings;
     private GameObject importedBuildings;
-    private List<GameObject> selectedObjectList;
-    private List<GameObject> deletedObjectList;
+    private List<GameObject> selectedBuildingsList;
+    private List<GameObject> deletedBuildingsList;
 
     // Material component
     public Material selectMaterial;
@@ -26,8 +26,8 @@ public class BuildingManager : MonoBehaviour
         importedBuildings = GameObject.Find("ImportedBuildings");
 
         // Initialize variable
-        selectedObjectList = new List<GameObject>();
-        deletedObjectList = new List<GameObject>();
+        selectedBuildingsList = new List<GameObject>();
+        deletedBuildingsList = new List<GameObject>();
         viewMode = 0;
     }
 
@@ -42,9 +42,9 @@ public class BuildingManager : MonoBehaviour
         {
             importedBuildings.transform.GetChild(i).gameObject.SetActive(true);
         }
-        for (int i = 0; i < deletedObjectList.Count; i++)
+        for (int i = 0; i < deletedBuildingsList.Count; i++)
         {
-            deletedObjectList[i].SetActive(false);
+            deletedBuildingsList[i].SetActive(false);
         }
         viewMode = 0;
     }
@@ -62,9 +62,9 @@ public class BuildingManager : MonoBehaviour
             {
                 importedBuildings.transform.GetChild(i).gameObject.SetActive(false);
             }
-            for (int i = 0; i < deletedObjectList.Count; i++)
+            for (int i = 0; i < deletedBuildingsList.Count; i++)
             {
-                deletedObjectList[i].SetActive(true);
+                deletedBuildingsList[i].SetActive(true);
             }
             viewMode = 1;
         }
@@ -78,9 +78,9 @@ public class BuildingManager : MonoBehaviour
             {
                 importedBuildings.transform.GetChild(i).gameObject.SetActive(true);
             }
-            for (int i = 0; i < deletedObjectList.Count; i++)
+            for (int i = 0; i < deletedBuildingsList.Count; i++)
             {
-                deletedObjectList[i].SetActive(false);
+                deletedBuildingsList[i].SetActive(false);
             }
             viewMode = 0;
         }
@@ -92,41 +92,41 @@ public class BuildingManager : MonoBehaviour
     }
 
     // Select object
-    public void SelectObject(GameObject building)
+    public void SelectBuilding(GameObject building)
     {
-        if (!selectedObjectList.Contains(building))
+        if (!selectedBuildingsList.Contains(building))
         {
-            selectedObjectList.Add(building);
+            selectedBuildingsList.Add(building);
             building.GetComponent<MeshRenderer>().material = selectMaterial;
         }
     }
 
     // Delete from selectedObjectList
-    public void DeleteFromSelectedObjectList(int index)
+    public void DeleteFromSelectedBuildingsList(int index)
     {
-        selectedObjectList[index].GetComponent<MeshRenderer>().material = normalMaterial;
-        selectedObjectList.RemoveAt(index);
+        selectedBuildingsList[index].GetComponent<MeshRenderer>().material = normalMaterial;
+        selectedBuildingsList.RemoveAt(index);
     }
 
     // Clear selectedObjectList
-    public void ClearSelectedObjectList()
+    public void ClearSelectedBuildingsList()
     {
-        for (int i = 0; i < selectedObjectList.Count; i++)
+        for (int i = 0; i < selectedBuildingsList.Count; i++)
         {
-            selectedObjectList[i].GetComponent<MeshRenderer>().material = normalMaterial;
+            selectedBuildingsList[i].GetComponent<MeshRenderer>().material = normalMaterial;
         }
-        selectedObjectList.Clear();
+        selectedBuildingsList.Clear();
     }
 
     // Return selectedObjectList
-    public List<GameObject> GetSelectedObjectList()
+    public List<GameObject> GetSelectedBuildingsList()
     {
-        return selectedObjectList;
+        return selectedBuildingsList;
     }
 
     // Return deletedObjectList
-    public List<GameObject> GetDeletedObjectList()
+    public List<GameObject> GetDeletedBuildingsList()
     {
-        return deletedObjectList;
+        return deletedBuildingsList;
     }
 }
