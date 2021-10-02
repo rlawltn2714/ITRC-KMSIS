@@ -78,14 +78,14 @@ public class ControlManager : MonoBehaviour
                 mainCamera.GetComponent<Camera>().fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
             }
 
-            if (Input.GetAxis("Horizontal") != 0) // When get A D กๆ ก็
+            if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !uiManager.CheckInputfieldFocused() && Input.GetAxis("Horizontal") != 0) // When get A D กๆ ก็
             {
                 // Update position of camera
                 mainCamera.transform.position += mainCamera.transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
                 CameraPositionRangeCheck();
             }
 
-            if (Input.GetAxis("Vertical") != 0) // When get W S ก่ ก้
+            if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !uiManager.CheckInputfieldFocused() && Input.GetAxis("Vertical") != 0) // When get W S ก่ ก้
             {
                 // Update position of camera
                 mainCamera.transform.position += mainCamera.transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -98,12 +98,12 @@ public class ControlManager : MonoBehaviour
                 mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
             }
 
-            if (Input.GetKeyUp(KeyCode.R))
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.R))
             {
                 ResetCamera();
             }
 
-            if (Input.GetKeyUp(KeyCode.Q))
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.Q))
             {
                 if (buildingManager.GetSelectedBuildingsList().Count < 1)
                 {
@@ -120,7 +120,7 @@ public class ControlManager : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyUp(KeyCode.Z))
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.D))
             {
                 for (int i = 0; i < buildingManager.GetSelectedBuildingsList().Count; i++)
                 {
@@ -130,13 +130,13 @@ public class ControlManager : MonoBehaviour
                 buildingManager.ClearSelectedBuildingsList();
             }
 
-            if (Input.GetKeyUp(KeyCode.X))
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.X))
             {
                 buildingManager.GetDeletedBuildingsList().Clear();
                 buildingManager.ShowAll();
             }
 
-            if (Input.GetKeyUp(KeyCode.C))
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.C))
             {
                 buildingManager.ChangeView();
             }
@@ -228,14 +228,14 @@ public class ControlManager : MonoBehaviour
                 CameraPositionRangeCheck();
             }
 
-            if (Input.GetAxis("Horizontal") != 0) // When get A D กๆ ก็
+            if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !uiManager.CheckInputfieldFocused() && Input.GetAxis("Horizontal") != 0) // When get A D กๆ ก็
             {
                 // Update position of camera
                 mainCamera.transform.position += mainCamera.transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
                 CameraPositionRangeCheck();
             }
 
-            if (Input.GetAxis("Vertical") != 0) // When get W S ก่ ก้
+            if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !uiManager.CheckInputfieldFocused() && Input.GetAxis("Vertical") != 0) // When get W S ก่ ก้
             {
                 // Update position of camera
                 mainCamera.transform.position += mainCamera.transform.up * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -340,14 +340,14 @@ public class ControlManager : MonoBehaviour
                 mainCamera.GetComponent<Camera>().fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
             }
 
-            if (Input.GetAxis("Horizontal") != 0) // When get A D กๆ ก็
+            if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !uiManager.CheckInputfieldFocused() && Input.GetAxis("Horizontal") != 0) // When get A D กๆ ก็
             {
                 // Update position of camera
                 mainCamera.transform.position += mainCamera.transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
                 CameraPositionRangeCheck();
             }
 
-            if (Input.GetAxis("Vertical") != 0) // When get W S ก่ ก้
+            if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !uiManager.CheckInputfieldFocused() && Input.GetAxis("Vertical") != 0) // When get W S ก่ ก้
             {
                 // Update position of camera
                 mainCamera.transform.position += mainCamera.transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -360,18 +360,18 @@ public class ControlManager : MonoBehaviour
                 mainCamera.transform.eulerAngles += rotateSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
             }
 
-            if (Input.GetKeyUp(KeyCode.R))
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.R))
             {
                 ResetCamera();
             }
 
-            if (Input.GetKeyUp(KeyCode.C))
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.C))
             {
                 if (analysisMode == 0) analysisMode = 1;
                 else if (analysisMode == 1) analysisMode = 0;
             }
 
-            if (Input.GetKeyUp(KeyCode.Q))
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.Q))
             {
                 mode = 0;
                 analysisManager.Release();

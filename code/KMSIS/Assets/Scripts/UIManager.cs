@@ -73,6 +73,16 @@ public class UIManager : MonoBehaviour
         return false;
     }
 
+    // Check if inputfield is focused
+    public bool CheckInputfieldFocused()
+    {
+        if (monthInput.isFocused || dayInput.isFocused || hourInput.isFocused || minuteInput.isFocused || searchInput.isFocused || scaleInput[0].isFocused || scaleInput[1].isFocused || scaleInput[2].isFocused)
+        {
+            return true;
+        }
+        else return false;
+    }
+
     // Change UI
     public void ChangeInterface(int current, int next)
     {
