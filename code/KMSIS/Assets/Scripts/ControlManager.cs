@@ -103,6 +103,11 @@ public class ControlManager : MonoBehaviour
                 ResetCamera();
             }
 
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.O))
+            {
+                importManager.ImportFromBrowser();
+            }
+
             if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.Q))
             {
                 if (buildingManager.GetSelectedBuildingsList().Count < 1)
