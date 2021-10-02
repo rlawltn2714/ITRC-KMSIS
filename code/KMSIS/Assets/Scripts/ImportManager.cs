@@ -141,14 +141,20 @@ namespace TriLibCore.Samples
 			assetLoaderContext.RootGameObject.transform.position = new Vector3(Camera.main.transform.position.x, 0.5f, Camera.main.transform.position.z);
 			controlManager.SetNormalScale(assetLoaderContext.RootGameObject.transform.localScale.x);
 			DeleteLevitation(assetLoaderContext.RootGameObject);
-			dataManager.LoadBuildingState(assetLoaderContext.RootGameObject.name);
+			for (int i = 0; i < importedBuildings.transform.childCount; i++)
+            {
+				if (importedBuildings.transform.GetChild(i).gameObject == assetLoaderContext.RootGameObject)
+                {
+					dataManager.LoadBuildingState(i);
+					break;
+				}
+            }
 		}
 
 		private void OnError(IContextualizedError contextualizedError)
         {
 			controlManager.SetMode(0);
 			Camera.main.transform.eulerAngles = eulerAngles;
-			Debug.Log("2");
 		}
 
 		IEnumerator ShowLoadDialogCoroutine()

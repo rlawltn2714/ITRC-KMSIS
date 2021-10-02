@@ -25,8 +25,7 @@ public class DataManager : MonoBehaviour
     private string directory1 = "/SaveFile"; // window - C:/Users/Username/AppData/LocalLow/DefaultCompony/KMSIS/SaveFile/data.save
     private string directory2 = "/SaveFile/Buildings";
     private string filename = "/data.save";
-    Dictionary<string, bool> importedBuildingList;
-    Dictionary<string, float[]> importedBuildingPointList;
+    private List<Building> importedBuildingsList;
 
     // Local variable (Standard : Chung-Ang University Hospital)
     private string[,] buildingData; // 0 : management_number, 1 : latitude, 2 : longitude, 3 : name, 4 : sido, 5 : gu, 6 : dong, 7 : road_name, 8 : subname, 9 : number,  10 : height, 11 : name_eng
@@ -190,14 +189,71 @@ public class DataManager : MonoBehaviour
     }
 
     [Serializable]
+    public class Building
+    {
+        [SerializeField]
+        private string name;
+        private float[] position;
+        private int index;
+        private bool active;
+
+        public Building() {
+            position = new float[3];
+        }
+
+        public void SetName(string name)
+        {
+            this.name = name;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            this.position[0] = position.x;
+            this.position[1] = position.y;
+            this.position[2] = position.z;
+        }
+
+        public float[] GetPosition()
+        {
+            return position;
+        }
+
+        public void SetIndex(int index)
+        {
+            this.index = index;
+        }
+
+        public int GetIndex()
+        {
+            return index;
+        }
+
+        public void SetActive(bool active)
+        {
+            this.active = active;
+        }
+
+        public bool GetActive()
+        {
+            return active;
+        }
+    }
+
+    [Serializable]
     public class UserData
     {
         [SerializeField]
         private float cameraPositionX, cameraPositionY, cameraPositionZ, cameraRotationX, cameraRotationY, cameraRotationZ;
-        private Dictionary<string, bool> importedBuildingList;
-        private Dictionary<string, float[]> importedBuildingPositionList;
+        private List<Building> importedBuildingsList;
 
-        public UserData() {}
+        public UserData() {
+            importedBuildingsList = new List<Building>();
+        }
 
         public void SetCameraPosition(Vector3 position)
         {
@@ -223,24 +279,9 @@ public class DataManager : MonoBehaviour
             return new Vector3(cameraRotationX, cameraRotationY, cameraRotationZ);
         }
 
-        public void SetImportedBuildingList(Dictionary<string, bool> dictionary)
+        public List<Building> GetImportedBuildingsList()
         {
-            importedBuildingList = dictionary;
-        }
-
-        public Dictionary<string, bool> GetImportedBuildingList()
-        {
-            return importedBuildingList;
-        }
-
-        public void SetImportedBuildingPositionList(Dictionary<string, float[]> dictionary)
-        {
-            importedBuildingPositionList = dictionary;
-        }
-
-        public Dictionary<string, float[]> GetImportedBuildingPositionList()
-        {
-            return importedBuildingPositionList;
+            return importedBuildingsList;
         }
     }
 
@@ -250,8 +291,6 @@ public class DataManager : MonoBehaviour
         UserData userData = new UserData();
         userData.SetCameraPosition(new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z));
         userData.SetCameraRotation(new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z));
-        Dictionary<string, bool> temp1 = new Dictionary<string, bool>();
-        Dictionary<string, float[]> temp2 = new Dictionary<string, float[]>();
         for (int i = 0; i < importedBuildings.transform.childCount; i++)
         {
             GameObject tempObject = importedBuildings.transform.GetChild(i).gameObject;
@@ -259,13 +298,15 @@ public class DataManager : MonoBehaviour
             if (result == "null") continue;
             else
             {
-                temp1.Add(result, tempObject.activeSelf);
-                temp2.Add(result, new float[] { tempObject.transform.position.x, tempObject.transform.position.y, tempObject.transform.position.z });
+                Building temp = new Building();
+                temp.SetIndex(i);
+                temp.SetName(result);
+                temp.SetPosition(new Vector3(tempObject.transform.position.x, tempObject.transform.position.y, tempObject.transform.position.z));
+                temp.SetActive(tempObject.activeSelf);
+                userData.GetImportedBuildingsList().Add(temp);
             }
 
         }
-        userData.SetImportedBuildingList(temp1);
-        userData.SetImportedBuildingPositionList(temp2);
         return userData;
     }
 
@@ -274,29 +315,25 @@ public class DataManager : MonoBehaviour
     {
         Camera.main.transform.position = userData.GetCameraPosition();
         Camera.main.transform.eulerAngles = userData.GetCameraRotation();
-        importedBuildingList = userData.GetImportedBuildingList();
-        importedBuildingPointList = userData.GetImportedBuildingPositionList();
-        foreach (var pair in importedBuildingList)
+        importedBuildingsList = userData.GetImportedBuildingsList();
+        for (int i = 0; i < importedBuildingsList.Count; i++)
         {
-            importManager.ImportFromPath(Application.persistentDataPath + directory2 + "/" + pair.Key);
+            importManager.ImportFromPath(Application.persistentDataPath + directory2 + "/" + importedBuildingsList[i].GetName());
         }
     }
 
     // Load buildling state
-    public void LoadBuildingState(string building)
+    public void LoadBuildingState(int index)
     {
-        string result = SearchFile(building);
-        if (result != "null")
+        for (int i = 0; i < importedBuildingsList.Count; i++)
         {
-            bool active;
-            if (importedBuildingList.TryGetValue(result, out active))
+            if (importedBuildingsList[i].GetIndex() == index)
             {
-                GameObject.Find(building).SetActive(active);
-            }
-            float[] position;
-            if (importedBuildingPointList.TryGetValue(result, out position))
-            {
-                GameObject.Find(building).transform.position = new Vector3(position[0], position[1], position[2]);
+                GameObject tempObject = GameObject.Find("ImportedBuildings").transform.GetChild(index).gameObject;
+                tempObject.SetActive(importedBuildingsList[i].GetActive());
+                float[] temp = importedBuildingsList[i].GetPosition();
+                if (temp.Length != 3) Debug.Log("Error : Position data are invaild.");
+                else tempObject.transform.position = new Vector3(temp[0], temp[1], temp[2]);
             }
         }
     }
