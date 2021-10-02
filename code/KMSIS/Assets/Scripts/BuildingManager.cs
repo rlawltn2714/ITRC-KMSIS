@@ -31,6 +31,15 @@ public class BuildingManager : MonoBehaviour
         viewMode = 0;
     }
 
+    // Update deleted building's state
+    public void UpdateDeletedBuildings()
+    {
+        for (int i = 0; i < deletedBuildingsList.Count; i++)
+        {
+            deletedBuildingsList[i].SetActive(false);
+        }
+    }
+
     // Show all object
     public void ShowAll()
     {

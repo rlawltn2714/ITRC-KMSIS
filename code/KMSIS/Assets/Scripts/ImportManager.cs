@@ -15,6 +15,7 @@ namespace TriLibCore.Samples
 		// Manager component
 		private ControlManager controlManager;
 		private DataManager dataManager;
+		private BuildingManager buildingManager;
 
 		// GameObject component
 		private GameObject importedBuildings;
@@ -38,6 +39,7 @@ namespace TriLibCore.Samples
 			// Get manager component
 			controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
 			dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
+			buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
 
 			// Set collider
 			colliders = GameObject.Find("DemRigidbody").transform.GetChild(0).gameObject;
@@ -62,7 +64,11 @@ namespace TriLibCore.Samples
 						check = true;
 					}
 				}
-				if (!check) deleteLevitation = false;
+				if (!check)
+				{
+					deleteLevitation = false;
+					buildingManager.UpdateDeletedBuildings();
+				}
 			}
 		}
 

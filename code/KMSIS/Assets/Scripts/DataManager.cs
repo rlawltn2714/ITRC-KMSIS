@@ -354,7 +354,10 @@ public class DataManager : MonoBehaviour
             if (importedBuildingsList[i].GetIndex() == index)
             {
                 GameObject tempObject = GameObject.Find("ImportedBuildings").transform.GetChild(index).gameObject;
-                tempObject.SetActive(importedBuildingsList[i].GetActive());
+                if (!importedBuildingsList[i].GetActive())
+                {
+                    buildingManager.GetDeletedBuildingsList().Add(tempObject);
+                }
                 float[] temp = importedBuildingsList[i].GetPosition();
                 if (temp.Length != 3) Debug.Log("Error : Position data are invaild.");
                 else tempObject.transform.position = new Vector3(temp[0], temp[1], temp[2]);
