@@ -196,11 +196,13 @@ public class DataManager : MonoBehaviour
         [SerializeField]
         private string name;
         private float[] position;
+        private float[] scale;
         private int index;
         private bool active;
 
         public Building() {
             position = new float[3];
+            scale = new float[3];
         }
 
         public void SetName(string name)
@@ -223,6 +225,18 @@ public class DataManager : MonoBehaviour
         public float[] GetPosition()
         {
             return position;
+        }
+
+        public void SetScale(Vector3 scale)
+        {
+            this.scale[0] = scale.x;
+            this.scale[1] = scale.y;
+            this.scale[2] = scale.z;
+        }
+
+        public float[] GetScale()
+        {
+            return scale;
         }
 
         public void SetIndex(int index)
@@ -311,6 +325,7 @@ public class DataManager : MonoBehaviour
                 temp.SetIndex(i);
                 temp.SetName(result);
                 temp.SetPosition(new Vector3(tempObject.transform.position.x, tempObject.transform.position.y, tempObject.transform.position.z));
+                temp.SetScale(new Vector3(tempObject.transform.localScale.x, tempObject.transform.localScale.y, tempObject.transform.localScale.z));
                 temp.SetActive(tempObject.activeSelf);
                 userData.GetImportedBuildingsList().Add(temp);
             }
@@ -361,6 +376,9 @@ public class DataManager : MonoBehaviour
                 float[] temp = importedBuildingsList[i].GetPosition();
                 if (temp.Length != 3) Debug.Log("Error : Position data are invaild.");
                 else tempObject.transform.position = new Vector3(temp[0], temp[1], temp[2]);
+                temp = importedBuildingsList[i].GetScale();
+                if (temp.Length != 3) Debug.Log("Error : Scale data are invaild.");
+                else tempObject.transform.localScale = new Vector3(temp[0], temp[1], temp[2]);
             }
         }
     }
