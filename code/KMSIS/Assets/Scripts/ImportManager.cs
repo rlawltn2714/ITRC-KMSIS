@@ -155,6 +155,7 @@ namespace TriLibCore.Samples
 					break;
 				}
             }
+			Camera.main.transform.eulerAngles = eulerAngles;
 		}
 
 		private void OnError(IContextualizedError contextualizedError)

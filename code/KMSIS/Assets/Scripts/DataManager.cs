@@ -185,6 +185,8 @@ public class DataManager : MonoBehaviour
             {
                 directoryInfo.Create();
             }
+            Camera.main.transform.position = new Vector3(0.5806503f, 1.184541f, 4.311463f);
+            Camera.main.transform.eulerAngles = new Vector3(16.365f, 161.884f, 0f);
             Save();
             Load();
         }
@@ -197,12 +199,14 @@ public class DataManager : MonoBehaviour
         private string name;
         private float[] position;
         private float[] scale;
+        private float[] rotation;
         private int index;
         private bool active;
 
         public Building() {
             position = new float[3];
             scale = new float[3];
+            rotation = new float[3];
         }
 
         public void SetName(string name)
@@ -237,6 +241,18 @@ public class DataManager : MonoBehaviour
         public float[] GetScale()
         {
             return scale;
+        }
+
+        public void SetRotation(Vector3 rotation)
+        {
+            this.rotation[0] = rotation.x;
+            this.rotation[1] = rotation.y;
+            this.rotation[2] = rotation.z;
+        }
+
+        public float[] GetRotation()
+        {
+            return rotation;
         }
 
         public void SetIndex(int index)
@@ -312,8 +328,8 @@ public class DataManager : MonoBehaviour
     private UserData SaveData()
     {
         UserData userData = new UserData();
-        userData.SetCameraPosition(new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z));
-        userData.SetCameraRotation(new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z));
+        userData.SetCameraPosition(Camera.main.transform.position);
+        userData.SetCameraRotation(Camera.main.transform.eulerAngles);
         for (int i = 0; i < importedBuildings.transform.childCount; i++)
         {
             GameObject tempObject = importedBuildings.transform.GetChild(i).gameObject;
@@ -324,8 +340,9 @@ public class DataManager : MonoBehaviour
                 Building temp = new Building();
                 temp.SetIndex(i);
                 temp.SetName(result);
-                temp.SetPosition(new Vector3(tempObject.transform.position.x, tempObject.transform.position.y, tempObject.transform.position.z));
-                temp.SetScale(new Vector3(tempObject.transform.localScale.x, tempObject.transform.localScale.y, tempObject.transform.localScale.z));
+                temp.SetPosition(tempObject.transform.position);
+                temp.SetScale(tempObject.transform.localScale);
+                temp.SetRotation(tempObject.transform.eulerAngles);
                 temp.SetActive(tempObject.activeSelf);
                 userData.GetImportedBuildingsList().Add(temp);
             }
@@ -379,6 +396,9 @@ public class DataManager : MonoBehaviour
                 temp = importedBuildingsList[i].GetScale();
                 if (temp.Length != 3) Debug.Log("Error : Scale data are invaild.");
                 else tempObject.transform.localScale = new Vector3(temp[0], temp[1], temp[2]);
+                temp = importedBuildingsList[i].GetRotation();
+                if (temp.Length != 3) Debug.Log("Error : Rotation data are invaild.");
+                else tempObject.transform.eulerAngles = new Vector3(temp[0], temp[1], temp[2]);
             }
         }
     }
@@ -386,8 +406,8 @@ public class DataManager : MonoBehaviour
     // Copy model file
     public void CopyFile(string filePath)
     {
-        string fName = Path.GetFileName(filePath);
-        File.Copy(filePath, Application.persistentDataPath + directory2 + "/" + fName, true);
+        string fileName = Path.GetFileName(filePath);
+        File.Copy(filePath, Application.persistentDataPath + directory2 + "/" + fileName, true);
     }
 
     // Search model file

@@ -69,6 +69,10 @@ public class AnalysisManager : MonoBehaviour
         {
             Debug.Log("You should select the points.");
         }
+        else if (selectedObjectList.Count > 2000)
+        {
+            Debug.Log("You've choose too many points.");
+        }
         else
         {
             for (int i = 0; i < objectList.Count; i++)

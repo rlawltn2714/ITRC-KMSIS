@@ -454,11 +454,11 @@ public class ControlManager : MonoBehaviour
         }
     }
 
-    // Reset camera rotation
+    // Reset camera
     private void ResetCamera()
     {
-        mainCamera.transform.position = new Vector3(3.479011f, 7f, 7.51886f);
-        mainCamera.transform.eulerAngles = new Vector3(56.753f, -157.571f, 0f);
+        mainCamera.transform.position = new Vector3(0.5806503f, 1.184541f, 4.311463f);
+        mainCamera.transform.eulerAngles = new Vector3(16.365f, 161.884f, 0f);
     }
 
     // Set normal scale
