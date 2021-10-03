@@ -21,8 +21,8 @@ public class AnalysisManager : MonoBehaviour
     public Material pointMaterial;
 
     // GameObject variable
-    private List<GameObject> objectList;
-    private List<GameObject> selectedObjectList;
+    private List<GameObject> pointList;
+    private List<GameObject> selectedPointList;
     private GameObject targetBuilding;
 
     // Variable
@@ -40,8 +40,8 @@ public class AnalysisManager : MonoBehaviour
         analysisPoints = GameObject.Find("AnalysisPoints");
 
         // Initialize variable
-        objectList = new List<GameObject>();
-        selectedObjectList = new List<GameObject>();
+        pointList = new List<GameObject>();
+        selectedPointList = new List<GameObject>();
     }
 
     // Initialize AnalysisManager
@@ -58,50 +58,66 @@ public class AnalysisManager : MonoBehaviour
     {
         targetBuilding.GetComponent<MeshRenderer>().material = normalMaterial;
         DestroyObject();
-        selectedObjectList.Clear();
+        selectedPointList.Clear();
+    }
+
+    // Check environment and estimate execution time
+    public float EstimateTime()
+    {
+        int month = 8, day = 8;
+        float startTime = Time.realtimeSinceStartup;
+        for (float clock = 0f; clock < 24f; clock += 24f / 1440f)
+        {
+            List<double> tempList = sunManager.Calculate(month, day, clock);
+            if (rayManager.CheckSunlight(selectedPointList[0], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) continue;
+        }
+        return (Time.realtimeSinceStartup - startTime);
+    }
+
+    // Optimize points
+    private List<GameObject> OptimizePoints(List<GameObject> pointList)
+    {
+        return pointList;
     }
 
     // Analyze the sunlight
     public void Analyze()
     {
-        float startTime = Time.realtimeSinceStartup;
-        if (selectedObjectList.Count < 1)
+        if (selectedPointList.Count < 1)
         {
             Debug.Log("You should select the points.");
         }
-        else if (selectedObjectList.Count > 2000)
+        else if (selectedPointList.Count > 2000)
         {
             Debug.Log("You've choose too many points.");
         }
         else
         {
-            for (int i = 0; i < objectList.Count; i++)
+            for (int i = 0; i < pointList.Count; i++)
             {
-                objectList[i].layer = 2;
+                pointList[i].layer = 2;
             }
 
-            // Analyze
+            List<GameObject> optimizedPointList = OptimizePoints(selectedPointList);
             List<float> dayInfo = uiManager.GetInterfaceValue();
             if (dayInfo == null) return;
             int month = (int)(dayInfo[0]);
             int day = (int)(dayInfo[1]);
 
-            float temp = Time.realtimeSinceStartup;
             for (float clock = 0f; clock < 24f; clock += 24f / 1440f)
             {
                 List<double> tempList = sunManager.Calculate(month, day, clock);
-                for (int i = 0; i < selectedObjectList.Count; i++)
+                for (int i = 0; i < optimizedPointList.Count; i++)
                 {
-                    if (rayManager.CheckSunlight(selectedObjectList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) continue;
+                    if (rayManager.CheckSunlight(optimizedPointList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) continue;
                 }
             }
-            Debug.Log("Average time : " + (Time.realtimeSinceStartup - temp) / (selectedObjectList.Count));
-            for (int i = 0; i < objectList.Count; i++)
+
+            for (int i = 0; i < pointList.Count; i++)
             {
-                objectList[i].layer = 0;
+                pointList[i].layer = 0;
             }
         }
-        Debug.Log("Execution time : " + (Time.realtimeSinceStartup - startTime));
     }
 
     // Intantiate plane object on the points
@@ -112,18 +128,18 @@ public class AnalysisManager : MonoBehaviour
             GameObject temp = Instantiate(pointPrefab, hitPointList[i].point + 0.000005f * hitPointList[i].normal, Quaternion.identity);
             temp.transform.up = hitPointList[i].normal;
             temp.transform.parent = analysisPoints.transform;
-            objectList.Add(temp);
+            pointList.Add(temp);
         }
     }
 
     // Destroy plane objects in the objectList
     private void DestroyObject()
     {
-        for (int i = 0; i < objectList.Count; i++)
+        for (int i = 0; i < pointList.Count; i++)
         {
-            Destroy(objectList[i], 0.5f);
+            Destroy(pointList[i], 0.5f);
         }
-        objectList.Clear();
+        pointList.Clear();
     }
 
     // Select points with circle
@@ -131,14 +147,14 @@ public class AnalysisManager : MonoBehaviour
     {
         if (gameObject.transform.parent.name == "AnalysisPoints")
         {
-            for (int i = 0; i < objectList.Count; i++)
+            for (int i = 0; i < pointList.Count; i++)
             {
-                if (objectList[i].transform.up == gameObject.transform.up && Vector3.Distance(objectList[i].transform.position, gameObject.transform.position) < maxDistance)
+                if (pointList[i].transform.up == gameObject.transform.up && Vector3.Distance(pointList[i].transform.position, gameObject.transform.position) < maxDistance)
                 {
-                    if (!selectedObjectList.Contains(objectList[i]))
+                    if (!selectedPointList.Contains(pointList[i]))
                     {
-                        selectedObjectList.Add(objectList[i]);
-                        objectList[i].GetComponent<MeshRenderer>().material = selectMaterial;
+                        selectedPointList.Add(pointList[i]);
+                        pointList[i].GetComponent<MeshRenderer>().material = selectMaterial;
                     }
                 }
             }
@@ -148,9 +164,9 @@ public class AnalysisManager : MonoBehaviour
     // Select object
     public void SelectObject(GameObject gameObject)
     {
-        if (!selectedObjectList.Contains(gameObject))
+        if (!selectedPointList.Contains(gameObject))
         {
-            selectedObjectList.Add(gameObject);
+            selectedPointList.Add(gameObject);
             gameObject.GetComponent<MeshRenderer>().material = selectMaterial;
         }
     }
@@ -158,16 +174,16 @@ public class AnalysisManager : MonoBehaviour
     // Clear selectedObjectList
     public void ClearSelectedObjectList()
     {
-        for (int i = 0; i < selectedObjectList.Count; i++)
+        for (int i = 0; i < selectedPointList.Count; i++)
         {
-            selectedObjectList[i].GetComponent<MeshRenderer>().material = pointMaterial;
+            selectedPointList[i].GetComponent<MeshRenderer>().material = pointMaterial;
         }
-        selectedObjectList.Clear();
+        selectedPointList.Clear();
     }
 
     // Return selectedObjectList
     public List<GameObject> GetSelectedObjectList()
     {
-        return selectedObjectList;
+        return selectedPointList;
     }
 }
