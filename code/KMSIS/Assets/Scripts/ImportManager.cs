@@ -34,7 +34,7 @@ namespace TriLibCore.Samples
 			// Get GameObject component
 			importedBuildings = GameObject.Find("ImportedBuildings");
 			standardBoundBuilding = GameObject.Find("Building.4028");
-			minBound = standardBoundBuilding.GetComponent<MeshRenderer>().bounds.size.y * 0.7f;
+			minBound = standardBoundBuilding.GetComponent<MeshRenderer>().bounds.size.y * 0.9f;
 
 			// Get manager component
 			controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
@@ -147,7 +147,7 @@ namespace TriLibCore.Samples
 			assetLoaderContext.RootGameObject.transform.position = new Vector3(Camera.main.transform.position.x, 0.5f, Camera.main.transform.position.z);
 			controlManager.SetNormalScale(assetLoaderContext.RootGameObject.transform.localScale.x);
 			DeleteLevitation(assetLoaderContext.RootGameObject);
-			for (int i = 0; i < importedBuildings.transform.childCount; i++)
+			for(int i = 0; i < importedBuildings.transform.childCount; i++)
             {
 				if (importedBuildings.transform.GetChild(i).gameObject == assetLoaderContext.RootGameObject)
                 {
@@ -155,7 +155,6 @@ namespace TriLibCore.Samples
 					break;
 				}
             }
-			Camera.main.transform.eulerAngles = eulerAngles;
 		}
 
 		private void OnError(IContextualizedError contextualizedError)

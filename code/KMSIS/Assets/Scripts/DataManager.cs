@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System;
+using System.Threading;
 using System.IO;
 using UnityEngine;
 using TriLibCore.Samples;
@@ -367,6 +368,7 @@ public class DataManager : MonoBehaviour
         for (int i = 0; i < importedBuildingsList.Count; i++)
         {
             importManager.ImportFromPath(Application.persistentDataPath + directory2 + "/" + importedBuildingsList[i].GetName());
+            Thread.Sleep(500);
         }
         for (int i = 0; i < buildings.transform.childCount; i++)
         {
