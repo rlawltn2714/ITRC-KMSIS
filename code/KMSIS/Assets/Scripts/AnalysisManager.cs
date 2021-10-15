@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AnalysisManager : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class AnalysisManager : MonoBehaviour
     private GameObject targetBuilding;
 
     // Variable
-    private float maxDistance = 0.02f;
+    private float radius = 0.01f;
 
     void Start()
     {
@@ -77,7 +78,34 @@ public class AnalysisManager : MonoBehaviour
     // Optimize points
     private List<GameObject> OptimizePoints(List<GameObject> pointList)
     {
-        return pointList;
+        if (pointList.Count < 200) return pointList;
+
+        int[] tempList = new int[pointList.Count];
+        for (int i = 0; i < tempList.Length; i++)
+        {
+            tempList[i] = 0;
+        }
+        System.Random rand = new System.Random();
+        int count = 0;
+        while (count < 200)
+        {
+            int index = rand.Next(0, pointList.Count);
+            if (tempList[index] != 0) continue;
+            else
+            {
+                tempList[index] = 1;
+                count++;
+            }
+        }
+        List<GameObject> optimizedPointList = new List<GameObject>();
+        for (int i = 0; i < tempList.Length; i++)
+        {
+            if (tempList[i] == 1)
+            {
+                optimizedPointList.Add(pointList[i]);
+            }
+        }
+        return optimizedPointList;
     }
 
     // Analyze the sunlight
@@ -149,7 +177,7 @@ public class AnalysisManager : MonoBehaviour
         {
             for (int i = 0; i < pointList.Count; i++)
             {
-                if (pointList[i].transform.up == gameObject.transform.up && Vector3.Distance(pointList[i].transform.position, gameObject.transform.position) < maxDistance)
+                if (pointList[i].transform.up == gameObject.transform.up && Vector3.Distance(pointList[i].transform.position, gameObject.transform.position) < radius)
                 {
                     if (!selectedPointList.Contains(pointList[i]))
                     {
