@@ -131,15 +131,31 @@ public class AnalysisManager : MonoBehaviour
             if (dayInfo == null) return;
             int month = (int)(dayInfo[0]);
             int day = (int)(dayInfo[1]);
+            List<double> timeInfo = sunManager.Calculate(month, day, 12f);
 
-            for (float clock = 0f; clock < 24f; clock += 24f / 1440f)
+            int[] result = new int[optimizedPointList.Count];
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = 0;
+            }
+
+            for (float clock = (float)timeInfo[2]; clock < (float)timeInfo[3]; clock += 24f / 1440f)
             {
                 List<double> tempList = sunManager.Calculate(month, day, clock);
                 for (int i = 0; i < optimizedPointList.Count; i++)
                 {
-                    if (rayManager.CheckSunlight(optimizedPointList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) continue;
+                    if (rayManager.CheckSunlight(optimizedPointList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) result[i]++;
                 }
             }
+
+            int min = 1440, max = 0;
+            for (int i = 0; i < result.Length; i++)
+            {
+                if (min > result[i]) min = result[i];
+                if (max < result[i]) max = result[i];
+            }
+            Debug.Log("Min : " + min / 60 + " h " + min % 60 + " m");
+            Debug.Log("Max : " + max / 60 + " h " + max % 60 + " m");
 
             for (int i = 0; i < pointList.Count; i++)
             {
