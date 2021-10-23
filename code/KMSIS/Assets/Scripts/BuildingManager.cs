@@ -12,6 +12,9 @@ public class BuildingManager : MonoBehaviour
     private List<GameObject> selectedBuildingsList;
     private List<GameObject> deletedBuildingsList;
 
+    // Manager component
+    private UIManager uiManager;
+
     // Material component
     public Material selectMaterial;
     public Material normalMaterial;
@@ -24,6 +27,9 @@ public class BuildingManager : MonoBehaviour
         // Get GameObject component
         buildings = GameObject.Find("Buildings");
         importedBuildings = GameObject.Find("ImportedBuildings");
+
+        // Get manager component
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         // Initialize variable
         selectedBuildingsList = new List<GameObject>();
@@ -108,6 +114,17 @@ public class BuildingManager : MonoBehaviour
             selectedBuildingsList.Add(building);
             building.GetComponent<MeshRenderer>().material = selectMaterial;
         }
+        if (selectedBuildingsList.Count == 1)
+        {
+            for (int i = 0; i < buildings.transform.childCount; i++)
+            {
+                if (building == buildings.transform.GetChild(i).gameObject)
+                {
+                    uiManager.WriteBuildingInfo(i);
+                    break;
+                }
+            }
+        }
     }
 
     // Delete from selectedObjectList
@@ -125,6 +142,7 @@ public class BuildingManager : MonoBehaviour
             selectedBuildingsList[i].GetComponent<MeshRenderer>().material = normalMaterial;
         }
         selectedBuildingsList.Clear();
+        uiManager.TurnOffInfoPanel();
     }
 
     // Return selectedObjectList

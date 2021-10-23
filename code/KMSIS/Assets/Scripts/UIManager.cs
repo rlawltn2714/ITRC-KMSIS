@@ -8,17 +8,24 @@ public class UIManager : MonoBehaviour
     // This class manages UI. This might be fixed in the future according to the design.
 
     // UI component
+    public GameObject basePanel;
+    public GameObject sunnyIcon;
+    public GameObject buildingIcon;
+    public GameObject questionIcon;
+    public GameObject cogWheelIcon;
+    public GameObject infoPanel;
+
+    public InputField searchInput;
+    public InputField[] scaleInput;
+    public InputField[] rotationInput;
+
     public InputField monthInput;
     public InputField dayInput;
     public InputField hourInput;
     public InputField minuteInput;
-    public InputField searchInput;
     public Button importButton;
     public Button simulateButton;
     public Button searchButton;
-    public InputField[] scaleInput;
-    public Button[] scaleUp;
-    public Button[] scaleDown;
 
     // Manager component
     private SunManager sunManager;
@@ -34,11 +41,10 @@ public class UIManager : MonoBehaviour
         buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
         controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
 
-        //  Initialize text of UI
-        monthInput.text = System.DateTime.Now.ToString("MM");
-        dayInput.text = System.DateTime.Now.ToString("dd");
-        hourInput.text = System.DateTime.Now.ToString("HH");
-        minuteInput.text = System.DateTime.Now.ToString("mm");
+        monthInput.text = "0";
+        dayInput.text = "0";
+        hourInput.text = "0";
+        minuteInput.text = "0";
 
         // Set the position of sun
         SetSunPosition();
@@ -47,30 +53,37 @@ public class UIManager : MonoBehaviour
         ChangeInterface(-1, 0);
     }
 
-    // Check if mouse is on UI
-    public bool IsMouseOnUI(Vector2 clickPosition, int mode)
+    // Turn off the info panel
+    public void TurnOffInfoPanel()
     {
-        List<RectTransform> rectList = new List<RectTransform>();
-        if (mode == 0)
-        {
-            rectList.Add(monthInput.GetComponent<RectTransform>());
-            rectList.Add(dayInput.GetComponent<RectTransform>());
-            rectList.Add(hourInput.GetComponent<RectTransform>());
-            rectList.Add(minuteInput.GetComponent<RectTransform>());
-            rectList.Add(searchInput.GetComponent<RectTransform>());
-            rectList.Add(importButton.GetComponent<RectTransform>());
-            rectList.Add(simulateButton.GetComponent<RectTransform>());
-            rectList.Add(searchButton.GetComponent<RectTransform>());
+        infoPanel.SetActive(false);
+    }
 
-            for (int i = 0; i < rectList.Count; i++)
-            {
-                if (clickPosition.x > rectList[i].position.x - rectList[i].sizeDelta.x / 2 && clickPosition.y > rectList[i].position.y - rectList[i].sizeDelta.y / 2 && clickPosition.x < rectList[i].position.x + rectList[i].sizeDelta.x / 2 && clickPosition.y < rectList[i].position.y + rectList[i].sizeDelta.y / 2)
-                {
-                    return true;
-                }
-            }
+    // Write building name & location on UI
+    public void WriteBuildingInfo(int index)
+    {
+        infoPanel.SetActive(true);
+        List<string> result = dataManager.FindData(index);
+        if (result[3] == "null")
+        {
+            infoPanel.transform.GetChild(0).GetComponent<Text>().text = "등록되지 않은 건물입니다.";
         }
-        return false;
+        else
+        {
+            infoPanel.transform.GetChild(0).GetComponent<Text>().text = result[3];
+        }
+        infoPanel.transform.GetChild(2).GetComponent<Text>().text = result[4] + " " + result[5] + " " + result[6] + " " + result[7];
+    }
+
+    // Check if mouse is on UI
+    public bool IsMouseOnUI(Vector2 clickPosition)
+    {
+        RectTransform rect = basePanel.GetComponent<RectTransform>();
+        if (clickPosition.x > rect.position.x - rect.sizeDelta.x / 2 && clickPosition.y > rect.position.y - rect.sizeDelta.y / 2 && clickPosition.x < rect.position.x + rect.sizeDelta.x / 2 && clickPosition.y < rect.position.y + rect.sizeDelta.y / 2)
+        {
+            return true;
+        }
+        else return false;
     }
 
     // Check if inputfield is focused
@@ -88,11 +101,6 @@ public class UIManager : MonoBehaviour
     {
         if (current == -1 && next == 0)
         {
-            SetInterfaceFalse();
-            monthInput.gameObject.SetActive(true);
-            dayInput.gameObject.SetActive(true);
-            hourInput.gameObject.SetActive(true);
-            minuteInput.gameObject.SetActive(true);
             searchInput.gameObject.SetActive(true);
             importButton.gameObject.SetActive(true);
             simulateButton.gameObject.SetActive(true);
@@ -100,45 +108,18 @@ public class UIManager : MonoBehaviour
         }
         else if (current == -1 && next == 1)
         {
-            SetInterfaceFalse();
             for (int i = 0; i < 3; i++)
             {
                 scaleInput[i].gameObject.SetActive(true);
                 scaleInput[i].text = "1";
-                scaleUp[i].gameObject.SetActive(true);
-                scaleDown[i].gameObject.SetActive(true);
             }
         }
         else if (current == 1 && next == 0)
         {
-            SetInterfaceFalse();
-            monthInput.gameObject.SetActive(true);
-            dayInput.gameObject.SetActive(true);
-            hourInput.gameObject.SetActive(true);
-            minuteInput.gameObject.SetActive(true);
             searchInput.gameObject.SetActive(true);
             importButton.gameObject.SetActive(true);
             simulateButton.gameObject.SetActive(true);
             searchButton.gameObject.SetActive(true);
-        }
-    }
-
-    // Turn off all UI
-    private void SetInterfaceFalse()
-    {
-        monthInput.gameObject.SetActive(false);
-        dayInput.gameObject.SetActive(false);
-        hourInput.gameObject.SetActive(false);
-        minuteInput.gameObject.SetActive(false);
-        searchInput.gameObject.SetActive(false);
-        importButton.gameObject.SetActive(false);
-        simulateButton.gameObject.SetActive(false);
-        searchButton.gameObject.SetActive(false);
-        for (int i = 0; i < 3; i++)
-        {
-            scaleInput[i].gameObject.SetActive(false);
-            scaleUp[i].gameObject.SetActive(false);
-            scaleDown[i].gameObject.SetActive(false);
         }
     }
 

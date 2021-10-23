@@ -165,7 +165,7 @@ public class ControlManager : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0)) // When left click is end
             {
-                if (IsMouseOnUI(Input.mousePosition))
+                if (uiManager.IsMouseOnUI(Input.mousePosition))
                 {
                     dragSelectBox.gameObject.SetActive(false);
                 }
@@ -394,7 +394,7 @@ public class ControlManager : MonoBehaviour
 
                 if (analysisMode == 0)
                 {
-                    if (!IsMouseOnUI(Input.mousePosition))
+                    if (!uiManager.IsMouseOnUI(clickPosition))
                     {
                         // Check if point is exist on click position
                         Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -417,7 +417,7 @@ public class ControlManager : MonoBehaviour
             {
                 if (analysisMode == 0)
                 {
-                    if (clickPosition != Input.mousePosition && !IsMouseOnUI(Input.mousePosition))
+                    if (clickPosition != Input.mousePosition && !uiManager.IsMouseOnUI(clickPosition))
                     {
                         // Check if point is exist on click position
                         Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -441,7 +441,7 @@ public class ControlManager : MonoBehaviour
             {
                 if (analysisMode == 1)
                 {
-                    if (IsMouseOnUI(Input.mousePosition) || Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
+                    if (uiManager.IsMouseOnUI(clickPosition) || Vector3.Distance(clickPosition, Input.mousePosition) < 2f)
                     {
                         dragSelectBox.gameObject.SetActive(false);
                     }
@@ -620,11 +620,5 @@ public class ControlManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    // Check if mouse is on UI
-    private bool IsMouseOnUI(Vector2 clickPosition)
-    {
-        return uiManager.IsMouseOnUI(clickPosition, mode);
     }
 }
