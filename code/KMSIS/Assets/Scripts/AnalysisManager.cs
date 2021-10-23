@@ -127,7 +127,7 @@ public class AnalysisManager : MonoBehaviour
             }
 
             List<GameObject> optimizedPointList = OptimizePoints(selectedPointList);
-            List<float> dayInfo = uiManager.GetInterfaceValue();
+            List<float> dayInfo = uiManager.GetTimeValue();
             if (dayInfo == null) return;
             int month = (int)(dayInfo[0]);
             int day = (int)(dayInfo[1]);

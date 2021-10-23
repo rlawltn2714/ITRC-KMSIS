@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,15 +15,12 @@ public class UIManager : MonoBehaviour
     public GameObject questionIcon;
     public GameObject cogWheelIcon;
     public GameObject infoPanel;
+    public GameObject timePanel;
 
     public InputField searchInput;
     public InputField[] scaleInput;
     public InputField[] rotationInput;
 
-    public InputField monthInput;
-    public InputField dayInput;
-    public InputField hourInput;
-    public InputField minuteInput;
     public Button importButton;
     public Button simulateButton;
     public Button searchButton;
@@ -33,6 +31,13 @@ public class UIManager : MonoBehaviour
     private BuildingManager buildingManager;
     private ControlManager controlManager;
 
+    // Time variable
+    private int[] dayForMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    string yearString, monthString, dayString, hourString, minuteString;
+
+    // Slider click state
+    bool sliderClicked;
+
     void Start()
     {
         // Get manager component
@@ -41,16 +46,95 @@ public class UIManager : MonoBehaviour
         buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
         controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
 
-        monthInput.text = "0";
-        dayInput.text = "0";
-        hourInput.text = "0";
-        minuteInput.text = "0";
+        // Set variable
+        yearString = System.DateTime.Now.ToString("yyyy");
+        monthString = System.DateTime.Now.ToString("MM");
+        dayString = System.DateTime.Now.ToString("dd");
+        hourString = System.DateTime.Now.ToString("HH");
+        minuteString = System.DateTime.Now.ToString("mm");
+
+        sliderClicked = false;
 
         // Set the position of sun
         SetSunPosition();
 
-        // Turn on UI
-        ChangeInterface(-1, 0);
+        // Update time panel
+        if (int.TryParse(yearString, out int year) && int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day) && int.TryParse(hourString, out int hour) && int.TryParse(minuteString, out int minute))
+        {
+            UpdateTimePanel(year, month, day, hour, minute);
+            float clock = (float)(hour * 60 + minute) / 1440f;
+            timePanel.transform.GetChild(3).GetComponent<Slider>().value = clock;
+        }
+    }
+
+    // Set slider state
+    public void SetSliderState(bool state)
+    {
+        sliderClicked = state;
+    }
+
+    // Get slider state
+    public bool GetSliderState()
+    {
+        return sliderClicked;
+    }
+
+    // Update time
+    public void UpdateTime()
+    {
+        float clock = timePanel.transform.GetChild(3).GetComponent<Slider>().value * 1440f;
+        int hour = (int)(clock / 60);
+        int minute = (int)(clock % 60);
+        hourString = hour.ToString();
+        minuteString = minute.ToString();
+        if (int.TryParse(yearString, out int year) && int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day))
+        {
+            UpdateTimePanel(year, month, day, hour, minute);
+        }
+        SetSunPosition();
+    }
+
+    // Update time panel
+    public void UpdateTimePanel(int year, int month, int day, int hour, int minute)
+    {
+        if (minute < 10)
+        {
+            if (hour > 11)
+            {
+                timePanel.transform.GetChild(2).GetComponent<Text>().text = hour + ":0" + minute + " PM";
+            }
+            else
+            {
+                timePanel.transform.GetChild(2).GetComponent<Text>().text = hour + ":0" + minute + " AM";
+            }
+        }
+        else
+        {
+            if (hour > 11)
+            {
+                timePanel.transform.GetChild(2).GetComponent<Text>().text = hour + ":" + minute + " PM";
+            }
+            else
+            {
+                timePanel.transform.GetChild(2).GetComponent<Text>().text = hour + ":" + minute + " AM";
+            }
+        }
+        timePanel.transform.GetChild(4).GetComponent<Text>().text = month + "/" + day + "/" + year;
+        if (dayForMonth[month-1] > day)
+        {
+            timePanel.transform.GetChild(5).GetComponent<Text>().text = month + "/" + (day + 1) + "/" + year;
+        }
+        else
+        {
+            if (month == 12)
+            {
+                timePanel.transform.GetChild(5).GetComponent<Text>().text = "1/1/" + (year + 1);
+            }
+            else
+            {
+                timePanel.transform.GetChild(5).GetComponent<Text>().text = (month + 1) + "/1/" + year;
+            }
+        }
     }
 
     // Turn off the info panel
@@ -83,13 +167,13 @@ public class UIManager : MonoBehaviour
         {
             return true;
         }
-        else return false;
+        return false;
     }
 
     // Check if inputfield is focused
     public bool CheckInputfieldFocused()
     {
-        if (monthInput.isFocused || dayInput.isFocused || hourInput.isFocused || minuteInput.isFocused || searchInput.isFocused || scaleInput[0].isFocused || scaleInput[1].isFocused || scaleInput[2].isFocused)
+        if (searchInput.isFocused || scaleInput[0].isFocused || scaleInput[1].isFocused || scaleInput[2].isFocused || rotationInput[0].isFocused || rotationInput[1].isFocused || rotationInput[2].isFocused)
         {
             return true;
         }
@@ -99,14 +183,7 @@ public class UIManager : MonoBehaviour
     // Change UI
     public void ChangeInterface(int current, int next)
     {
-        if (current == -1 && next == 0)
-        {
-            searchInput.gameObject.SetActive(true);
-            importButton.gameObject.SetActive(true);
-            simulateButton.gameObject.SetActive(true);
-            searchButton.gameObject.SetActive(true);
-        }
-        else if (current == -1 && next == 1)
+        if (current == -1 && next == 1)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -124,9 +201,9 @@ public class UIManager : MonoBehaviour
     }
 
     // Get UI value
-    public List<float> GetInterfaceValue()
+    public List<float> GetTimeValue()
     {
-        if (int.TryParse(monthInput.text, out int month) && int.TryParse(dayInput.text, out int day) && int.TryParse(hourInput.text, out int hour) && int.TryParse(minuteInput.text, out int minute))
+        if (int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day) && int.TryParse(hourString, out int hour) && int.TryParse(minuteString, out int minute))
         {
             // Calculate clock
             float clock = (float)(hour) + (float)(minute) / 60f;
@@ -171,7 +248,7 @@ public class UIManager : MonoBehaviour
     // Set the position of sun according to the text in UI
     public void SetSunPosition()
     {
-        if (int.TryParse(monthInput.text, out int month) && int.TryParse(dayInput.text, out int day) && int.TryParse(hourInput.text, out int hour) && int.TryParse(minuteInput.text, out int minute))
+        if (int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day) && int.TryParse(hourString, out int hour) && int.TryParse(minuteString, out int minute))
         {
             // Calculate clock
             float clock = (float)(hour) + (float)(minute) / 60f;
@@ -196,7 +273,7 @@ public class UIManager : MonoBehaviour
     // Simulate sunlight for a specific day
     public void Simulation()
     {
-        if (int.TryParse(monthInput.text, out int month) && int.TryParse(dayInput.text, out int day))
+        if (int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day))
         {
             sunManager.SimulateSunlight(month, day);
         }

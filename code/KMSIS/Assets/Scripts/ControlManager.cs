@@ -160,7 +160,17 @@ public class ControlManager : MonoBehaviour
             if (Input.GetMouseButton(0)) // When left click is continue
             {
                 // Update SelectBox
-                UpdateDragSelectBox(Input.mousePosition);
+                if (!uiManager.IsMouseOnUI(Input.mousePosition) && !uiManager.GetSliderState())
+                {
+                    UpdateDragSelectBox(Input.mousePosition);
+                }
+                if (uiManager.GetSliderState())
+                {
+                    if (dragSelectBox.gameObject.activeInHierarchy)
+                    {
+                        dragSelectBox.gameObject.SetActive(false);
+                    }
+                }
             }
 
             if (Input.GetMouseButtonUp(0)) // When left click is end

@@ -125,6 +125,10 @@ public class BuildingManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            uiManager.TurnOffInfoPanel();
+        }
     }
 
     // Delete from selectedObjectList
