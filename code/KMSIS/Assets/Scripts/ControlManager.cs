@@ -34,7 +34,7 @@ public class ControlManager : MonoBehaviour
     private GameObject mainCamera;
 
     // Local variable and setting
-    private int mode; // -1 : unable control mode, 0 : normal mode, 1 : import mode, 2 : analysis mode
+    private int mode; // -1 : unable, 0 : main, 1 : importing, 2 : analysis
     private int analysisMode; // 0 : drawing mode, 1 : drag mode
     private Vector3 clickPosition;
     private float rotateLR;
@@ -489,7 +489,6 @@ public class ControlManager : MonoBehaviour
     // Set mode
     public void SetMode(int value)
     {
-        uiManager.ChangeInterface(mode, value);
         mode = value;
     }
 

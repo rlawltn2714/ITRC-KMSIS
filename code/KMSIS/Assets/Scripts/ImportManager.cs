@@ -16,6 +16,7 @@ namespace TriLibCore.Samples
 		private ControlManager controlManager;
 		private DataManager dataManager;
 		private BuildingManager buildingManager;
+		private UIManager uiManager;
 
 		// GameObject component
 		private GameObject importedBuildings;
@@ -40,6 +41,7 @@ namespace TriLibCore.Samples
 			controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
 			dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
 			buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
+			uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
 
 			// Set collider
 			colliders = GameObject.Find("DemRigidbody").transform.GetChild(0).gameObject;
@@ -145,6 +147,10 @@ namespace TriLibCore.Samples
 		{
 			SetSizeOfModel(assetLoaderContext.RootGameObject);
 			assetLoaderContext.RootGameObject.transform.position = new Vector3(Camera.main.transform.position.x, 0.5f, Camera.main.transform.position.z);
+			if (Camera.main.transform.position.y < 1f)
+            {
+				Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 1f, Camera.main.transform.position.z);
+            }
 			controlManager.SetNormalScale(assetLoaderContext.RootGameObject.transform.localScale.x);
 			DeleteLevitation(assetLoaderContext.RootGameObject);
 			for(int i = 0; i < importedBuildings.transform.childCount; i++)
@@ -155,6 +161,7 @@ namespace TriLibCore.Samples
 					break;
 				}
             }
+			uiManager.LoadInfo(assetLoaderContext.RootGameObject);
 		}
 
 		private void OnError(IContextualizedError contextualizedError)

@@ -127,7 +127,7 @@ public class BuildingManager : MonoBehaviour
         }
         else
         {
-            uiManager.TurnOffInfoPanel();
+            uiManager.TurnOffUI(0);
         }
     }
 
@@ -146,7 +146,7 @@ public class BuildingManager : MonoBehaviour
             selectedBuildingsList[i].GetComponent<MeshRenderer>().material = normalMaterial;
         }
         selectedBuildingsList.Clear();
-        uiManager.TurnOffInfoPanel();
+        uiManager.TurnOffUI(0);
     }
 
     // Return selectedObjectList

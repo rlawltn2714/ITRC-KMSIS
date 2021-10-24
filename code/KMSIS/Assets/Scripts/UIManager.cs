@@ -10,20 +10,18 @@ public class UIManager : MonoBehaviour
 
     // UI component
     public GameObject basePanel;
-    public GameObject sunnyIcon;
-    public GameObject buildingIcon;
-    public GameObject questionIcon;
-    public GameObject cogWheelIcon;
+    public GameObject recentPanel;
+    public GameObject iconPanel;
     public GameObject infoPanel;
+    public GameObject sunlightPanel;
+    public GameObject periodPanel;
+    public GameObject importPanel;
     public GameObject timePanel;
+    public GameObject importPreviewPanel;
 
     public InputField searchInput;
     public InputField[] scaleInput;
     public InputField[] rotationInput;
-
-    public Button importButton;
-    public Button simulateButton;
-    public Button searchButton;
 
     // Manager component
     private SunManager sunManager;
@@ -67,6 +65,76 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // UI index - infoPanel(0), sunlightPanel(1), periodPanel(2), importPreviewPanel(3), importPanel(4)
+
+    // Turn off the UI
+    public void TurnOffUI(int index)
+    {
+        if (index == -1)
+        {
+            infoPanel.SetActive(false);
+            sunlightPanel.SetActive(false);
+            periodPanel.SetActive(false);
+            importPanel.SetActive(false);
+            importPreviewPanel.SetActive(false);
+        }
+        else if (index == 0)
+        {
+            infoPanel.SetActive(false);
+        }
+        else if (index == 1)
+        {
+            sunlightPanel.SetActive(false);
+            periodPanel.SetActive(false);
+        }
+        else if (index == 3)
+        {
+            importPreviewPanel.SetActive(false);
+        }
+        else if (index == 4)
+        {
+            importPanel.SetActive(false);
+        }
+    }
+
+    // Turn on the UI
+    public void TurnOnUI(int index)
+    {
+        if (index == 0)
+        {
+            TurnOffUI(-1);
+            infoPanel.SetActive(true);
+        }
+        else if (index == 1)
+        {
+            TurnOffUI(-1);
+            sunlightPanel.SetActive(true);
+            periodPanel.SetActive(true);
+        }
+        else if (index == 3)
+        {
+            TurnOffUI(-1);
+            importPreviewPanel.SetActive(true);
+        }
+        else if (index == 4)
+        {
+            TurnOffUI(-1);
+            importPanel.SetActive(true);
+        }
+    }
+
+    // Load information from imported building
+    public void LoadInfo(GameObject building)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            scaleInput[i].text = "1";
+        }
+        rotationInput[0].text = building.transform.eulerAngles.x.ToString();
+        rotationInput[1].text = building.transform.eulerAngles.y.ToString();
+        rotationInput[2].text = building.transform.eulerAngles.z.ToString();
+    }
+    
     // Set slider state
     public void SetSliderState(bool state)
     {
@@ -137,16 +205,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Turn off the info panel
-    public void TurnOffInfoPanel()
-    {
-        infoPanel.SetActive(false);
-    }
-
     // Write building name & location on UI
     public void WriteBuildingInfo(int index)
     {
-        infoPanel.SetActive(true);
+        TurnOnUI(0);
         List<string> result = dataManager.FindData(index);
         if (result[3] == "null")
         {
@@ -178,26 +240,6 @@ public class UIManager : MonoBehaviour
             return true;
         }
         else return false;
-    }
-
-    // Change UI
-    public void ChangeInterface(int current, int next)
-    {
-        if (current == -1 && next == 1)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                scaleInput[i].gameObject.SetActive(true);
-                scaleInput[i].text = "1";
-            }
-        }
-        else if (current == 1 && next == 0)
-        {
-            searchInput.gameObject.SetActive(true);
-            importButton.gameObject.SetActive(true);
-            simulateButton.gameObject.SetActive(true);
-            searchButton.gameObject.SetActive(true);
-        }
     }
 
     // Get UI value
