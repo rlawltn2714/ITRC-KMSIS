@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     private DataManager dataManager;
     private BuildingManager buildingManager;
     private ControlManager controlManager;
+    private AnalysisManager analysisManager;
 
     // Time variable
     private int[] dayForMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
         buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
         controlManager = GameObject.Find("ControlManager").GetComponent<ControlManager>();
+        analysisManager = GameObject.Find("AnalysisManager").GetComponent<AnalysisManager>();
 
         // Set variable
         yearString = System.DateTime.Now.ToString("yyyy");
@@ -107,9 +109,37 @@ public class UIManager : MonoBehaviour
         }
         else if (index == 1)
         {
-            TurnOffUI(-1);
-            sunlightPanel.SetActive(true);
-            periodPanel.SetActive(true);
+            if (buildingManager.GetSelectedBuildingsList().Count == 1)
+            {
+                if (analysisManager.IsAnalyzing())
+                {
+                    analysisManager.Release();
+                    buildingManager.ClearSelectedBuildingsList();
+                    controlManager.SetMode(0);
+                    TurnOffUI(-1);
+                }
+                else
+                {
+                    TurnOffUI(-1);
+                    sunlightPanel.SetActive(true);
+                    periodPanel.SetActive(true);
+                    controlManager.SetMode(2);
+                    analysisManager.Init(buildingManager.GetSelectedBuildingsList()[0]);
+                    List<int> temp = analysisManager.AnalyzeBuilding();
+                    if (temp != null)
+                    {
+                        sunlightPanel.transform.GetChild(2).GetComponent<Text>().text = (temp[0] / 60) + "시간 " + (temp[0] % 60) + "분";
+                        sunlightPanel.transform.GetChild(6).GetComponent<Text>().text = (temp[1] / 60) + "시간 " + (temp[1] % 60) + "분";
+                    }
+                    else
+                    {
+                        analysisManager.Release();
+                        buildingManager.ClearSelectedBuildingsList();
+                        controlManager.SetMode(0);
+                        TurnOffUI(-1);
+                    }
+                }
+            }
         }
         else if (index == 3)
         {

@@ -167,6 +167,7 @@ namespace TriLibCore.Samples
 		private void OnError(IContextualizedError contextualizedError)
         {
 			controlManager.SetMode(0);
+			uiManager.TurnOffUI(-1);
 			Camera.main.transform.eulerAngles = eulerAngles;
 		}
 
@@ -191,6 +192,7 @@ namespace TriLibCore.Samples
             else
             {
 				controlManager.SetMode(0);
+				uiManager.TurnOffUI(-1);
 			}
 		}
 	}

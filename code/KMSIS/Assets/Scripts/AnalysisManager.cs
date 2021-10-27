@@ -45,6 +45,12 @@ public class AnalysisManager : MonoBehaviour
         selectedPointList = new List<GameObject>();
     }
 
+    // Check if current state is analysis mode or not
+    public bool IsAnalyzing()
+    {
+        return pointList.Count != 0;
+    }
+
     // Initialize AnalysisManager
     public void Init(GameObject building)
     {
@@ -60,6 +66,7 @@ public class AnalysisManager : MonoBehaviour
         targetBuilding.GetComponent<MeshRenderer>().material = normalMaterial;
         DestroyObject();
         selectedPointList.Clear();
+        pointList.Clear();
     }
 
     // Check environment and estimate execution time
@@ -108,16 +115,13 @@ public class AnalysisManager : MonoBehaviour
         return optimizedPointList;
     }
 
-    // Analyze the sunlight
-    public void Analyze()
+    // Analyze the sunlight of the building
+    public List<int> AnalyzeBuilding()
     {
-        if (selectedPointList.Count < 1)
+        if (pointList.Count < 1)
         {
-            Debug.Log("You should select the points.");
-        }
-        else if (selectedPointList.Count > 2000)
-        {
-            Debug.Log("You've choose too many points.");
+            Debug.Log("Error");
+            return null;
         }
         else
         {
@@ -126,9 +130,9 @@ public class AnalysisManager : MonoBehaviour
                 pointList[i].layer = 2;
             }
 
-            List<GameObject> optimizedPointList = OptimizePoints(selectedPointList);
+            List<GameObject> optimizedPointList = OptimizePoints(pointList);
             List<float> dayInfo = uiManager.GetTimeValue();
-            if (dayInfo == null) return;
+            if (dayInfo == null) return null;
             int month = (int)(dayInfo[0]);
             int day = (int)(dayInfo[1]);
             List<double> timeInfo = sunManager.Calculate(month, day, 12f);
@@ -148,19 +152,83 @@ public class AnalysisManager : MonoBehaviour
                 }
             }
 
-            int min = 1440, max = 0;
+            int average = 0, max = 0;
             for (int i = 0; i < result.Length; i++)
             {
-                if (min > result[i]) min = result[i];
                 if (max < result[i]) max = result[i];
+                average += result[i];
             }
-            Debug.Log("Min : " + min / 60 + " h " + min % 60 + " m");
-            Debug.Log("Max : " + max / 60 + " h " + max % 60 + " m");
-
+            average = average / result.Length;
             for (int i = 0; i < pointList.Count; i++)
             {
                 pointList[i].layer = 0;
             }
+
+            List<int> resultList = new List<int>();
+            resultList.Add(average);
+            resultList.Add(max);
+            return resultList;
+        }
+    }
+
+    // Analyze the sunlight of the selected points
+    public List<int> Analyze()
+    {
+        if (selectedPointList.Count < 1)
+        {
+            Debug.Log("You should select the points.");
+            return null;
+        }
+        else if (selectedPointList.Count > 2000)
+        {
+            Debug.Log("You've choose too many points.");
+            return null;
+        }
+        else
+        {
+            for (int i = 0; i < pointList.Count; i++)
+            {
+                pointList[i].layer = 2;
+            }
+
+            List<GameObject> optimizedPointList = OptimizePoints(selectedPointList);
+            List<float> dayInfo = uiManager.GetTimeValue();
+            if (dayInfo == null) return null;
+            int month = (int)(dayInfo[0]);
+            int day = (int)(dayInfo[1]);
+            List<double> timeInfo = sunManager.Calculate(month, day, 12f);
+
+            int[] result = new int[optimizedPointList.Count];
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = 0;
+            }
+
+            for (float clock = (float)timeInfo[2]; clock < (float)timeInfo[3]; clock += 24f / 1440f)
+            {
+                List<double> tempList = sunManager.Calculate(month, day, clock);
+                for (int i = 0; i < optimizedPointList.Count; i++)
+                {
+                    if (rayManager.CheckSunlight(optimizedPointList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) result[i]++;
+                }
+            }
+
+            int average = 0, max = 0;
+            for (int i = 0; i < result.Length; i++)
+            {
+                if (max < result[i]) max = result[i];
+                average += result[i];
+            }
+            average = average / result.Length;
+            for (int i = 0; i < pointList.Count; i++)
+            {
+                pointList[i].layer = 0;
+            }
+
+            List<int> resultList = new List<int>();
+            resultList.Add(average);
+            resultList.Add(max);
+            return resultList;
         }
     }
 

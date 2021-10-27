@@ -116,8 +116,7 @@ public class ControlManager : MonoBehaviour
                 }
                 else if (buildingManager.GetSelectedBuildingsList().Count == 1)
                 {
-                    mode = 2;
-                    analysisManager.Init(buildingManager.GetSelectedBuildingsList()[0]);
+                    uiManager.TurnOnUI(1);
                 }
                 else
                 {
@@ -388,13 +387,8 @@ public class ControlManager : MonoBehaviour
 
             if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.Q))
             {
-                mode = 0;
+                SetMode(0);
                 analysisManager.Release();
-            }
-
-            if (Input.GetKeyUp(KeyCode.Return))
-            {
-                analysisManager.Analyze();
             }
 
             if (Input.GetMouseButtonDown(0)) // When left click is start
