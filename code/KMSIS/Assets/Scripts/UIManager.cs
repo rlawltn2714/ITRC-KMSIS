@@ -259,6 +259,11 @@ public class UIManager : MonoBehaviour
         {
             return true;
         }
+        rect = timePanel.GetComponent<RectTransform>();
+        if (clickPosition.x > rect.position.x - rect.sizeDelta.x / 2 && clickPosition.y > rect.position.y - rect.sizeDelta.y / 2 && clickPosition.x < rect.position.x + rect.sizeDelta.x / 2 && clickPosition.y < rect.position.y + rect.sizeDelta.y / 2)
+        {
+            return true;
+        }
         return false;
     }
 
