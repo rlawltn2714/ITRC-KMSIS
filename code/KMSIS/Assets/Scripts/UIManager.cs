@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     public GameObject importPanel;
     public GameObject timePanel;
     public GameObject importPreviewPanel;
+    public GameObject savedRecordPanel;
 
     public InputField searchInput;
     public InputField[] scaleInput;
@@ -67,7 +68,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // UI index - infoPanel(0), sunlightPanel(1), periodPanel(2), importPreviewPanel(3), importPanel(4)
+    // Open link
+    public void OpenHelpPage()
+    {
+        Application.OpenURL("https://github.com/foba1/ITRC-KMSIS");
+    }
+
+    // UI index - infoPanel(0), sunlightPanel(1), periodPanel(2), importPreviewPanel(3), importPanel(4), savedRecordPanel(5)
 
     // Turn off the UI
     public void TurnOffUI(int index)
@@ -96,6 +103,10 @@ public class UIManager : MonoBehaviour
         else if (index == 4)
         {
             importPanel.SetActive(false);
+        }
+        else if (index == 5)
+        {
+            savedRecordPanel.SetActive(false);
         }
     }
 
