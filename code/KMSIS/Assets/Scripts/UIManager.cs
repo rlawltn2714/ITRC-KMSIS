@@ -69,7 +69,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Open link
+    // Open request correction link
+    public void OpenCorrectionPage()
+    {
+        Application.OpenURL("mailto:foba1@naver.com");
+    }
+
+    // Open help page
     public void OpenHelpPage()
     {
         Application.OpenURL("https://github.com/foba1/ITRC-KMSIS");
@@ -87,6 +93,13 @@ public class UIManager : MonoBehaviour
             customPanel.SetActive(false);
             importPanel.SetActive(false);
             importPreviewPanel.SetActive(false);
+            for (int i = 0; i < iconPanel.transform.childCount; i++)
+            {
+                if (i == 2) continue;
+                iconPanel.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+                iconPanel.transform.GetChild(i).GetChild(2).gameObject.SetActive(false);
+                iconPanel.transform.GetChild(i).GetChild(0).GetComponent<Text>().color = new Color(50f / 255f, 50f / 255f, 50f / 255f, 255 / 255f);
+            }
         }
         else if (index == 0)
         {
@@ -96,18 +109,30 @@ public class UIManager : MonoBehaviour
         {
             sunlightPanel.SetActive(false);
             customPanel.SetActive(false);
+            iconPanel.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+            iconPanel.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+            iconPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = new Color(50f / 255f, 50f / 255f, 50f / 255f, 255 / 255f);
         }
         else if (index == 3)
         {
             importPreviewPanel.SetActive(false);
+            iconPanel.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
+            iconPanel.transform.GetChild(1).GetChild(2).gameObject.SetActive(false);
+            iconPanel.transform.GetChild(1).GetChild(0).GetComponent<Text>().color = new Color(50f / 255f, 50f / 255f, 50f / 255f, 255 / 255f);
         }
         else if (index == 4)
         {
             importPanel.SetActive(false);
+            iconPanel.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
+            iconPanel.transform.GetChild(1).GetChild(2).gameObject.SetActive(false);
+            iconPanel.transform.GetChild(1).GetChild(0).GetComponent<Text>().color = new Color(50f / 255f, 50f / 255f, 50f / 255f, 255 / 255f);
         }
         else if (index == 5)
         {
             savedRecordPanel.SetActive(false);
+            iconPanel.transform.GetChild(3).GetChild(1).gameObject.SetActive(true);
+            iconPanel.transform.GetChild(3).GetChild(2).gameObject.SetActive(false);
+            iconPanel.transform.GetChild(3).GetChild(0).GetComponent<Text>().color = new Color(50f / 255f, 50f / 255f, 50f / 255f, 255 / 255f);
         }
     }
 
@@ -150,6 +175,9 @@ public class UIManager : MonoBehaviour
                         controlManager.SetMode(0);
                         TurnOffUI(-1);
                     }
+                    iconPanel.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                    iconPanel.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+                    iconPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = new Color(249f / 255f, 199f / 255f, 0f, 255 / 255f);
                 }
             }
         }
@@ -157,16 +185,25 @@ public class UIManager : MonoBehaviour
         {
             TurnOffUI(-1);
             importPreviewPanel.SetActive(true);
+            iconPanel.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+            iconPanel.transform.GetChild(1).GetChild(2).gameObject.SetActive(true);
+            iconPanel.transform.GetChild(1).GetChild(0).GetComponent<Text>().color = new Color(249f / 255f, 199f / 255f, 0f, 255 / 255f);
         }
         else if (index == 4)
         {
             TurnOffUI(-1);
             importPanel.SetActive(true);
+            iconPanel.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+            iconPanel.transform.GetChild(1).GetChild(2).gameObject.SetActive(true);
+            iconPanel.transform.GetChild(1).GetChild(0).GetComponent<Text>().color = new Color(249f / 255f, 199f / 255f, 0f, 255 / 255f);
         }
         else if (index == 5)
         {
             TurnOffUI(-1);
             savedRecordPanel.SetActive(true);
+            iconPanel.transform.GetChild(3).GetChild(1).gameObject.SetActive(false);
+            iconPanel.transform.GetChild(3).GetChild(2).gameObject.SetActive(true);
+            iconPanel.transform.GetChild(3).GetChild(0).GetComponent<Text>().color = new Color(249f / 255f, 199f / 255f, 0f, 255 / 255f);
         }
     }
 

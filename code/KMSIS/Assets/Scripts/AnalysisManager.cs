@@ -130,14 +130,13 @@ public class AnalysisManager : MonoBehaviour
                 pointList[i].layer = 2;
             }
 
-            List<GameObject> optimizedPointList = OptimizePoints(pointList);
             List<float> dayInfo = uiManager.GetTimeValue();
             if (dayInfo == null) return null;
             int month = (int)(dayInfo[0]);
             int day = (int)(dayInfo[1]);
             List<double> timeInfo = sunManager.Calculate(month, day, 12f);
 
-            int[] result = new int[optimizedPointList.Count];
+            int[] result = new int[pointList.Count];
             for (int i = 0; i < result.Length; i++)
             {
                 result[i] = 0;
@@ -146,9 +145,9 @@ public class AnalysisManager : MonoBehaviour
             for (float clock = (float)timeInfo[2]; clock < (float)timeInfo[3]; clock += 24f / 1440f)
             {
                 List<double> tempList = sunManager.Calculate(month, day, clock);
-                for (int i = 0; i < optimizedPointList.Count; i++)
+                for (int i = 0; i < pointList.Count; i++)
                 {
-                    if (rayManager.CheckSunlight(optimizedPointList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) result[i]++;
+                    if (rayManager.CheckSunlight(pointList[i], sunManager.CalculateSunVector(-tempList[0], tempList[1]))) result[i]++;
                 }
             }
 
