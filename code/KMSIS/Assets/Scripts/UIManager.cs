@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject iconPanel;
     public GameObject infoPanel;
     public GameObject sunlightPanel;
+    public GameObject customPanel;
     public GameObject periodPanel;
     public GameObject importPanel;
     public GameObject timePanel;
@@ -74,7 +75,7 @@ public class UIManager : MonoBehaviour
         Application.OpenURL("https://github.com/foba1/ITRC-KMSIS");
     }
 
-    // UI index - infoPanel(0), sunlightPanel(1), periodPanel(2), importPreviewPanel(3), importPanel(4), savedRecordPanel(5)
+    // UI index - infoPanel(0), sunlightPanel(1), customPanel(2), importPreviewPanel(3), importPanel(4), savedRecordPanel(5)
 
     // Turn off the UI
     public void TurnOffUI(int index)
@@ -83,7 +84,7 @@ public class UIManager : MonoBehaviour
         {
             infoPanel.SetActive(false);
             sunlightPanel.SetActive(false);
-            periodPanel.SetActive(false);
+            customPanel.SetActive(false);
             importPanel.SetActive(false);
             importPreviewPanel.SetActive(false);
         }
@@ -94,7 +95,7 @@ public class UIManager : MonoBehaviour
         else if (index == 1)
         {
             sunlightPanel.SetActive(false);
-            periodPanel.SetActive(false);
+            customPanel.SetActive(false);
         }
         else if (index == 3)
         {
@@ -133,7 +134,7 @@ public class UIManager : MonoBehaviour
                 {
                     TurnOffUI(-1);
                     sunlightPanel.SetActive(true);
-                    periodPanel.SetActive(true);
+                    customPanel.SetActive(true);
                     controlManager.SetMode(2);
                     analysisManager.Init(buildingManager.GetSelectedBuildingsList()[0]);
                     List<int> temp = analysisManager.AnalyzeBuilding();
@@ -161,6 +162,11 @@ public class UIManager : MonoBehaviour
         {
             TurnOffUI(-1);
             importPanel.SetActive(true);
+        }
+        else if (index == 5)
+        {
+            TurnOffUI(-1);
+            savedRecordPanel.SetActive(true);
         }
     }
 
