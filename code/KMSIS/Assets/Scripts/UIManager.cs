@@ -210,6 +210,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // Get time information from time panel
+    public List<int> GetTime()
+    {
+        if (int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day) && int.TryParse(hourString, out int hour) && int.TryParse(minuteString, out int minute))
+        {
+            List<int> tempList = new List<int>();
+            tempList.Add(month);
+            tempList.Add(day);
+            tempList.Add(hour);
+            tempList.Add(minute);
+            return tempList;
+        }
+        else return null;
+    }
+
     // Initialize timePanel's dropdown
     public void InitTimePanelDropdown()
     {
@@ -512,15 +527,6 @@ public class UIManager : MonoBehaviour
                     GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(sunDataList[1]), (float)(sunDataList[0]), 0);
                 }
             }
-        }
-    }
-
-    // Simulate sunlight for a specific day
-    public void Simulation()
-    {
-        if (int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day))
-        {
-            sunManager.SimulateSunlight(month, day);
         }
     }
 

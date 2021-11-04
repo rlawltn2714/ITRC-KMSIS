@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SunManager : MonoBehaviour
 {
     // This class manages sun.
+
+    // Manager component
+    private UIManager uiManager;
 
     // Convert value
     private double degToRad = 0.01745329251;
@@ -23,22 +27,26 @@ public class SunManager : MonoBehaviour
 
     // Variable for simulation
     private bool simulationMode = false;
-    private bool check = false;
     private int simulationMonth, simulationDay;
     private float simulationTime, simulationSunrise, simulationSunset, simulationInterval;
 
+    void Start()
+    {
+        // Get manager component
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+    }
+
     void FixedUpdate()
     {
-        if (simulationMode && check) // When simulation mode and need to update the position of sun
+        if (simulationMode) // When simulation mode and need to update the position of sun
         {
-            check = false;
-
             // Calculate position of sun
-            List<double> tempList = Calculate(simulationMonth, simulationDay, simulationTime);
+            float clock = simulationTime * 24f / 1440f;
+            List<double> tempList = Calculate(simulationMonth, simulationDay, clock);
             if (tempList != null)
             {
                 // Set the position of sun
-                if (simulationTime > (tempList[2] + tempList[3]) / 2)
+                if (clock > (tempList[2] + tempList[3]) / 2)
                 {
                     GameObject.Find("Directional Light").transform.eulerAngles = new Vector3((float)(tempList[1]), (float)(-tempList[0]), 0);
                 }
@@ -49,15 +57,12 @@ public class SunManager : MonoBehaviour
             }
 
             // Add interval
-            simulationTime += simulationInterval;
+            simulationTime += 1;
+            uiManager.timePanel.transform.GetChild(3).GetComponent<Slider>().value = simulationTime;
 
-            if (simulationTime > simulationSunset) // When simulation is end
+            if (simulationTime >= 1439) // When simulation is end
             {
                 simulationMode = false;
-            }
-            else
-            {
-                StartCoroutine(Wait());
             }
         }
     }
@@ -111,29 +116,24 @@ public class SunManager : MonoBehaviour
         return new Vector3(Mathf.Sin((float)(azimuth * degToRad)) * Mathf.Cos((float)(altitude * degToRad)), Mathf.Sin(-(float)(altitude * degToRad)), Mathf.Cos((float)(altitude * degToRad)) * Mathf.Cos((float)(azimuth * degToRad)));
     }
 
-    // Simulate sunlight for a specific day
-    public void SimulateSunlight(int month, int day)
+    // Start simulation
+    public void StartSimulate()
     {
         // Calculate sunrise and sunset
-        List<double> sunDataList = Calculate(month, day, 0);
+        List<int> timeInfo = uiManager.GetTime();
 
         // Set values
-        simulationMonth = month;
-        simulationDay = day;
-        simulationTime = (float)(sunDataList[2]);
-        simulationSunrise = (float)(sunDataList[2]);
-        simulationSunset = (float)(sunDataList[3]);
-        simulationInterval = (simulationSunset - simulationSunrise) / 300f;
+        simulationMonth = timeInfo[0];
+        simulationDay = timeInfo[1];
+        simulationTime = timeInfo[2] * 60 + timeInfo[3];
 
         // Turn on the simulation mode
         simulationMode = true;
-        check = true;
     }
 
-    // Make time delay using coroutine
-    IEnumerator Wait()
+    // Stop simulation
+    public void StopSimulate()
     {
-        yield return new WaitForSeconds(0.01f);
-        check = true;
+        simulationMode = false;
     }
 }
