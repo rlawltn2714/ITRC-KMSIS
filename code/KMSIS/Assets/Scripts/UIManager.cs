@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     public GameObject importPreviewPanel;
     public GameObject savedRecordPanel;
 
+    public Dropdown[] timePanelDropdown;
+
     public InputField searchInput;
     public InputField[] scaleInput;
     public InputField[] rotationInput;
@@ -61,10 +63,11 @@ public class UIManager : MonoBehaviour
         SetSunPosition();
 
         // Update time panel
+        InitTimePanelDropdown();
         if (int.TryParse(yearString, out int year) && int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day) && int.TryParse(hourString, out int hour) && int.TryParse(minuteString, out int minute))
         {
-            UpdateTimePanel(year, month, day, hour, minute);
-            float clock = (float)(hour * 60 + minute) / 1440f;
+            UpdateTimeSlider(year, month, day, hour, minute);
+            int clock = hour * 60 + minute;
             timePanel.transform.GetChild(3).GetComponent<Slider>().value = clock;
         }
     }
@@ -207,6 +210,117 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // Initialize timePanel's dropdown
+    public void InitTimePanelDropdown()
+    {
+        timePanelDropdown[0].options.Clear();
+        if (int.TryParse(yearString, out int year))
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                timePanelDropdown[0].options.Add(new Dropdown.OptionData() { text = (year + i).ToString() + "년" });
+            }
+            timePanelDropdown[0].value = 0;
+        }
+        else Debug.Log("Error - yearString value is invalid.");
+
+        timePanelDropdown[1].options.Clear();
+        if (int.TryParse(monthString, out int month))
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                timePanelDropdown[1].options.Add(new Dropdown.OptionData() { text = (i + 1).ToString() + "월" });
+            }
+            timePanelDropdown[1].value = month - 1;
+        }
+        else Debug.Log("Error - monthString value is invalid.");
+
+        timePanelDropdown[2].options.Clear();
+        if (int.TryParse(dayString, out int day))
+        {
+            for (int i = 0; i < dayForMonth[timePanelDropdown[1].value]; i++)
+            {
+                timePanelDropdown[2].options.Add(new Dropdown.OptionData() { text = (i + 1).ToString() + "일" });
+            }
+            timePanelDropdown[2].value = day - 1;
+        }
+        else Debug.Log("Error - dayString value is invalid.");
+
+        timePanelDropdown[3].options.Clear();
+        if (int.TryParse(hourString, out int hour))
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                timePanelDropdown[3].options.Add(new Dropdown.OptionData() { text = i.ToString() + "시" });
+            }
+            timePanelDropdown[3].value = hour - 1;
+        }
+        else Debug.Log("Error - hourString value is invalid.");
+
+        timePanelDropdown[4].options.Clear();
+        if (int.TryParse(minuteString, out int minute))
+        {
+            for (int i = 0; i < 60; i++)
+            {
+                timePanelDropdown[4].options.Add(new Dropdown.OptionData() { text = i.ToString() + "분" });
+            }
+            timePanelDropdown[4].value = minute - 1;
+        }
+        else Debug.Log("Error - minuteString value is invalid.");
+    }
+
+    // Update timePanel's dropdown
+    public void UpdateTimePanelDropdown(int index)
+    {
+        if (index == 0)
+        {
+            string temp = timePanelDropdown[0].options[timePanelDropdown[0].value].text;
+            yearString = temp.Substring(0, temp.Length - 1);
+        }
+        else if (index == 1)
+        {
+            string temp = timePanelDropdown[1].options[timePanelDropdown[1].value].text;
+            monthString = temp.Substring(0, temp.Length - 1);
+            if (timePanelDropdown[2].value + 1 > dayForMonth[timePanelDropdown[1].value])
+            {
+                timePanelDropdown[2].options.Clear();
+                for (int i = 0; i < dayForMonth[timePanelDropdown[1].value]; i++)
+                {
+                    timePanelDropdown[2].options.Add(new Dropdown.OptionData() { text = (i + 1).ToString() + "일" });
+                }
+                timePanelDropdown[2].value = dayForMonth[timePanelDropdown[1].value] - 1;
+                dayString = dayForMonth[timePanelDropdown[1].value].ToString();
+            }
+        }
+        else if (index == 2)
+        {
+            dayString = (timePanelDropdown[2].value + 1).ToString();
+        }
+        else if (index == 3)
+        {
+            hourString = (timePanelDropdown[3].value).ToString();
+            if (int.TryParse(minuteString, out int minuteTemp))
+            {
+                timePanelDropdown[4].value = minuteTemp;
+            }
+        }
+        else if (index == 4)
+        {
+            if (int.TryParse(hourString, out int hourTemp))
+            {
+                timePanelDropdown[3].value = hourTemp;
+            }
+            minuteString = (timePanelDropdown[4].value).ToString();
+        }
+        if (int.TryParse(yearString, out int year) && int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day) && int.TryParse(hourString, out int hour) && int.TryParse(minuteString, out int minute))
+        {
+            UpdateTimeSlider(year, month, day, hour, minute);
+            int clock = hour * 60 + minute;
+            timePanel.transform.GetChild(3).GetComponent<Slider>().value = clock;
+            SetSunPosition();
+        }
+    }
+
     // Load information from imported building
     public void LoadInfo(GameObject building)
     {
@@ -234,20 +348,20 @@ public class UIManager : MonoBehaviour
     // Update time
     public void UpdateTime()
     {
-        float clock = timePanel.transform.GetChild(3).GetComponent<Slider>().value * 1440f;
-        int hour = (int)(clock / 60);
-        int minute = (int)(clock % 60);
+        int clock = (int)timePanel.transform.GetChild(3).GetComponent<Slider>().value;
+        int hour = clock / 60;
+        int minute = clock % 60;
         hourString = hour.ToString();
         minuteString = minute.ToString();
         if (int.TryParse(yearString, out int year) && int.TryParse(monthString, out int month) && int.TryParse(dayString, out int day))
         {
-            UpdateTimePanel(year, month, day, hour, minute);
+            UpdateTimeSlider(year, month, day, hour, minute);
         }
         SetSunPosition();
     }
 
-    // Update time panel
-    public void UpdateTimePanel(int year, int month, int day, int hour, int minute)
+    // Update time slider
+    public void UpdateTimeSlider(int year, int month, int day, int hour, int minute)
     {
         if (minute < 10)
         {
